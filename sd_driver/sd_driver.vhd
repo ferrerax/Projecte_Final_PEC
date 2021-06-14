@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
 
 ENTITY sd_driver IS
-	PORT ( addr  : IN std_logic_vector(31 downto 0);
+	PORT ( addr  : IN std_logic_vector(15 downto 0);
 				 rd    : IN std_logic;
 				 busy : IN std_logic;
          dout  : IN std_logic_vector(7 downto 0);
@@ -33,7 +33,7 @@ begin
 		end if;
 		if ( busy = '1' ) then -- during read operation
 			if ( rising_edge(dout_avail) ) then -- new byte readed
-				if ( offset = byte_counter(8 downto 1) ) then
+				if ( offset = byte_counter(8 downto 1) & '0' ) then
 					if ( byte_counter(0) = '1' ) then
 						data(15 downto 8) <= dout;
 						valid <= '1'; -- and abort read

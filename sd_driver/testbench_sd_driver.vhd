@@ -616,7 +616,7 @@ function slv_to_string(slv: std_logic_vector) return string is
     return cv.all;
   end;
 COMPONENT sd_driver IS
-	PORT ( addr  : IN std_logic_vector(31 downto 0);
+	PORT ( addr  : IN std_logic_vector(15 downto 0);
 				 rd    : IN std_logic;
 				 busy : IN std_logic;
          dout  : IN std_logic_vector(7 downto 0);
@@ -659,7 +659,7 @@ BEGIN
           dout_taken => dout_taken,
           clk => clk
         );
-		sd_drv: sd_driver PORT MAP (addr  => addr,
+		sd_drv: sd_driver PORT MAP (addr  => addr(15 downto 0),
 																rd => rd,
 																busy => sd_busy,
 																dout => dout,
@@ -700,30 +700,21 @@ BEGIN
 		assert sd_error='0' report "Error in initialisation";
 		
 		wait for 30 us;
-		rx_byte_counter <= 0;
 		report "Starting Read 1 at byte_counter=" & integer'image(rx_byte_counter);
 		-- Read from address 0
 		addr <= (others=>'0');
 		rd <= '1';
---		for b in 0 to 511 loop
---			wait until dout_avail='1';
-			-- report slv_to_string(dout);
---			wait for 10ns;
---			assert conv_integer(dout)=(b mod 64) report "Read 1 mismatch " & slv_to_string(dout);
-			--assert conv_integer(dout)/=(b mod 64) report "Read 1 match " & slv_to_string(dout);
-	--		wait for b * 10ns;
-	--		dout_taken <= '1';
-	--		wait until dout_avail='0';
---			wait for b * 11ns;
---			dout_taken <= '0';
 		wait until sd_data_valid = '1';
 		rd <= '0';
+		report "Starting Read 1 finish addr=0x0000000";
 		wait until sd_busy='0';
 		wait for 500 ns;
+		report "Starting Read 2 at byte_counter=" & integer'image(rx_byte_counter);
 		addr <= x"00000006";
 		rd <= '1';
 		wait until sd_data_valid = '1';
 		rd <= '0';
+		report "Starting Read 2 finish addr=0x000006" ;
 
 		assert sd_error='0' report "Error in Read 1";
 		wait for 500 ns;
