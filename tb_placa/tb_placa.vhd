@@ -13,7 +13,7 @@ ENTITY tb_placa IS
 			
 			SW   : IN std_logic_vector(9  DOWNTO 0);
 			KEY  : IN std_logic_vector(0  DOWNTO 0);
-			LEDR : OUT std_logic_vector(0 DOWNTO 0);
+			LEDR : OUT std_logic_vector(4 DOWNTO 0);
 			
 			HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 			HEX1 : OUT std_logic_vector(6 DOWNTO 0);
@@ -89,7 +89,8 @@ END COMPONENT;
 
 signal reset : std_logic;
 
-signal rd    : std_logic;
+signal rd       : std_logic;
+signal rd_debug : std_logic;
 signal addr  : std_logic_vector(31 downto 0);
 signal data  : std_logic_vector(15 downto 0);
 signal valid : std_logic;
@@ -106,11 +107,18 @@ signal sd_error_code : std_logic_vector(2 downto 0);
 BEGIN
 
 	SD_DAT3 <= not cs;
-	rd      <= KEY(0);
+	rd <= '0' when SW(9) = '1'  else
+			'1' when KEY(0) = '0' else 
+					'0' when valid = '1'  else
+					rd;
+	LEDR(2) <= rd;
+	LEDR(3) <= valid;
+	--rd  <= rd_debug;
 	reset   <= SW(9);
 	addr    <= x"0000" & "0000000" & SW(8 downto 0);
 	
 	LEDR(0) <= valid;
+	LEDR(1) <= sd_busy;
 	
 asdf: driverHex PORT MAP (
 		num => data,
