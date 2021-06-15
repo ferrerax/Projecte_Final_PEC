@@ -97,16 +97,17 @@ __begin_for_headers:
     add   r5, r5, r2 ; R5 <- sh_size+s_offset
 __begin_for_copy:
     cmpltu r0, r2, r5
-    bz    r0, __epileg_for_copy
+    bz    r0, __end_for_copy
     
     addi r1, r2, 0
     jal  r6, r4
-    
+    st   (r3), r1    ; Copia efectiva. Valor R1 -> a posicio addr (R3)
 
-    addi  r2, r2, 2  ; incrementem R2 sh_offset 2 bytes
+    addi  r2, r2, 2  ; incrementem R2 (sh_offset) 2 bytes
+    addi  r3, r3, 2  ; incrementem r3 (sh_addr) 2 bytes
     bnz   r2, __begin_for_copy
 __end_for_copy:
-    k
+    
     
 
 __epileg_for_headers:
@@ -117,8 +118,19 @@ __epileg_for_headers:
 
 __end_for_headers:
     movi  r1, 0
-    movhi r1, 0xC0    
-    jmp   r1        ; saltem al punt dentrada
+    movhi r1, 0xC0 
+
+    ; Cleanup and jump to system 
+    xor   r0, r0, r0   
+    xor   r1, r1, r1   
+    xor   r2, r2, r2   
+    xor   r3, r3, r3   
+    xor   r4, r4, r4   
+    xor   r5, r5, r5   
+    xor   r6, r6, r6   
+    xor   r7, r7, r7   
+    movhi r6, 0xC0
+    jmp   r6         ; saltem al punt dentrada
 
 read_sd: ; parametre addr a R1, retorn valor a R1
     $pst r7, r0

@@ -37,10 +37,10 @@ int main(int argc, char *argv[]) {
     u_int16_t e_shstrndx;
     u_int16_t e_shnum;
 
-    fseek(fd, 32, SEEK_SET);
+    fseek(fd, __OFF_E_SHOFF, SEEK_SET);
     fread(&e_shoff, 4, 1, fd);
 
-    fseek(fd, 48, SEEK_SET);
+    fseek(fd, __OFF_E_SHNUM, SEEK_SET);
     fread(&e_shnum, 2, 1, fd);
     // Just a continuacio es troba el seguent camp que ens interessa.
     fread(&e_shstrndx, 2, 1, fd);
@@ -76,6 +76,15 @@ int main(int argc, char *argv[]) {
             fread(&sh_size, 2, 1, fd);
 
             printf("Allocatable section detected.  Offset: %04X, Size: %04X.\nIt will be copied at address %04X.\n\n", sh_offset, sh_size, sh_addr);
+
+            fseek(fd, sh_offset, SEEK_SET);
+            for(int read_index = sh_offset; read_index < sh_offset+sh_size; read_index+=2) {
+               u_int16_t word;
+              fread(&word, 2, 1, fd);
+              printf("%04X\n", word);
+
+            }
+            printf("\n");
        }
    }
 
