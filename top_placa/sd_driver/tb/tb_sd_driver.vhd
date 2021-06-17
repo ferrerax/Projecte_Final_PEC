@@ -34,10 +34,10 @@ USE STD.textio.all;
 -- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
  
-ENTITY testbench_sd_driver IS
-END testbench_sd_driver;
+ENTITY tb_sd_driver IS
+END tb_sd_driver;
  
-ARCHITECTURE behavior OF testbench_sd_driver IS 
+ARCHITECTURE behavior OF tb_sd_driver IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
@@ -706,7 +706,7 @@ BEGIN
 		rd <= '1';
 		wait until sd_data_valid = '1';
 		rd <= '0';
-		report "Starting Read 1 finish addr=0x0000000";
+		report "Read 1 finish addr=0x0000000";
 		wait until sd_busy='0';
 		wait for 500 ns;
 		report "Starting Read 2 at byte_counter=" & integer'image(rx_byte_counter);
@@ -714,7 +714,7 @@ BEGIN
 		rd <= '1';
 		wait until sd_data_valid = '1';
 		rd <= '0';
-		report "Starting Read 2 finish addr=0x000006" ;
+		report "Read 2 finish addr=0x000006" ;
 
 		assert sd_error='0' report "Error in Read 1";
 		wait for 500 ns;

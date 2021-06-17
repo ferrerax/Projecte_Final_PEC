@@ -4,7 +4,7 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.ALL;
 use IEEE.numeric_std.ALL;
 
-ENTITY tb_placa IS
+ENTITY top_placa IS
 	PORT (CLOCK_50 : IN std_logic;
 			SD_CLK  : OUT std_logic; -- sclk 
 			SD_CMD  : OUT std_logic; -- mosi
@@ -20,9 +20,9 @@ ENTITY tb_placa IS
 			HEX2 : OUT std_logic_vector(6 DOWNTO 0);
 			HEX3 : OUT std_logic_vector(6 DOWNTO 0)
 	);
-END tb_placa;
+END top_placa;
 
-ARCHITECTURE Structure OF tb_placa IS 
+ARCHITECTURE Structure OF top_placa IS 
 
 COMPONENT sd_controller is
 generic (
@@ -50,13 +50,15 @@ port (
 	din : in std_logic_vector(7 downto 0);	-- Data to SD card
 	din_valid : in std_logic;		-- Set when din is valid
 	din_taken : out std_logic;		-- Ackowledgement for din
+			sd_type : out std_logic_vector(1 downto 0);
+			sd_fsm : out std_logic_vector(7 downto 0);
+			sd_error : out std_logic; -- '1' if an error occurs, reset on next RD or WR
+			sd_error_code : out std_logic_vector(2 downto 0);
+			erase_count : in std_logic_vector(7 downto 0);
 	
 	addr : in std_logic_vector(31 downto 0);	-- Block address
-	erase_count : in std_logic_vector(7 downto 0); -- For wr_multiple only
 
-	sd_error : out std_logic;		-- '1' if an error occurs, reset on next RD or WR
 	sd_busy : out std_logic;		-- '0' if a RD or WR can be accepted
-	sd_error_code : out std_logic_vector(2 downto 0); -- See above, 000=No error
 	
 	
 	reset : in std_logic;	-- System reset
@@ -101,10 +103,8 @@ signal dout_avail : std_logic;
 signal dout_taken : std_logic;
 signal cs         : std_logic;
 
-signal sd_error      : std_logic;
+signal sd_error : std_logic ;
 signal sd_error_code : std_logic_vector(2 downto 0);
-signal din_taken     : std_logic;
-
 BEGIN
 
 	SD_DAT3 <= not cs;
@@ -112,12 +112,12 @@ BEGIN
 --			'1' when KEY(0) = '0' else 
 --					'0' when valid = '1'  else
 --					rd;
-  rd <= KEY(0);
+  rd <= SW(0);
 	LEDR(3) <= valid;
 	LEDR(2) <= rd;
 	--rd  <= rd_debug;
 	reset   <= SW(9);
-	addr    <= x"0000" & "0000000" & SW(8 downto 0);
+	addr    <= x"0000" & "0000000" & SW(8 downto 1) & '0';
 	
 	LEDR(1) <= sd_busy;
 	LEDR(0) <= valid;
@@ -130,7 +130,6 @@ asdf: driverHex PORT MAP (
 		HEX2 => HEX2,
 		HEX3 => HEX3
 	);
-
 	-- Instantiate the Unit Under Test (UUT)
    uut: sd_controller PORT MAP (
           cs => cs,
@@ -139,8 +138,8 @@ asdf: driverHex PORT MAP (
           sclk => SD_CLK,
 			 card_present => '1',
 			 card_write_prot => '0',
-          -- sd_type => sd_state,
-          -- sd_fsm => sd_fsm,
+       --    sd_type => sd_type,
+       --    sd_fsm => sd_fsm,
 			 sd_error => sd_error,
 			 sd_error_code => sd_error_code,
 			 sd_busy => sd_busy,
@@ -151,9 +150,9 @@ asdf: driverHex PORT MAP (
           addr => addr,
 			    erase_count => "00000010",
           reset => reset,
-          din => x"00",
+          din => "00000000",
           din_valid => '0',
-          din_taken => din_taken,
+          --din_taken => '0',
           dout => dout,
           dout_avail => dout_avail,
           dout_taken => dout_taken,
