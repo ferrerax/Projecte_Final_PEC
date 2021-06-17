@@ -37,20 +37,20 @@ begin
 					end if;
 				end if;
 				-- dout_taken <= '1';
-				byte_counter <= byte_counter_d + 1;
+				byte_counter <= byte_counter + 1;
 
 			end if;
 		end if;
 
 	end process;
 
-  process (rd, byte_counter) begin
-    if(rising_edge(rd)) then
-      byte_counter_d <= "000000000";
-    else
-      byte_counter_d <= byte_counter;
-    end if;
-  end process;
+--  process (rd, byte_counter) begin
+--    if(rising_edge(rd)) then
+--      byte_counter_d <= "000000000";
+--    else
+--      byte_counter_d <= byte_counter;
+--    end if;
+--  end process;
 
 
 
