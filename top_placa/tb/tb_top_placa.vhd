@@ -640,6 +640,7 @@ BEGIN
 		--dout_taken <= '0';
       -- hold reset state for 100 ns. then initialise
      rd <= '0';
+	  reset <='1';
       wait for 100 ns;	
 		reset <= '0';
       wait for 30000 us;	
