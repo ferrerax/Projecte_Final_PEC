@@ -1,5 +1,8 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate -divider proves
+add wave -noupdate -radix hexadecimal /tb_top_placa/tb/uut/reset
+add wave -noupdate -radix hexadecimal /tb_top_placa/tb/sd_drv/busy
 add wave -noupdate -expand -group top_placa -radix hexadecimal /tb_top_placa/tb/CLOCK_50
 add wave -noupdate -expand -group top_placa -radix hexadecimal /tb_top_placa/tb/SD_CLK
 add wave -noupdate -expand -group top_placa -radix hexadecimal /tb_top_placa/tb/SD_CMD
@@ -55,11 +58,12 @@ add wave -noupdate -expand -group sd_controller /tb_top_placa/tb/uut/state
 add wave -noupdate -expand -group sd_controller /tb_top_placa/tb/uut/new_state
 add wave -noupdate -expand -group sd_controller -radix hexadecimal /tb_top_placa/tb/uut/sd_type
 add wave -noupdate -expand -group sd_controller -radix hexadecimal /tb_top_placa/tb/uut/sd_fsm
+add wave -noupdate /tb_top_placa/tb/uut/sr_return_state
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {30030100000 ps} 0}
-quietly wave cursor active 1
+WaveRestoreCursors {reset_falling_edge {100000 ps} 1} {sd_error_falling_edge {2064650000 ps} 1} {busy_falling_edge {2065010000 ps} 1} {rd_rising_edge_1 {30030100000 ps} 1} {{Cursor 10} {2730000 ps} 0}
+quietly wave cursor active 5
 configure wave -namecolwidth 323
-configure wave -valuecolwidth 100
+configure wave -valuecolwidth 101
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -72,4 +76,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {29998511648 ps} {30061688352 ps}
+WaveRestoreZoom {2237072 ps} {3222928 ps}
