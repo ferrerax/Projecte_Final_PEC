@@ -14,7 +14,7 @@ ARCHITECTURE Structure OF bootrom IS
     -- Aqui iria la definicion de los registros
 	type brom is array (0 to 128) of std_logic_vector(15 downto 0);
 	signal bootrom  : brom := (
-  x"5e00", x"5ff8", x"5800", x"5900",
+  x"5e00", x"5ff8", x"58A4", x"5900",
   x"5000", x"2ffe", x"41c0", x"2ffe",
   x"41c0", x"2ffe", x"41c0", x"2ffe",
   x"41c0", x"5a00", x"567f", x"5745",
