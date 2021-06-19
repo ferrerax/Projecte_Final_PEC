@@ -34,51 +34,51 @@ USE STD.textio.all;
 -- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
  
-ENTITY testbench_sd_spi IS
-END testbench_sd_spi;
+ENTITY testbench_sd_driver IS
+END testbench_sd_driver;
  
-ARCHITECTURE behavior OF testbench_sd_spi IS 
+ARCHITECTURE behavior OF testbench_sd_driver IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT sd_controller
-	 GENERIC(
-			WRITE_TIMEOUT : integer := 1
-			);
-    PORT(
-			cs : out std_logic;
-			mosi : out std_logic;
-			miso : in std_logic;
-			sclk : out std_logic;
-			card_present : in std_logic;
-			card_write_prot : in std_logic;
-
-			rd : in std_logic; -- Should latch addr on rising edge
-			rd_multiple : in std_logic; -- Should latch addr on rising edge
-			wr : in std_logic; -- Should latch addr on rising edge
-			wr_multiple : in std_logic; -- Should latch addr on rising edge
-			addr : in std_logic_vector(31 downto 0);
-			erase_count : in std_logic_vector(7 downto 0);
-			reset : in std_logic;
-			sd_error : out std_logic; -- '1' if an error occurs, reset on next RD or WR
-			sd_busy : out std_logic; -- '0' if a RD or WR can be accepted
-			sd_error_code : out std_logic_vector(2 downto 0);
-			
-			din : in std_logic_vector(7 downto 0);
-			din_valid : in std_logic;
-			din_taken : out std_logic;
-			
-			dout : out std_logic_vector(7 downto 0);
-			dout_avail : out std_logic;
-			dout_taken : in std_logic;
-			
-			clk : in std_logic;	-- twice the SPI clk
-			
-			-- Debug stuff
-			sd_type : out std_logic_vector(1 downto 0);
-			sd_fsm : out std_logic_vector(7 downto 0)
-        );
-    END COMPONENT;
+    --COMPONENT sd_controller
+--	 GENERIC(
+--			WRITE_TIMEOUT : integer := 1
+--			);
+--    PORT(
+--			cs : out std_logic;
+--			mosi : out std_logic;
+--			miso : in std_logic;
+--			sclk : out std_logic;
+--			card_present : in std_logic;
+--			card_write_prot : in std_logic;
+--
+--			rd : in std_logic; -- Should latch addr on rising edge
+--			rd_multiple : in std_logic; -- Should latch addr on rising edge
+--			wr : in std_logic; -- Should latch addr on rising edge
+--			wr_multiple : in std_logic; -- Should latch addr on rising edge
+--			addr : in std_logic_vector(31 downto 0);
+--			erase_count : in std_logic_vector(7 downto 0);
+--			reset : in std_logic;
+--			sd_error : out std_logic; -- '1' if an error occurs, reset on next RD or WR
+--			sd_busy : out std_logic; -- '0' if a RD or WR can be accepted
+--			sd_error_code : out std_logic_vector(2 downto 0);
+--			
+--			din : in std_logic_vector(7 downto 0);
+--			din_valid : in std_logic;
+--			din_taken : out std_logic;
+--			
+--			dout : out std_logic_vector(7 downto 0);
+--			dout_avail : out std_logic;
+--			dout_taken : in std_logic;
+--			
+--			clk : in std_logic;	-- twice the SPI clk
+--			
+--			-- Debug stuff
+--			sd_type : out std_logic_vector(1 downto 0);
+--			sd_fsm : out std_logic_vector(7 downto 0)
+--        );
+--    END COMPONENT;
     
 
    --Inputs
@@ -93,6 +93,7 @@ ARCHITECTURE behavior OF testbench_sd_spi IS
    signal din_valid : std_logic := '0';
    signal dout_taken : std_logic := '0';
    signal clk : std_logic := '0';
+   signal sw_test : std_logic;
 
  	--Outputs
    signal cs : std_logic;
@@ -615,38 +616,95 @@ function slv_to_string(slv: std_logic_vector) return string is
     write(cv, bv);
     return cv.all;
   end;
+--COMPONENT sd_driver IS
+--	PORT ( addr  : IN std_logic_vector(15 downto 0);
+--				 rd    : IN std_logic;
+--				 busy : IN std_logic;
+--         dout  : IN std_logic_vector(7 downto 0);
+--         dout_avail : IN std_logic;
+--         dout_taken : OUT std_logic;
+--				 data  : OUT std_logic_vector(15 downto 0);
+--         valid : OUT std_logic
+--);
+--END COMPONENT;
+
+COMPONENT sd_controller is
+port (
+	cs : out std_logic;
+	mosi : inout std_logic;
+	miso : inout std_logic;
+	sclk : out std_logic;
+
+	rd : in std_logic;
+	wr : in std_logic;
+	dm_in : in std_logic;	-- data mode, 0 = write continuously, 1 = write single block
+	reset : in std_logic;
+	din : in std_logic_vector(7 downto 0);
+	dout : out std_logic_vector(7 downto 0);
+	clk : in std_logic	-- twice the SPI clk
+);
+end component;
+
+signal sd_data: std_logic_vector(15 downto 0);
+signal sd_data_valid: std_logic;
 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: sd_controller PORT MAP (
-          cs => cs,
-          mosi => mosi,
-          miso => miso,
-          sclk => sclk,
-			 card_present => '1',
-			 card_write_prot => '0',
-          sd_type => sd_state,
-          sd_fsm => sd_fsm,
-			 sd_error => sd_error,
-			 sd_error_code => sd_error_code,
-			 sd_busy => sd_busy,
-          rd => rd,
-          rd_multiple => rd_multiple,
-          wr => wr,
-          wr_multiple => wr_multiple,
-          addr => addr,
-			 erase_count => "00000010",
-          reset => reset,
-          din => din,
-          din_valid => din_valid,
-          din_taken => din_taken,
-          dout => dout,
-          dout_avail => dout_avail,
-          dout_taken => dout_taken,
-          clk => clk
-        );
+   --uut: sd_controller PORT MAP (
+--          cs => cs,
+--          mosi => mosi,
+--          miso => miso,
+--          sclk => sclk,
+--			 card_present => '1',
+--			 card_write_prot => '0',
+--          sd_type => sd_state,
+--          sd_fsm => sd_fsm,
+--			 sd_error => sd_error,
+--			 sd_error_code => sd_error_code,
+--			 sd_busy => sd_busy,
+--          rd => rd,
+--          rd_multiple => rd_multiple,
+--          wr => wr,
+--          wr_multiple => wr_multiple,
+--          addr => addr,
+--			 erase_count => "00000010",
+--          reset => reset,
+--          din => din,
+--          din_valid => din_valid,
+--          din_taken => din_taken,
+--          dout => dout,
+--          dout_avail => dout_avail,
+--          dout_taken => dout_taken,
+--          clk => clk
+--        );
+--		sd_drv: sd_driver PORT MAP (addr  => addr(15 downto 0),
+--																rd => rd,
+--																busy => sd_busy,
+--																dout => dout,
+--																dout_avail => dout_avail,
+--																dout_taken => dout_taken,
+--																data  => sd_data,
+--																valid => sd_data_valid);
+		
 
+sd : sd_controller
+		port map(
+			cs => cs,
+			mosi => mosi,
+			miso => miso,
+			sclk => sclk,
+
+			rd => rd,
+			wr => '0',
+			dm_in => '1',	-- data mode, 0 = write continuously, 1 = write single block
+			reset => sw_test,
+			din => "00000000",
+			dout => dout,
+			clk => clk	-- twice the SPI clk
+		);
+
+sw_test <= '1', '0' after 30ns;
    -- Clock process definitions
 --   sclk_process :process
 --   begin
@@ -669,7 +727,7 @@ BEGIN
 	variable b : integer;
 	variable vec9 : std_logic_vector(8 downto 0);
    begin
-		dout_taken <= '0';
+		--dout_taken <= '0';
       -- hold reset state for 100 ns. then initialise
       wait for 100 ns;	
 		reset <= '0';
@@ -678,150 +736,26 @@ BEGIN
 		assert sd_error='0' report "Error in initialisation";
 		
 		wait for 30 us;
-
 		report "Starting Read 1 at byte_counter=" & integer'image(rx_byte_counter);
 		-- Read from address 0
 		addr <= (others=>'0');
 		rd <= '1';
-		for b in 0 to 511 loop
-			wait until dout_avail='1';
-			-- report slv_to_string(dout);
-			wait for 10ns;
-			assert conv_integer(dout)=(b mod 64) report "Read 1 mismatch " & slv_to_string(dout);
-			--assert conv_integer(dout)/=(b mod 64) report "Read 1 match " & slv_to_string(dout);
-			wait for b * 10ns;
-			dout_taken <= '1';
-			wait until dout_avail='0';
-			wait for b * 11ns;
-			dout_taken <= '0';
-		end loop;
+		wait until sd_data_valid = '1';
 		rd <= '0';
+		report "Starting Read 1 finish addr=0x0000000";
 		wait until sd_busy='0';
-		assert sd_error='0' report "Error in Read 1";
-		wait for 500ns;
-
+		wait for 500 ns;
 		report "Starting Read 2 at byte_counter=" & integer'image(rx_byte_counter);
-		-- Read from address 0, but stop after receiving 11 bytes
+		addr <= x"00000006";
 		rd <= '1';
-		for b in 0 to 10 loop
-			wait until dout_avail='1';
-			-- report slv_to_string(dout);
-			wait for 10ns;
-			assert conv_integer(dout)=(b mod 64) report "Read 2 mismatch " & slv_to_string(dout);
-			wait for b * 21ns;
-			dout_taken <= '1';
-			wait until dout_avail='0';
-			wait for b * 22ns;
-			dout_taken <= '0';
-		end loop;
+		wait until sd_data_valid = '1';
 		rd <= '0';
-		wait until sd_busy='0';
-		assert sd_error='0' report "Error in Read 2";
-		wait for 500ns;
+		report "Starting Read 2 finish addr=0x000006" ;
+
+		assert sd_error='0' report "Error in Read 1";
+		wait for 500 ns;
+
 		
-		report "Starting Read 3 at byte_counter=" & integer'image(rx_byte_counter);
-		-- Read Multiple from address 0, but stop after receiving 522 bytes
-		rd_multiple <= '1';
-		for b in 0 to 521 loop
-			wait until dout_avail='1';
-			-- report slv_to_string(dout);
-			wait for 10ns;
-			assert conv_integer(dout)=(b mod 64) report "Read 3 mismatch " & slv_to_string(dout);
-			wait for b * 7ns;
-			dout_taken <= '1';
-			wait until dout_avail='0';
-			wait for b * 11ns;
-			dout_taken <= '0';
-		end loop;
-		rd_multiple <= '0';
-		wait until sd_busy='0';
-		assert sd_error='0' report "Error in Read 3";
-		wait for 500ns;
-		
-		report "Starting Read 4 at byte_counter=" & integer'image(rx_byte_counter);
-		-- Read Multiple from address 0, but stop after receiving 512 bytes
-		rd_multiple <= '1';
-		for b in 0 to 511 loop
-			wait until dout_avail='1';
-			-- report slv_to_string(dout);
-			wait for 1ns;
-			assert conv_integer(dout)=(b mod 64) report "Read 4 mismatch " & slv_to_string(dout);
-			wait for 1us;
-			dout_taken <= '1';
-			wait until dout_avail='0';
-			wait for 1us;
-			dout_taken <= '0';
-		end loop;
-		rd_multiple <= '0';
-		wait until sd_busy='0';
-		assert sd_error='0' report "Error in Read 4";
-		wait for 500ns;
-		
-		-- Write to address 0
-		-- Contents are 00-FF twice
-		report "Starting Write 1 at byte_counter=" & integer'image(rx_byte_counter);
-		wr <= '1';
-		for b in 0 to 511 loop
-			vec9 := STD_LOGIC_VECTOR(to_unsigned(b,9));
-			din <= vec9(7 downto 0);
-			din_valid <= '1';
-			wait until din_taken='1';
-			wait for b * 3ns;
-			din_valid <= '0';
-			wait until din_taken='0';
-			wait for b * 7ns;
-			-- report slv_to_string(din);
-		end loop;
-		wr <= '0';
-		wait until sd_busy='0';
-		assert sd_error='0' report "Error in Write 1";
-		wait for 500ns;
-		
-		-- Write Multiple to address 0
-		-- Contents are 00-FF twice
-		report "Starting Write 2 at byte_counter=" & integer'image(rx_byte_counter);
-		wr_multiple <= '1';
-		for b in 0 to 511 loop
-			wait for b * 17ns;
-			vec9 := STD_LOGIC_VECTOR(to_unsigned(b,9));
-			din <= vec9(7 downto 0);
-			din_valid <= '1';
-			wait until din_taken='1';
-			wait for b * 13ns;
-			din_valid <= '0';
-			wait until din_taken='0';
-			-- report slv_to_string(din);
-		end loop;
-		wr_multiple <= '0';
-		wait until sd_busy='0';
-		-- Note - will get an error 011 if wr_multiple drops too late
---		assert sd_error='1' and sd_error_code="011" report "Missing Error in Write 2";
-		assert sd_error='0' report "Error in Write 2";
-		wait for 500ns;
-		
-		-- Write Multiple to address 0, stop after 256 bytes
-		-- Contents are 00-FF twice
-		report "Starting Write 3 at byte_counter=" & integer'image(rx_byte_counter);
-		wr_multiple <= '1';
-		for b in 0 to 255 loop
-			vec9 := STD_LOGIC_VECTOR(to_unsigned(b,9));
-			din <= vec9(7 downto 0);
-			din_valid <= '1';
-			wait until din_taken='1';
-			wait for b * 7ns;
-			din_valid <= '0';
-			wait until din_taken='0';
-			wait for b * 11ns;
-			-- report slv_to_string(din);
-		end loop;
-		wr_multiple <= '0';
-		wait until sd_busy='0';
-		assert sd_error='1' and sd_error_code="011" report "Missing Error in Write 3";
-		wait for 500ns;
-		
-		assert sd_fsm=x"11" report "Not in Idle2 state at end";
-		
-		wait for 100us;
 		report "Simulation finished";
       wait;
 

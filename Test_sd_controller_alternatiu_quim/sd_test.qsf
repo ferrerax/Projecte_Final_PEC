@@ -18,14 +18,14 @@
 #
 # Quartus II 64-Bit
 # Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-# Date created = 21:02:34  May 09, 2021
+# Date created = 11:42:10  June 13, 2021
 #
 # -------------------------------------------------------------------------- #
 #
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		sisa_assignment_defaults.qdf
+#		sd_test_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -38,14 +38,24 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C20F484C7
-set_global_assignment -name TOP_LEVEL_ENTITY sisa
+set_global_assignment -name TOP_LEVEL_ENTITY sd_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:02:34  MAY 09, 2021"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:42:10  JUNE 13, 2021"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/modelsim -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name VHDL_FILE driver7Segmentos.vhd
+set_global_assignment -name VHDL_FILE SdCardCrtl.vhd
+set_global_assignment -name VHDL_FILE sd_test.vhd
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_A13 -to GPIO_0[0]
 set_location_assignment PIN_B13 -to GPIO_0[1]
 set_location_assignment PIN_A14 -to GPIO_0[2]
@@ -491,39 +501,11 @@ set_location_assignment PIN_Y7 -to SRAM_LB_N
 set_location_assignment PIN_T8 -to SRAM_OE_N
 set_location_assignment PIN_W7 -to SRAM_UB_N
 set_location_assignment PIN_AA10 -to SRAM_WE_N
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/sisa16_coop_funct_pkg.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/cte_tipos_UF_pkg.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/cte_tipos_UC_pkg.vhd
-set_global_assignment -name VHDL_FILE src/Proc/unidad_control.vhd
-set_global_assignment -name VHDL_FILE src/Proc/sregfile.vhd
-set_global_assignment -name VHDL_FILE src/Proc/regfile.vhd
-set_global_assignment -name VHDL_FILE src/Proc/proc.vhd
-set_global_assignment -name VHDL_FILE src/Proc/multi.vhd
-set_global_assignment -name VHDL_FILE src/Proc/exception_controller.vhd
-set_global_assignment -name VHDL_FILE src/Proc/datapath.vhd
-set_global_assignment -name VHDL_FILE src/Proc/control_l.vhd
-set_global_assignment -name VHDL_FILE src/Proc/alu.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_sync.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_ram_dual.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_font_rom.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_SDRAM/SRAMController.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_SDRAM/MemoryController.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_PS2_Keyboard/ps2_keyboard.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_PS2_Keyboard/keyboard_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/timer_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/pulsadores_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/interruptores_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/interrupt_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/driverHex.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/controladores_IO.vhd
-set_global_assignment -name VHDL_FILE src/sisa.vhd
-set_global_assignment -name VHDL_FILE src/Reloj.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_SD/sd_driver/sd_spi.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_SD/sd_driver/sd_driver.vhd
+set_location_assignment PIN_V20 -to SD_CLK
+set_location_assignment PIN_Y20 -to SD_CMD
+set_location_assignment PIN_W20 -to SD_DAT
+set_location_assignment PIN_U20 -to SD_DAT3
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "USE AS REGULAR IO"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
