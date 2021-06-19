@@ -48,6 +48,14 @@ architecture comportament of test_sisa is
 			 ps2_dat : inout std_logic); 
    end component;
 
+   COMPONENT stub_SD IS
+	PORT (CLOCK_50 : IN std_logic;
+			SD_CLK  : IN std_logic; -- sclk 
+			SD_CMD  : IN std_logic; -- mosi
+			SD_DAT  : OUT  std_logic; -- miso
+			SD_DAT3 : IN std_logic -- ss_n
+       );
+   END COMPONENT;
    
    -- Registres (entrades) i cables
    signal clk           : std_logic := '0';
@@ -119,6 +127,14 @@ begin
 
 				boot     => reset_ram
       );
+
+      sd0: stub_SD
+         port map ( CLOCK_50 => clk,
+                    SD_CLK => ,
+                    SD_CMD => ,
+                    SD_DAT =>,
+                    SD_DAT3 => );
+
 	  
 
 		addr_mem (15 downto 0) <= addr_SOC (15 downto 0);

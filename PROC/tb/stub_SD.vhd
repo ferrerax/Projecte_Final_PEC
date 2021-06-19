@@ -34,10 +34,16 @@ USE STD.textio.all;
 -- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
  
-ENTITY tb_top_placa IS
-END tb_top_placa;
+ENTITY stub_SD IS
+	PORT (CLOCK_50 : IN std_logic;
+			SD_CLK  : IN std_logic; -- sclk 
+			SD_CMD  : IN std_logic; -- mosi
+			SD_DAT  : OUT  std_logic; -- miso
+			SD_DAT3 : IN std_logic -- ss_n
+       );
+END stub_SD;
  
-ARCHITECTURE behavior OF tb_top_placa IS 
+ARCHITECTURE behavior OF stub_SD IS 
  
    --Inputs
    signal miso : std_logic := '0';
@@ -45,10 +51,6 @@ ARCHITECTURE behavior OF tb_top_placa IS
    signal rd_multiple : std_logic := '0';
    signal wr : std_logic := '0';
    signal wr_multiple : std_logic := '0';
-   signal addr : std_logic_vector(31 downto 0) := (others => '0');
-   signal reset : std_logic := '1';
-   signal din : std_logic_vector(7 downto 0) := (others => '0');
-   signal din_valid : std_logic := '0';
    signal dout_taken : std_logic := '0';
    signal clk : std_logic := '0';
 
@@ -573,101 +575,15 @@ function slv_to_string(slv: std_logic_vector) return string is
     write(cv, bv);
     return cv.all;
   end;
-COMPONENT top_placa IS
-	PORT (CLOCK_50 : IN std_logic;
-			SD_CLK  : OUT std_logic; -- sclk 
-			SD_CMD  : OUT std_logic; -- mosi
-			SD_DAT  : IN  std_logic; -- miso
-			SD_DAT3 : OUT std_logic; -- ss_n
-			
-			SW   : IN std_logic_vector(9  DOWNTO 0);
-			KEY  : IN std_logic_vector(0  DOWNTO 0);
-			LEDR : OUT std_logic_vector(4 DOWNTO 0);
-			
-			HEX0 : OUT std_logic_vector(6 DOWNTO 0);
-			HEX1 : OUT std_logic_vector(6 DOWNTO 0);
-			HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-			HEX3 : OUT std_logic_vector(6 DOWNTO 0)
-	);
-END COMPONENT;
-signal sd_data: std_logic_vector(15 downto 0);
-signal sd_data_valid: std_logic;
-signal cs_n : std_logic;
-signal sw : std_logic_vector(9 downto 0);
-signal key : std_logic_vector(0 downto 0);
 
 BEGIN
  
-  tb : top_placa port map ( CLOCK_50 => clk,
-                  SD_CLK => sclk,
-                  SD_CMD => mosi,
-                  SD_DAT => miso,
-                  SD_DAT3 => cs_n ,
-                  SW => sw,
-			           -- sd_busy => sd_busy,
-                 -- dout => dout,
-                  KEY => key); --,
-         --         LEDR => ledr,
-         --         HEX0 => hex0,
-         --         HEX1 => hex1,
-         --         HEX2 => hex2,
-         --         HEX3 => hex3);
-
-  sw <= reset & addr(8 downto 1) & rd;
-  cs <= not cs_n;
-   -- Clock process definitions
---   sclk_process :process
---   begin
---		sclk <= '0';
---		wait for sclk_period/2;
---		sclk <= '1';
---		wait for sclk_period/2;
---   end process;
+  cs <= not SD_DAT3;
+  miso <= SD_DAT;
+  mosi <= SD_CMD;
+  clk <= CLOCK_50;
+  sclk <= SD_CLK;
  
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
- 
-   -- Stimulus process to drive the sd_controller
-   stim_proc: process
-	variable b : integer;
-	variable vec9 : std_logic_vector(8 downto 0);
-   begin
-		--dout_taken <= '0';
-      -- hold reset state for 100 ns. then initialise
-     rd <= '0';
-      wait for 100 ns;	
-		reset <= '0';
-      wait for 30000 us;	
-		
-		wait for 30 us;
-		report "Starting Read 1 at byte_counter=" & integer'image(rx_byte_counter);
-		-- Read from address 0
-		addr <= (others=>'0');
-		rd <= '1';
-    wait for 10000 ns;	
-		rd <= '0';
-		report "Read 1 finish addr=0x0000000";
-		wait for 2000 us;
-		report "Starting Read 2 at byte_counter=" & integer'image(rx_byte_counter);
-		addr <= x"00000006";
-		rd <= '1';
-    wait for 10000 ns;	
-		rd <= '0';
-		report "Read 2 finish addr=0x000006" ;
-
-		wait for 500 ns;
-
-		
-		report "Simulation finished";
-      wait;
-
-   end process;
-
 clk_pol <= sclk xor CPOL;
 
 -- This process receives data sent to the card and compares it with the receive portion of the list
