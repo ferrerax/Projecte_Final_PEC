@@ -45,7 +45,11 @@ architecture comportament of test_sisa is
 			 SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
 			 KEY : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 			 ps2_clk : inout std_logic;
-			 ps2_dat : inout std_logic); 
+			 ps2_dat : inout std_logic; 
+			 SD_CLK  : OUT std_logic; -- sclk 
+			 SD_CMD  : OUT std_logic; -- mosi
+			 SD_DAT  : IN  std_logic; -- miso
+			 SD_DAT3 : OUT std_logic);
    end component;
 
    COMPONENT stub_SD IS
@@ -94,7 +98,7 @@ architecture comportament of test_sisa is
 	
 begin
    
-   ce_m2 <= '1', ce_m after 100ns;
+   ce_m2 <= '1', ce_m after 100 ns;
    -- Instanciacions de moduls
    SoC : sisa
       port map (

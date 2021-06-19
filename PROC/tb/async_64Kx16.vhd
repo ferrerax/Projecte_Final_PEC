@@ -193,10 +193,10 @@ begin
 
 if (boot'event and boot = '1') then
 	-- Procedural Call --
-	Load_FitxerUsrDataMemoria(mem_array);
-	Load_FitxerUsrCodeMemoria(mem_array);
-	Load_FitxerSysDataMemoria(mem_array);
-	Load_FitxerSysCodeMemoria(mem_array);
+	--Load_FitxerUsrDataMemoria(mem_array);
+	--Load_FitxerUsrCodeMemoria(mem_array);
+	--Load_FitxerSysDataMemoria(mem_array);
+	--Load_FitxerSysCodeMemoria(mem_array);
 	--mem_array (65500) <= X"ABCD";
 	
 else
