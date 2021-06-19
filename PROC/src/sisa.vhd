@@ -130,6 +130,10 @@ component vga_controller is
          byte_m            : in std_logic);                     -- simplemente lo ignoramos, este controlador no lo tiene implementado
 end component;
 
+component bootrom IS
+    port (addr : IN  STD_LOGIC_VECTOR(6 DOWNTO 0);
+			    a    : OUT STD_LOGIC_VECTOR(15 DOWNTO 0));
+END component;
 
 signal rellotge, proc0_word_byte, wr_m_t : std_logic;
 signal proc0_addr_m, proc0_data_wr, proc0_datard_m, vga_rd_data, mem0_rd_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -148,6 +152,9 @@ signal proc0_int_en: std_logic;
 signal io0_intr: std_logic;
 
 signal vga_addr_vga: std_logic_vector(15 downto 0);
+signal bootrom_addr: std_logic_vector(6 downto 0);
+signal bootrom_rd_data: std_logic_vector(15 downto 0);
+
 BEGIN
 --	rel0  : Reloj GENERIC MAP ( factor => 8) PORT MAP (CLOCK_50 => CLOCK_50, reloj => rellotge);
 	
@@ -227,7 +234,12 @@ BEGIN
          rd_data        => vga_rd_data,
          byte_m         => proc0_word_byte);  
 		
-
+	bootrom: bootrom port map(
+		addr => bootrom_addr,
+		a    => bootrom_rd_data 
+	);
+	
+	 bootrom_addr <= proc0_addr_m(7 downto 1);
 	 vga_addr_vga <= proc0_addr_m - x"A000";
 	 process (CLOCK_50, SW(8)) begin
 	   if SW(8) = '1' then
@@ -241,9 +253,14 @@ BEGIN
 				mem0_we <= '0';
 				proc0_datard_m <= vga_rd_data;
 			 else
+				if (proc0_addr_m < x"0100") then
+					proc0_datard_m <= bootrom_rd_data;
+					mem0_we <= '0';
+				else 
+					mem0_we <= proc0_wr_m;
+					proc0_datard_m <= mem0_rd_data;
+				end if;
 			   vga_we <= '0';
-				mem0_we <= proc0_wr_m;
-				proc0_datard_m <= mem0_rd_data;
 			 end if;
 		  end if;
 		end if;
