@@ -1,5 +1,12 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
+add wave -noupdate -divider {I/O PORTS SD}
+add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(22)
+add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(23)
+add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(24)
+add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(25)
+add wave -noupdate -divider {fi I/O PORTS SD}
+add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(25)
 add wave -noupdate -group test_sisa -radix hexadecimal /test_sisa/addr_mem
 add wave -noupdate -group test_sisa -radix hexadecimal /test_sisa/addr_SoC
 add wave -noupdate -group test_sisa -radix hexadecimal /test_sisa/b_HEX0
@@ -240,107 +247,107 @@ add wave -noupdate -group datapath -group ALU -group alu_internals -radix hexade
 add wave -noupdate -group datapath -group ALU -group alu_internals -radix hexadecimal /test_sisa/SoC/proc0/e0/ALUop/sha
 add wave -noupdate -group datapath -group ALU -group alu_internals -radix hexadecimal /test_sisa/SoC/proc0/e0/ALUop/shl
 add wave -noupdate -group datapath -group ALU -group alu_internals -radix hexadecimal /test_sisa/SoC/proc0/e0/ALUop/shift_y
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/CLOCK_50
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/addr
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/wr_data
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/rd_data
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/we
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/byte_m
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_ADDR
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_DQ
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_UB_N
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_LB_N
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_CE_N
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_OE_N
-add wave -noupdate -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_WE_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/clk
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_ADDR
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_DQ
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_UB_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_LB_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_CE_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_OE_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_WE_N
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/address
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/dataReaded
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/dataToWrite
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/WR
-add wave -noupdate -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/byte_m
-add wave -noupdate -group mem -group sram -group sram_internals -radix hexadecimal /test_sisa/SoC/mem0/sram/state
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/clk
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/boot
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/inta
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/intr
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/read_key
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/state
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_d
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_q
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/clk
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/boot
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/inta
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/intr
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/read_key
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/state
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_d
-add wave -noupdate -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_q
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/CLOCK_50
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/boot
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/inta
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/intr
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/state
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_clk
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_cnt
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/tick
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/contador
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/half_count
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/CLOCK_50
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/boot
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/inta
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/intr
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/state
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_clk
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_cnt
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/tick
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/contador
-add wave -noupdate -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/half_count
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/inta
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/key_intr
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/ps2_intr
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/switch_intr
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/timer_intr
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/intr
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/key_inta
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/ps2_inta
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/switch_inta
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/timer_inta
-add wave -noupdate -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/iid
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/mem
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/hex_num
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/hex_display_en
-add wave -noupdate -group io -group io_internals -radix hexadecimal -childformat {{/test_sisa/SoC/io0/kb_read_char(7) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(6) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(5) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(4) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(3) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(2) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(1) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(0) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/io0/kb_read_char(7) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(0) {-height 16 -radix hexadecimal}} /test_sisa/SoC/io0/kb_read_char
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/kb_data_ready
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/clear_char
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/cont_ciclos
-add wave -noupdate -group io -group io_internals -radix hexadecimal /test_sisa/SoC/io0/cont_mili
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/boot
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/CLOCK_50
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/addr_io
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/wr_io
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/rd_io
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/wr_out
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/rd_in
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/led_verdes
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/led_rojos
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/PS2_CLK
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/PS2_DAT
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/KEY
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/SW
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/HEX0
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/HEX1
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/HEX2
-add wave -noupdate -group io -radix hexadecimal /test_sisa/SoC/io0/HEX3
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/CLOCK_50
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/addr
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/wr_data
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/rd_data
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/we
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/byte_m
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_ADDR
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_DQ
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_UB_N
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_LB_N
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_CE_N
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_OE_N
+add wave -noupdate -expand -group mem -radix hexadecimal /test_sisa/SoC/mem0/SRAM_WE_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/clk
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_ADDR
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_DQ
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_UB_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_LB_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_CE_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_OE_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/SRAM_WE_N
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/address
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/dataReaded
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/dataToWrite
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/WR
+add wave -noupdate -expand -group mem -group sram -radix hexadecimal /test_sisa/SoC/mem0/sram/byte_m
+add wave -noupdate -expand -group mem -group sram -group sram_internals -radix hexadecimal /test_sisa/SoC/mem0/sram/state
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/clk
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/boot
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/inta
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/intr
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/read_key
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/state
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_d
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_q
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/clk
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/boot
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/inta
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/intr
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/read_key
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/state
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_d
+add wave -noupdate -expand -group io -group key_ctrl -radix hexadecimal /test_sisa/SoC/io0/keys_ctr/keys_q
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/CLOCK_50
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/boot
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/inta
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/intr
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/state
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_clk
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_cnt
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/tick
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/contador
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/half_count
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/CLOCK_50
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/boot
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/inta
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/intr
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/state
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_clk
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz_cnt
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/tick
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/contador
+add wave -noupdate -expand -group io -group timer_ctrl -radix hexadecimal /test_sisa/SoC/io0/timer_ctr/clock_20hz/half_count
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/inta
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/key_intr
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/ps2_intr
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/switch_intr
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/timer_intr
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/intr
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/key_inta
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/ps2_inta
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/switch_inta
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/timer_inta
+add wave -noupdate -expand -group io -group interrupt_controller /test_sisa/SoC/io0/int_ctr/iid
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal -childformat {{/test_sisa/SoC/io0/mem(0) -radix hexadecimal} {/test_sisa/SoC/io0/mem(1) -radix hexadecimal} {/test_sisa/SoC/io0/mem(2) -radix hexadecimal} {/test_sisa/SoC/io0/mem(3) -radix hexadecimal} {/test_sisa/SoC/io0/mem(4) -radix hexadecimal} {/test_sisa/SoC/io0/mem(5) -radix hexadecimal} {/test_sisa/SoC/io0/mem(6) -radix hexadecimal} {/test_sisa/SoC/io0/mem(7) -radix hexadecimal} {/test_sisa/SoC/io0/mem(8) -radix hexadecimal} {/test_sisa/SoC/io0/mem(9) -radix hexadecimal} {/test_sisa/SoC/io0/mem(10) -radix hexadecimal} {/test_sisa/SoC/io0/mem(11) -radix hexadecimal} {/test_sisa/SoC/io0/mem(12) -radix hexadecimal} {/test_sisa/SoC/io0/mem(13) -radix hexadecimal} {/test_sisa/SoC/io0/mem(14) -radix hexadecimal} {/test_sisa/SoC/io0/mem(15) -radix hexadecimal} {/test_sisa/SoC/io0/mem(16) -radix hexadecimal} {/test_sisa/SoC/io0/mem(17) -radix hexadecimal} {/test_sisa/SoC/io0/mem(18) -radix hexadecimal} {/test_sisa/SoC/io0/mem(19) -radix hexadecimal} {/test_sisa/SoC/io0/mem(20) -radix hexadecimal} {/test_sisa/SoC/io0/mem(21) -radix hexadecimal} {/test_sisa/SoC/io0/mem(22) -radix hexadecimal} {/test_sisa/SoC/io0/mem(23) -radix hexadecimal} {/test_sisa/SoC/io0/mem(24) -radix hexadecimal} {/test_sisa/SoC/io0/mem(25) -radix hexadecimal} {/test_sisa/SoC/io0/mem(26) -radix hexadecimal} {/test_sisa/SoC/io0/mem(27) -radix hexadecimal} {/test_sisa/SoC/io0/mem(28) -radix hexadecimal} {/test_sisa/SoC/io0/mem(29) -radix hexadecimal} {/test_sisa/SoC/io0/mem(30) -radix hexadecimal} {/test_sisa/SoC/io0/mem(31) -radix hexadecimal}} -expand -subitemconfig {/test_sisa/SoC/io0/mem(0) {-radix hexadecimal} /test_sisa/SoC/io0/mem(1) {-radix hexadecimal} /test_sisa/SoC/io0/mem(2) {-radix hexadecimal} /test_sisa/SoC/io0/mem(3) {-radix hexadecimal} /test_sisa/SoC/io0/mem(4) {-radix hexadecimal} /test_sisa/SoC/io0/mem(5) {-radix hexadecimal} /test_sisa/SoC/io0/mem(6) {-radix hexadecimal} /test_sisa/SoC/io0/mem(7) {-radix hexadecimal} /test_sisa/SoC/io0/mem(8) {-radix hexadecimal} /test_sisa/SoC/io0/mem(9) {-radix hexadecimal} /test_sisa/SoC/io0/mem(10) {-radix hexadecimal} /test_sisa/SoC/io0/mem(11) {-radix hexadecimal} /test_sisa/SoC/io0/mem(12) {-radix hexadecimal} /test_sisa/SoC/io0/mem(13) {-radix hexadecimal} /test_sisa/SoC/io0/mem(14) {-radix hexadecimal} /test_sisa/SoC/io0/mem(15) {-radix hexadecimal} /test_sisa/SoC/io0/mem(16) {-radix hexadecimal} /test_sisa/SoC/io0/mem(17) {-radix hexadecimal} /test_sisa/SoC/io0/mem(18) {-radix hexadecimal} /test_sisa/SoC/io0/mem(19) {-radix hexadecimal} /test_sisa/SoC/io0/mem(20) {-radix hexadecimal} /test_sisa/SoC/io0/mem(21) {-radix hexadecimal} /test_sisa/SoC/io0/mem(22) {-radix hexadecimal} /test_sisa/SoC/io0/mem(23) {-radix hexadecimal} /test_sisa/SoC/io0/mem(24) {-radix hexadecimal} /test_sisa/SoC/io0/mem(25) {-radix hexadecimal} /test_sisa/SoC/io0/mem(26) {-radix hexadecimal} /test_sisa/SoC/io0/mem(27) {-radix hexadecimal} /test_sisa/SoC/io0/mem(28) {-radix hexadecimal} /test_sisa/SoC/io0/mem(29) {-radix hexadecimal} /test_sisa/SoC/io0/mem(30) {-radix hexadecimal} /test_sisa/SoC/io0/mem(31) {-radix hexadecimal}} /test_sisa/SoC/io0/mem
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/hex_num
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/hex_display_en
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal -childformat {{/test_sisa/SoC/io0/kb_read_char(7) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(6) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(5) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(4) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(3) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(2) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(1) -radix hexadecimal} {/test_sisa/SoC/io0/kb_read_char(0) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/io0/kb_read_char(7) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/io0/kb_read_char(0) {-height 16 -radix hexadecimal}} /test_sisa/SoC/io0/kb_read_char
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/kb_data_ready
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/clear_char
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/cont_ciclos
+add wave -noupdate -expand -group io -expand -group io_internals -radix hexadecimal /test_sisa/SoC/io0/cont_mili
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/boot
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/CLOCK_50
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/addr_io
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/wr_io
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/rd_io
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/wr_out
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/rd_in
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/led_verdes
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/led_rojos
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/PS2_CLK
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/PS2_DAT
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/KEY
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/SW
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/HEX0
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/HEX1
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/HEX2
+add wave -noupdate -expand -group io -radix hexadecimal /test_sisa/SoC/io0/HEX3
 add wave -noupdate -expand -group core_state /test_sisa/SoC/proc0/boot
 add wave -noupdate -expand -group core_state /test_sisa/SoC/proc0/c0/clk
 add wave -noupdate -expand -group core_state /test_sisa/SoC/proc0/c0/m0/state
@@ -350,7 +357,7 @@ add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/p
 add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/proc0/c0/int_en
 add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/proc0/c0/intr
 add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/proc0/c0/excp
-add wave -noupdate -expand -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(0) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(2) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(3) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(4) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(5) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(6) {-radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(7) {-radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR
+add wave -noupdate -expand -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR
 add wave -noupdate -expand -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/SBR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/SBR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/SBR/BR
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1289599 ps} 1} {{Cursor 2} {23478792 ps} 0}
@@ -369,4 +376,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {22845207 ps} {26500301 ps}
+WaveRestoreZoom {1336297661 ps} {1339952755 ps}
