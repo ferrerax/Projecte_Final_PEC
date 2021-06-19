@@ -579,7 +579,7 @@ function slv_to_string(slv: std_logic_vector) return string is
 BEGIN
  
   cs <= not SD_DAT3;
-  miso <= SD_DAT;
+  SD_DAT  <= miso;
   mosi <= SD_CMD;
   clk <= CLOCK_50;
   sclk <= SD_CLK;

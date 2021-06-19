@@ -92,6 +92,7 @@ END COMPONENT;
 
 --signal rd       : std_logic;
 signal rd_debug : std_logic;
+signal big_addr : std_logic_vector(31 downto 0);
 --signal addr  : std_logic_vector(31 downto 0);
 --signal data  : std_logic_vector(15 downto 0);
 --signal valid : std_logic;
@@ -107,28 +108,7 @@ signal sd_error_code : std_logic_vector(2 downto 0);
 BEGIN
 
 	SD_DAT3 <= not cs;
---	rd <= '0' when SW(9) = '1'  else
---			'1' when KEY(0) = '0' else 
---					'0' when valid = '1'  else
---					rd;
- -- rd <= SW(0);
---	LEDR(3) <= valid;
---	LEDR(2) <= rd;
-	--rd  <= rd_debug;
---	reset   <= SW(9);
---	addr    <= x"0000" & "0000000" & SW(8 downto 1) & '0';
-	
---	LEDR(1) <= sd_busy;
---	LEDR(0) <= valid;
-	
---asdf: driverHex PORT MAP (
---		num => data,
---		display_en => "1111",
---		HEX0 => HEX0,
---		HEX1 => HEX1,
---		HEX2 => HEX2,
---		HEX3 => HEX3
---	);
+  big_addr <= x"0000" & addr;
 	-- Instantiate the Unit Under Test (UUT)
    uut: sd_controller PORT MAP (
           cs => cs,
@@ -146,7 +126,7 @@ BEGIN
           rd_multiple => '0',
           wr => '0',
           wr_multiple => '0',
-          addr => x"0000" & addr,
+          addr => big_addr,
 			    erase_count => "00000010",
           reset => reset,
           din => "00000000",
