@@ -85,6 +85,11 @@ architecture comportament of test_sisa is
 	signal b_KEY : STD_LOGIC_VECTOR(3 DOWNTO 0) := x"0";
 	signal b_ps2_clk : std_logic := '0';
 	signal b_ps2_data : std_logic := '0'; 
+
+				signal SD_CLK  : std_logic;
+				signal SD_CMD  : std_logic;
+				signal SD_DAT  : std_logic;
+				signal SD_DAT3 : std_logic;
    
 	
 begin
@@ -110,7 +115,11 @@ begin
 			HEX3  => b_HEX3,
 			KEY  => b_KEY,
 			ps2_clk  => b_ps2_clk,
-			ps2_dat  => b_ps2_data 
+			ps2_dat  => b_ps2_data,
+			SD_CLK => SD_CLK, 
+			SD_CMD => SD_CMD,
+			SD_DAT => SD_DAT,
+			SD_DAT3 => SD_DAT3
       );
 
    mem0 : async_64Kx16
@@ -130,10 +139,10 @@ begin
 
       sd0: stub_SD
          port map ( CLOCK_50 => clk,
-                    SD_CLK => ,
-                    SD_CMD => ,
-                    SD_DAT =>,
-                    SD_DAT3 => );
+			SD_CLK => SD_CLK, 
+			SD_CMD => SD_CMD,
+			SD_DAT => SD_DAT,
+			SD_DAT3 => SD_DAT3);
 
 	  
 
