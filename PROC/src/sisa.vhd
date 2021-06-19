@@ -42,7 +42,7 @@ component MemoryController is
           rd_data   : out std_logic_vector(15 downto 0);
           we        : in  std_logic;
           byte_m    : in  std_logic;
-          -- seÃ¯Â¿Â½ales para la placa de desarrollo
+          -- seÃƒÂ¯Ã‚Â¿Ã‚Â½ales para la placa de desarrollo
 			 SRAM_ADDR : out   std_logic_vector(17 downto 0);
           SRAM_DQ   : inout std_logic_vector(15 downto 0);
           SRAM_UB_N : out   std_logic;
@@ -234,7 +234,7 @@ BEGIN
          rd_data        => vga_rd_data,
          byte_m         => proc0_word_byte);  
 		
-	bootrom: bootrom port map(
+	bootrom0: bootrom port map(
 		addr => bootrom_addr,
 		a    => bootrom_rd_data 
 	);
