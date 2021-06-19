@@ -19,9 +19,9 @@
 .set  __OFF_SH_OFFSET,  16 
 .set  __OFF_SH_SIZE  ,  20 
 
-.set  SD_PORT_ADDR,    20
-.set  SD_PORT_AVALID ,  21
-.set  SD_PORT_VVALID ,  22
+.set  SD_PORT_ADDR,     22
+.set  SD_PORT_AVALID ,  24
+.set  SD_PORT_VVALID ,  25
 .set  SD_PORT_VALUE  ,  23
 
 .set MAGICNUMBER_L, 0x457F
@@ -35,6 +35,7 @@
     movi   r4, lo(read_sd)
     movhi  r4, hi(read_sd)
     
+
     movi   r0, 0
     $pst   r7, r0 ; variable local e_shoff  6(r7)
     $pst   r7, r0 ; variable local e_shnum  4(r7)
