@@ -11,9 +11,10 @@ ENTITY top_placa IS
 			SD_DAT  : IN  std_logic; -- miso
 			SD_DAT3 : OUT std_logic; -- ss_n
 			
-			SW   : IN std_logic_vector(9  DOWNTO 0);
-			KEY  : IN std_logic_vector(0  DOWNTO 0);
+			SW   : IN std_logic_vector (9  DOWNTO 0);
+			KEY  : IN std_logic_vector (0  DOWNTO 0);
 			LEDR : OUT std_logic_vector(4 DOWNTO 0);
+			LEDG : OUT std_logic_vector(2 downto 0);
 			
 			HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 			HEX1 : OUT std_logic_vector(6 DOWNTO 0);
@@ -166,5 +167,7 @@ asdf: driverHex PORT MAP (
 																dout_taken => dout_taken,
 																data  => data,
 																valid => valid);
+																
+		LEDG <= sd_error_code;
 
 END Structure;
