@@ -2,7 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
 
-ENTITY sd_driver IS
+ENTITY sd_interface IS
 	PORT ( addr  : IN std_logic_vector(15 downto 0);
 				 rd    : IN std_logic;
 				 busy : IN std_logic;
@@ -12,9 +12,9 @@ ENTITY sd_driver IS
 				 data  : OUT std_logic_vector(15 downto 0) := (others => '0');
          valid : OUT std_logic
 );
-END sd_driver;
+END sd_interface;
 
-architecture rtl of sd_driver is
+architecture rtl of sd_interface is
 signal byte_counter : std_logic_vector(8 downto 0) := (others => '0');
 signal byte_counter_d : std_logic_vector(8 downto 0) := (others => '0');
 signal offset : std_logic_vector(8 downto 0) := (others => '0');

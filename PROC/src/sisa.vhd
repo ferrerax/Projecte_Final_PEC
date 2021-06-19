@@ -27,7 +27,11 @@ ENTITY sisa IS
 			 HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 			 HEX1 : OUT std_logic_vector(6 DOWNTO 0);
 			 HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-			 HEX3 : OUT std_logic_vector(6 DOWNTO 0));
+			 HEX3 : OUT std_logic_vector(6 DOWNTO 0);
+			 SD_CLK  : OUT std_logic; -- sclk 
+			 SD_CMD  : OUT std_logic; -- mosi
+			 SD_DAT  : IN  std_logic; -- miso
+			 SD_DAT3 : OUT std_logic);
 END sisa;
 
 ARCHITECTURE Structure OF sisa IS
@@ -103,7 +107,11 @@ COMPONENT controladores_IO IS
 		HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX1 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX3 : OUT std_logic_vector(6 DOWNTO 0)
+		HEX3 : OUT std_logic_vector(6 DOWNTO 0);
+		SD_CLK  : OUT std_logic; -- sclk 
+		SD_CMD  : OUT std_logic; -- mosi
+		SD_DAT  : IN  std_logic; -- miso
+		SD_DAT3 : OUT std_logic -- ss_n
 	);
 END COMPONENT;
 component vga_controller is
@@ -197,7 +205,11 @@ BEGIN
 		HEX0 => HEX0,
 		HEX1 => HEX1,
 		HEX2 => HEX2,
-		HEX3 => HEX3
+		HEX3 => HEX3,
+		SD_CLK => SD_CLK,
+		SD_CMD => SD_CMD,
+		SD_DAT => SD_DAT,
+		SD_DAT3 => SD_DAT3
 	);
 	
 	--blank_out, csync_out, horiz_sync_out, vert_sync_out, red_out, green_out y blue_out s
