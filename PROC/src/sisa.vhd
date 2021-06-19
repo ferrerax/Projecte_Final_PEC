@@ -220,19 +220,19 @@ BEGIN
 	);
 	
 	--blank_out, csync_out, horiz_sync_out, vert_sync_out, red_out, green_out y blue_out s
-	vga: vga_controller  port map(clk_50mhz  => CLOCK_50, -- system clock signal
-         reset         => SW(8), -- system reset
-         red_out(3 downto 0)   => VGA_R, -- vga red pixel value
-         green_out(3 downto 0) =>  VGA_G, -- vga green pixel value
-         blue_out(3 downto 0)  => VGA_B, -- vga blue pixel value
-         horiz_sync_out => VGA_HS, -- vga control signal
-         vert_sync_out  => VGA_VS, -- vga control signal
-         --
-         addr_vga       => vga_addr_vga(12 downto 0),
-         we             => vga_we,
-         wr_data        => proc0_data_wr,
-         rd_data        => vga_rd_data,
-         byte_m         => proc0_word_byte);  
+--	vga: vga_controller  port map(clk_50mhz  => CLOCK_50, -- system clock signal
+--         reset         => SW(8), -- system reset
+--         red_out(3 downto 0)   => VGA_R, -- vga red pixel value
+--         green_out(3 downto 0) =>  VGA_G, -- vga green pixel value
+--         blue_out(3 downto 0)  => VGA_B, -- vga blue pixel value
+--         horiz_sync_out => VGA_HS, -- vga control signal
+--         vert_sync_out  => VGA_VS, -- vga control signal
+--         --
+--         addr_vga       => vga_addr_vga(12 downto 0),
+--         we             => vga_we,
+--         wr_data        => proc0_data_wr,
+--         rd_data        => vga_rd_data,
+--         byte_m         => proc0_word_byte);  
 		
 	bootrom0: bootrom port map(
 		addr => bootrom_addr,
