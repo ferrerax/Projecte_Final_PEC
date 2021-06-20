@@ -253,14 +253,15 @@ BEGIN
 				mem0_we <= '0';
 				proc0_datard_m <= vga_rd_data;
 			 else
+			    vga_we <= '0';
+				mem0_we <= proc0_wr_m;
 				if (proc0_addr_m < x"0100") then
 					proc0_datard_m <= bootrom_rd_data;
-					mem0_we <= '0';
+					-- mem0_we <= '0';
 				else 
-					mem0_we <= proc0_wr_m;
+					-- mem0_we <= proc0_wr_m;
 					proc0_datard_m <= mem0_rd_data;
 				end if;
-			   vga_we <= '0';
 			 end if;
 		  end if;
 		end if;
