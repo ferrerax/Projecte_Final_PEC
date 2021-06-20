@@ -34,7 +34,7 @@ begin
     if (rising_edge(rd)) then
         valid <= '0';
 		 byte_counter <= (others => '0');
---    if (busy = '0') then
+--    if (busy = '0' and rd = '1') then
 --		 valid <= '0';
 --		 byte_counter <= (others => '0');
     else  -- during read operation
