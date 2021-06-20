@@ -9,6 +9,7 @@ ENTITY sd_interface IS
             dout        : IN  std_logic_vector(7  downto 0);                   
             dout_avail  : IN  std_logic;                                         
             dout_taken  : OUT std_logic;                                         
+			rd_out      : OUT std_logic := '0';
             data        : OUT std_logic_vector(15 downto 0) := (others => '0');
             valid       : OUT std_logic                                          
 );
@@ -24,6 +25,9 @@ begin
 
 	offset <= addr(8 downto 1) & '0'; -- 2 byte align addr%512
 	dout_taken <= dout_avail;
+
+    rd_out <= rd when busy = '0';
+
 	process (dout_avail, busy) begin
 		
     if (busy = '0' ) then

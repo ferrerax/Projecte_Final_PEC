@@ -72,6 +72,7 @@ COMPONENT sd_interface IS
 			  dout  : IN std_logic_vector(7 downto 0);
 			  dout_avail : IN std_logic;
 			  dout_taken : OUT std_logic;
+			  rd_out    : OUT std_logic;
 			  data  : OUT std_logic_vector(15 downto 0) := (others => '0');
 			  valid : OUT std_logic
 );
@@ -105,6 +106,9 @@ signal cs         : std_logic;
 
 signal sd_error : std_logic ;
 signal sd_error_code : std_logic_vector(2 downto 0);
+
+signal sd_drv_rd : std_logic;
+
 BEGIN
 
 	SD_DAT3 <= not cs;
@@ -122,7 +126,7 @@ BEGIN
 			 sd_error => sd_error,
 			 sd_error_code => sd_error_code,
 			 sd_busy => sd_busy,
-          rd => rd,
+          rd => sd_drv_rd,
           rd_multiple => '0',
           wr => '0',
           wr_multiple => '0',
@@ -139,6 +143,7 @@ BEGIN
         );
 		sd_drv: sd_interface PORT MAP (addr  => addr(15 downto 0),
 																rd => rd,
+                                                                rd_out => sd_drv_rd,
 																busy => sd_busy,
 																dout => dout,
 																dout_avail => dout_avail,
