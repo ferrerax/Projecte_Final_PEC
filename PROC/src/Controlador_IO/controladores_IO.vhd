@@ -41,13 +41,12 @@ END controladores_IO;
 ARCHITECTURE Structure OF controladores_IO IS 
 
 COMPONENT driverHex IS
-	PORT (
-		num : IN std_logic_vector(15 DOWNTO 0);
-		display_en : IN std_logic_vector(3 downto 0);
-		HEX0 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX1 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX3 : OUT std_logic_vector(6 DOWNTO 0)
+	PORT (  num         :  IN   std_logic_vector(15  DOWNTO  0);
+            display_en  :  IN   std_logic_vector(3   downto  0);
+            HEX0        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX1        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX2        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX3        :  OUT  std_logic_vector(6   DOWNTO  0)
 	);
 END COMPONENT;
 COMPONENT keyboard_controller IS
@@ -57,48 +56,48 @@ COMPONENT keyboard_controller IS
           ps2_data   : inout STD_LOGIC;
           read_char  : out   STD_LOGIC_VECTOR (7 downto 0);
           clear_char : in    STD_LOGIC;
-			 data_ready : out   STD_LOGIC);
+		  data_ready : out   STD_LOGIC);
 END COMPONENT;
 COMPONENT pulsadores_controller IS
-    Port (clk        : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 keys       : in    STD_LOGIC_VECTOR(3 DOWNTO 0);
-			 intr       : out   STD_LOGIC;
-			 read_key   : out   STD_LOGIC_VECTOR(3 DOWNTO 0));
+    Port (  clk       :  in   STD_LOGIC;                  
+            boot      :  in   STD_LOGIC;                  
+            inta      :  in   STD_LOGIC;                  
+            keys      :  in   STD_LOGIC_VECTOR(3  DOWNTO  0);
+            intr      :  out  STD_LOGIC;                  
+            read_key  :  out  STD_LOGIC_VECTOR(3  DOWNTO  0));
 END COMPONENT;
 
 COMPONENT interruptores_controller IS
-    Port (clk        : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 switches   : in    STD_LOGIC_VECTOR(7 DOWNTO 0);
-			 intr       : out   STD_LOGIC;
-			 rd_switch  : out   STD_LOGIC_VECTOR(7 DOWNTO 0));
+    Port (  clk        :  in   STD_LOGIC;                  
+            boot       :  in   STD_LOGIC;                  
+            inta       :  in   STD_LOGIC;                  
+            switches   :  in   STD_LOGIC_VECTOR(7  DOWNTO  0);
+            intr       :  out  STD_LOGIC;                  
+            rd_switch  :  out  STD_LOGIC_VECTOR(7  DOWNTO  0));
 END COMPONENT;
 
 COMPONENT timer_controller IS
-    Port (CLOCK_50   : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 intr       : out   STD_LOGIC);
+    Port (  CLOCK_50  :  in   STD_LOGIC;
+            boot      :  in   STD_LOGIC;
+            inta      :  in   STD_LOGIC;
+            intr      :  out  STD_LOGIC);
 END COMPONENT;
 
 COMPONENT interrupt_controller IS
-    Port (clk         : in   STD_LOGIC;
-          boot        : in   STD_LOGIC;
-			 inta        : in   STD_LOGIC;
-			 key_intr    : in   STD_LOGIC;
-			 ps2_intr    : in   STD_LOGIC;
-			 switch_intr : in   STD_LOGIC;
-			 timer_intr  : in   STD_LOGIC;
-			 
-			 intr        : out  STD_LOGIC;
-			 key_inta    : out  STD_LOGIC;
-			 ps2_inta    : out  STD_LOGIC;
-			 switch_inta : out  STD_LOGIC;
-			 timer_inta  : out  STD_LOGIC;
-			 iid         : out  STD_LOGIC_VECTOR(7 DOWNTO 0));
+    Port (  clk          :  in   STD_LOGIC;                  
+            boot         :  in   STD_LOGIC;                  
+            inta         :  in   STD_LOGIC;                  
+            key_intr     :  in   STD_LOGIC;                  
+            ps2_intr     :  in   STD_LOGIC;                  
+            switch_intr  :  in   STD_LOGIC;                  
+            timer_intr   :  in   STD_LOGIC;                  
+
+            intr         :  out  STD_LOGIC;                  
+            key_inta     :  out  STD_LOGIC;                  
+            ps2_inta     :  out  STD_LOGIC;                  
+            switch_inta  :  out  STD_LOGIC;                  
+            timer_inta   :  out  STD_LOGIC;                  
+            iid          :  out  STD_LOGIC_VECTOR(7  DOWNTO  0));
 END COMPONENT;
 
 COMPONENT sd_driver IS
@@ -149,9 +148,9 @@ END COMPONENT;
 	signal cont_ciclos  : STD_LOGIC_VECTOR(15 downto 0):=x"0000";
 	signal cont_mili    : STD_LOGIC_VECTOR(15 downto 0):=x"0000";
 
-	signal inta_pulsa  : std_logic;
-	signal inta_sw  : std_logic;
-	signal inta_ps2  : std_logic;
+    signal  inta_pulsa  :  std_logic;
+    signal  inta_sw     :  std_logic;
+    signal  inta_ps2    :  std_logic;
 	
 	signal sd_data : std_logic_vector(15 downto 0);
 	signal sd_rd : std_logic := '0';
@@ -171,6 +170,7 @@ BEGIN
 			  clear_char  <= '0';
 				key_inta    <= '0';
 			  switch_inta <= '0';
+              sd_rd <= mem(IO_PORT_SD_RD);
 				
 				mem(IO_PORT_KEY)           <= "000000000000"    & keys_q;
 				mem(IO_PORT_SW)            <= "00000000"     	& switches_q;

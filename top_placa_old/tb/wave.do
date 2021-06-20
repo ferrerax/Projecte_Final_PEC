@@ -56,7 +56,7 @@ add wave -noupdate -expand -group sd_controller /tb_top_placa/tb/uut/new_state
 add wave -noupdate -expand -group sd_controller -radix hexadecimal /tb_top_placa/tb/uut/sd_type
 add wave -noupdate -expand -group sd_controller -radix hexadecimal /tb_top_placa/tb/uut/sd_fsm
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {30030100000 ps} 0}
+WaveRestoreCursors {{ini primera lec.} {30030100000 ps} 1}
 quietly wave cursor active 1
 configure wave -namecolwidth 323
 configure wave -valuecolwidth 100
@@ -72,4 +72,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {29998511648 ps} {30061688352 ps}
+WaveRestoreZoom {29992193972 ps} {30244900788 ps}
