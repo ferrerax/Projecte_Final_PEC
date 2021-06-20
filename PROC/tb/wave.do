@@ -381,6 +381,9 @@ add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_
 add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter
 add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter_d
 add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/offset
+add wave -noupdate -group sd_interface /test_sisa/sd0/tx_byte_counter
+add wave -noupdate -group sd_interface /test_sisa/sd0/tx_bit_counter
+add wave -noupdate -group sd_interface /test_sisa/sd0/cs
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(2)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(6)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(7)
@@ -393,8 +396,8 @@ add wave -noupdate /test_sisa/SoC/mem0/we
 add wave -noupdate /test_sisa/SoC/mem0/sram_wr
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/mem0/addr
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{rd rising_edge} {14710000 ps} 1} {{final reset} {2064850000 ps} 1} {{ini segiona lectura} {2092510000 ps} 1} {{rd_out mal posat} {2090230000 ps} 1} {{pc_in = 0022} {7690000 ps} 1} {{Cursor 8} {2248890000 ps} 1}
-quietly wave cursor active 6
+WaveRestoreCursors {{final reset} {2064850000 ps} 1} {{Cursor 8} {2601490000 ps} 0} {{__OFF_E_SHOFF sd read valid} {2418510000 ps} 1} {{__OFF_E_SHNUM sd read valid} {2592730000 ps} 1}
+quietly wave cursor active 4
 configure wave -namecolwidth 357
 configure wave -valuecolwidth 132
 configure wave -justifyvalue left
@@ -409,4 +412,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {7310192 ps}
+WaveRestoreZoom {2590902452 ps} {2594557548 ps}
