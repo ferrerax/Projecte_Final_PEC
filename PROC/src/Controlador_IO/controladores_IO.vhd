@@ -170,7 +170,7 @@ BEGIN
 			  clear_char  <= '0';
 				key_inta    <= '0';
 			  switch_inta <= '0';
-              sd_rd <= mem(IO_PORT_SD_RD);
+              sd_rd <= mem(IO_PORT_SD_RD)(0);
 				
 				mem(IO_PORT_KEY)           <= "000000000000"    & keys_q;
 				mem(IO_PORT_SW)            <= "00000000"     	& switches_q;
