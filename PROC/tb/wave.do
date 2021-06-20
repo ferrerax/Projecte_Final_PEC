@@ -5,11 +5,11 @@ add wave -noupdate /test_sisa/SoC/io0/sd_ctr/uut/new_state
 add wave -noupdate /test_sisa/SoC/io0/sd_ctr/uut/sd_busy
 add wave -noupdate /test_sisa/SoC/io0/sd_ctr/sd_drv_rd
 add wave -noupdate -divider {I/O PORTS SD}
-add wave -noupdate -expand -group ADDR -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(7)
-add wave -noupdate -expand -group ADDR -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(1)(15) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(14) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(13) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(12) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(11) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(10) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(9) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(8) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(7) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(0) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(1)(15) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(14) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(13) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(12) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(11) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(10) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(9) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(8) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(7) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(0) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR(1)
-add wave -noupdate -expand -group ADDR /test_sisa/SoC/io0/sd_ctr/sd_drv/addr
-add wave -noupdate -expand -group ADDR /test_sisa/SoC/io0/sd_ctr/uut/addr
-add wave -noupdate -expand -group ADDR -radix hexadecimal /test_sisa/SoC/io0/mem(22)
+add wave -noupdate -group ADDR -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(7)
+add wave -noupdate -group ADDR -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(1)(15) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(14) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(13) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(12) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(11) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(10) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(9) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(8) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(7) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1)(0) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(1)(15) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(14) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(13) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(12) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(11) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(10) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(9) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(8) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(7) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1)(0) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR(1)
+add wave -noupdate -group ADDR -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/addr
+add wave -noupdate -group ADDR /test_sisa/SoC/io0/sd_ctr/uut/addr
+add wave -noupdate -group ADDR -radix hexadecimal /test_sisa/SoC/io0/mem(22)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(23)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(24)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(25)
@@ -369,18 +369,18 @@ add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/p
 add wave -noupdate -expand -group core_state -radix hexadecimal /test_sisa/SoC/proc0/c0/excp
 add wave -noupdate -expand -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR
 add wave -noupdate -expand -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/SBR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/SBR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/SBR/BR
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/addr
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/rd
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/busy
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/addr
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/rd
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/busy
 add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/dout
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/dout_avail
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/dout_taken
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/rd_out
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/data
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/valid
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter_d
-add wave -noupdate -group sd_interface /test_sisa/SoC/io0/sd_ctr/sd_drv/offset
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/dout_avail
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/dout_taken
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/rd_out
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/data
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/valid
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/byte_counter_d
+add wave -noupdate -group sd_interface -radix hexadecimal /test_sisa/SoC/io0/sd_ctr/sd_drv/offset
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(2)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(6)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/proc0/e0/BR/BR(7)
@@ -393,8 +393,8 @@ add wave -noupdate /test_sisa/SoC/mem0/we
 add wave -noupdate /test_sisa/SoC/mem0/sram_wr
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/mem0/addr
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{rd rising_edge} {14710000 ps} 1} {{final reset} {2064850000 ps} 1} {{ini segiona lectura} {2092510000 ps} 1} {{rd_out mal posat} {2090230000 ps} 1} {{pc_in = 0022} {7690000 ps} 1} {{primera escriptura a la pila (WTF)} {3290000 ps} 1} {{Perque sram_wr s'aixeca ara i no abans?} {3690000 ps} 1}
-quietly wave cursor active 7
+WaveRestoreCursors {{rd rising_edge} {14710000 ps} 1} {{final reset} {2064850000 ps} 1} {{ini segiona lectura} {2092510000 ps} 1} {{rd_out mal posat} {2090230000 ps} 1} {{pc_in = 0022} {7690000 ps} 1} {{Cursor 8} {2248890000 ps} 1}
+quietly wave cursor active 6
 configure wave -namecolwidth 357
 configure wave -valuecolwidth 132
 configure wave -justifyvalue left
@@ -409,4 +409,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {3152929 ps} {4066703 ps}
+WaveRestoreZoom {0 ps} {7310192 ps}

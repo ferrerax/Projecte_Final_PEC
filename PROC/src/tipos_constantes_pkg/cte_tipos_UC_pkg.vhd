@@ -21,7 +21,7 @@ constant REGFILE_D_PC_2:    std_logic_vector(2 downto 0) := "010";
 constant REGFILE_D_IO:      std_logic_vector(2 downto 0) := "011";
 constant REGFILE_D_PC_NEXT: std_logic_vector(2 downto 0) := "100";
 
-constant PC_INI: std_logic_vector(15 downto 0) := x"C000";
+constant PC_INI: std_logic_vector(15 downto 0) := x"0000";
 
 constant OP_SYS_NORMAL : std_logic_vector(2 downto 0) := "000";
 constant OP_SYS_EI     : std_logic_vector(2 downto 0) := "001";
