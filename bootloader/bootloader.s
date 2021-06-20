@@ -58,7 +58,7 @@
     movhi r3, hi(MAGICNUMBER_H)
     cmpeq r1, r3, r1
     and   r1, r1, r2
-    bz    r1, __magicnumber_ok
+    bnz    r1, __magicnumber_ok
     halt
     
     ; Obtenim offset dels headers de seccio
@@ -150,7 +150,7 @@ __polling_while:
     in   r0, SD_PORT_VVALID
     bz   r0, __polling_while
     in   r2, SD_PORT_VALUE
-    st   -6(r7), r2 ; Posem retorn a R1 (pila)
+    st   0xA(r7), r2 ; Posem retorn a R1 (pila)
 
     $ppt r7, r6
     $ppt r7, r5

@@ -233,8 +233,8 @@ BEGIN
           clear_char => inta_ps2,
 			 data_ready => kb_data_ready); 
 			 
-	 hex : driverHex port map    (num        => hex_num, 
-											display_en => hex_display_en,
+	 hex : driverHex port map    (num        => mem(IO_PORT_SD_DATA), --hex_num, 
+											display_en => "1111", --hex_display_en,
 											HEX0       => HEX0,
 											HEX1       => HEX1,
 											HEX2       => HEX2,

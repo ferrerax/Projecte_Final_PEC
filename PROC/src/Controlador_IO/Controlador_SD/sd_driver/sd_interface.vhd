@@ -9,6 +9,7 @@ ENTITY sd_interface IS
             dout        : IN  std_logic_vector(7  downto 0);                   
             dout_avail  : IN  std_logic;                                         
             dout_taken  : OUT std_logic;                                         
+			rd_out      : OUT std_logic := '0';
             data        : OUT std_logic_vector(15 downto 0) := (others => '0');
             valid       : OUT std_logic                                          
 );
@@ -24,11 +25,18 @@ begin
 
 	offset <= addr(8 downto 1) & '0'; -- 2 byte align addr%512
 	dout_taken <= dout_avail;
-	process (dout_avail, busy) begin
+
+    rd_out <= rd when busy = '0' else
+              rd when rd   = '0';
+
+	process (dout_avail, busy, rd) begin
 		
-    if (busy = '0' ) then
-		 valid <= '0';
+    if (rising_edge(rd)) then
+        valid <= '0';
 		 byte_counter <= (others => '0');
+--    if (busy = '0') then
+--		 valid <= '0';
+--		 byte_counter <= (others => '0');
     else  -- during read operation
         if ( rising_edge(dout_avail) ) then -- new byte readed
             if ( offset = byte_counter(8 downto 1) & '0' ) then
