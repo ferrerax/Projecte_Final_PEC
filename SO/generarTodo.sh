@@ -46,6 +46,6 @@ sisa-objdump -S -x -w --section=.userFibonacci temp_so.o >fibonacci.dis
 sisa-objdump -S -x -w --section=.userdataFibonacci temp_so.o >>fibonacci.dis
 
 rm so.data.DE2-115.hex so.code.DE2-115.hex fibonacci.data.DE2-115.hex fibonacci.code.DE2-115.hex corre_letras.code.DE2-115.hex corre_letras.data.DE2-115.hex
-rm  so.o temp_so.o so.code so.data
-rm  fibonacci.o corre_letras.code corre_letras.data fibonacci.code fibonacci.data
+rm  temp_so.o so.code so.data
+rm  corre_letras.code corre_letras.data fibonacci.code fibonacci.data
 

@@ -6,29 +6,29 @@ EXEC_P, HAS_SYMS, D_PAGED
 start address 0x00000000
 
 Encabezado del Programa:
-    LOAD off    0x00000000 vaddr 0x00007f0c paddr 0x00007f0c align 2**0
-         filesz 0x0000012a memsz 0x0000012a flags rw-
-    LOAD off    0x0000012a vaddr 0x0000a000 paddr 0x0000a000 align 2**0
-         filesz 0x00000062 memsz 0x00000062 flags rw-
-    LOAD off    0x00000180 vaddr 0x0000aa00 paddr 0x0000aa00 align 2**0
-         filesz 0x00000000 memsz 0x00000040 flags rw-
-    LOAD off    0x0000018c vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x00000240 memsz 0x00000240 flags r-x
-    LOAD off    0x000003cc vaddr 0x0000d000 paddr 0x0000d000 align 2**0
-         filesz 0x0000087e memsz 0x0000087e flags r-x
-    LOAD off    0x00000c4a vaddr 0x0000f000 paddr 0x0000f000 align 2**0
+    LOAD off    0x00000000 vaddr 0x00001f0c paddr 0x00001f0c align 2**0
+         filesz 0x00000972 memsz 0x00000972 flags r-x
+    LOAD off    0x00000972 vaddr 0x00004000 paddr 0x00004000 align 2**0
          filesz 0x00000160 memsz 0x00000160 flags r-x
+    LOAD off    0x00000ad0 vaddr 0x00004a00 paddr 0x00004a00 align 2**0
+         filesz 0x00000000 memsz 0x00000040 flags rw-
+    LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
+         filesz 0x00000062 memsz 0x00000062 flags rw-
+    LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
+         filesz 0x0000003a memsz 0x0000003a flags rw-
+    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x000001dc memsz 0x000001dc flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      00000240  0000c000  0000c000  0000018c  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .userCorreletras 0000087e  0000d000  0000d000  000003cc  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .userFibonacci 00000160  0000f000  0000f000  00000c4a  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      00000036  00008000  00008000  000000f4  2**1  CONTENTS, ALLOC, LOAD, DATA
-  4 .userdataCorreletras 00000062  0000a000  0000a000  0000012a  2**1  CONTENTS, ALLOC, LOAD, DATA
-  5 .bss          00000040  0000aa00  0000aa00  0000018c  2**4  ALLOC
-  6 .stab         000010c8  0000aa40  0000aa40  00000dac  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      000007e7  0000bb08  0000bb08  00001e74  2**0  CONTENTS, READONLY, DEBUGGING
+  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
+  5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
+  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 0000c000 l    d  .sistema	00000000 .sistema
 0000c0c4 l       .sistema	00000000 RSI__interrup_timer
@@ -44,13 +44,9 @@ SYMBOL TABLE:
 0000c080 l       .sistema	00000000 __finRSG
 0000c0a0 l       .sistema	00000000 __finRSG_timer
 0000c000 g       .sistema	00000000 __entry_point
-0000c13e g     F .sistema	00000022 update_sched_data_rr
-0000c1c0 g     F .sistema	00000026 schedule
-0000c18e g     F .sistema	00000032 sched_next_rr
-0000c160 g     F .sistema	0000002e needs_sched_rr
-0000c1e6 g     F .sistema	00000030 init_sched
-0000c228 g     F .sistema	00000018 main
-0000c216 g     F .sistema	00000012 init_interrupts
+0000c170 g     F .sistema	00000054 schedule
+0000c13e g     F .sistema	00000032 sched_next_rr
+0000c1c4 g     F .sistema	00000018 main
 0000c024 g       .sistema	00000000 RSG
 0000c0e8 g     F .sistema	00000056 task_switch
 
@@ -65,8 +61,8 @@ Disassembly of section .sistema:
     c008:	5f40 	movhi	r7, 64
     c00a:	5a14 	movi	r5, 20
     c00c:	5bc0 	movhi	r5, -64
-    c00e:	5c28 	movi	r6, 40
-    c010:	5dc2 	movhi	r6, -62
+    c00e:	5cc4 	movi	r6, -60
+    c010:	5dc1 	movhi	r6, -63
     c012:	a183 	jmp	r6
 
 0000c014 <__exit>:
@@ -186,12 +182,12 @@ Disassembly of section .sistema:
     c0ca:	47c1 	st	2(r7), r3
     c0cc:	49c0 	st	0(r7), r4
     c0ce:	5860 	movi	r4, 96
-    c0d0:	59a0 	movhi	r4, -96
+    c0d0:	5960 	movhi	r4, 96
     c0d2:	3700 	ld	r3, 0(r4)
     c0d4:	26c1 	addi	r3, r3, 1
     c0d6:	4700 	st	0(r4), r3
     c0d8:	7706 	out	6, r3
-    c0da:	54c0 	movi	r2, -64
+    c0da:	5470 	movi	r2, 112
     c0dc:	55c1 	movhi	r2, -63
     c0de:	a684 	jal	r3, r2
     c0e0:	58a0 	movi	r4, -96
@@ -213,20 +209,20 @@ void task_switch()
     c0ee:	2dc6 	addi	r6, r7, 6
     c0f0:	45c0 	st	0(r7), r2
     int espOLD, espNEW;
-    if (running) espOLD = fibonacci.register_esp;
+    if (running) espOLD = fibonacci_esp;
     c0f2:	5200 	movi	r1, 0
-    c0f4:	53aa 	movhi	r1, -86
+    c0f4:	534a 	movhi	r1, 74
     c0f6:	3240 	ld	r1, 0(r1)
     c0f8:	6206 	bz	r1, 14
-    c0fa:	5204 	movi	r1, 4
-    c0fc:	53aa 	movhi	r1, -86
+    c0fa:	5236 	movi	r1, 54
+    c0fc:	5380 	movhi	r1, -128
     c0fe:	3240 	ld	r1, 0(r1)
     c100:	43be 	st	-4(r6), r1
     c102:	5a00 	movi	r5, 0
     c104:	6a04 	bz	r5, 10
-    else         espOLD = correletras.register_esp;
-    c106:	5202 	movi	r1, 2
-    c108:	53aa 	movhi	r1, -86
+    else         espOLD = correletras_esp;
+    c106:	5234 	movi	r1, 52
+    c108:	5380 	movhi	r1, -128
     c10a:	3240 	ld	r1, 0(r1)
     c10c:	43be 	st	-4(r6), r1
     
@@ -242,20 +238,20 @@ void task_switch()
             : "=r" (espNEW)
             : "r" (espOLD));
     
-    if (running) correletras.register_esp = espNEW;
+    if (running) correletras_esp = espNEW;
     c118:	5200 	movi	r1, 0
-    c11a:	53aa 	movhi	r1, -86
+    c11a:	534a 	movhi	r1, 74
     c11c:	3240 	ld	r1, 0(r1)
     c11e:	6206 	bz	r1, 14
-    c120:	5402 	movi	r2, 2
-    c122:	55aa 	movhi	r2, -86
+    c120:	5434 	movi	r2, 52
+    c122:	5580 	movhi	r2, -128
     c124:	33bf 	ld	r1, -2(r6)
     c126:	4280 	st	0(r2), r1
     c128:	5a00 	movi	r5, 0
     c12a:	6a04 	bz	r5, 10
-    else         correletras.register_esp = espNEW;
-    c12c:	5402 	movi	r2, 2
-    c12e:	55aa 	movhi	r2, -86
+    else         fibonacci_esp = espNEW;
+    c12c:	5436 	movi	r2, 54
+    c12e:	5580 	movhi	r2, -128
     c130:	33bf 	ld	r1, -2(r6)
     c132:	4280 	st	0(r2), r1
     
@@ -266,205 +262,162 @@ void task_switch()
     c13a:	2fca 	addi	r7, r7, 10
     c13c:	a143 	jmp	r5
 
-0000c13e <update_sched_data_rr>:
-
+0000c13e <sched_next_rr>:
+/*
 void update_sched_data_rr(void)
+{
+  remaining_quantum--;
+}*/
+/*
+int needs_sched_rr(void)
+{
+  if (remaining_quantum <= 0) return 1;
+  return 0;
+}*/
+
+void sched_next_rr(void)
 {
     c13e:	2ffa 	addi	r7, r7, -6
     c140:	4bc2 	st	4(r7), r5
     c142:	4dc1 	st	2(r7), r6
     c144:	2dc2 	addi	r6, r7, 2
     c146:	45c0 	st	0(r7), r2
-  remaining_quantum--;
-    c148:	5234 	movi	r1, 52
-    c14a:	5380 	movhi	r1, -128
-    c14c:	3240 	ld	r1, 0(r1)
-    c14e:	247f 	addi	r2, r1, -1
-    c150:	5234 	movi	r1, 52
-    c152:	5380 	movhi	r1, -128
-    c154:	4440 	st	0(r1), r2
-}
-    c156:	35c0 	ld	r2, 0(r7)
-    c158:	3dc1 	ld	r6, 2(r7)
-    c15a:	3bc2 	ld	r5, 4(r7)
-    c15c:	2fc6 	addi	r7, r7, 6
-    c15e:	a143 	jmp	r5
-
-0000c160 <needs_sched_rr>:
-
-int needs_sched_rr(void)
-{
-    c160:	2ff8 	addi	r7, r7, -8
-    c162:	4bc3 	st	6(r7), r5
-    c164:	4dc2 	st	4(r7), r6
-    c166:	2dc4 	addi	r6, r7, 4
-    c168:	45c0 	st	0(r7), r2
-  if (remaining_quantum <= 0) return 1;
-    c16a:	5234 	movi	r1, 52
-    c16c:	5380 	movhi	r1, -128
-    c16e:	3440 	ld	r2, 0(r1)
-    c170:	5200 	movi	r1, 0
-    c172:	1289 	cmple	r1, r2, r1
-    c174:	6204 	bz	r1, 10
-    c176:	5201 	movi	r1, 1
-    c178:	43bf 	st	-2(r6), r1
-    c17a:	5a00 	movi	r5, 0
-    c17c:	6a02 	bz	r5, 6
-  return 0;
-    c17e:	5200 	movi	r1, 0
-    c180:	43bf 	st	-2(r6), r1
-    c182:	33bf 	ld	r1, -2(r6)
-}
-    c184:	35c0 	ld	r2, 0(r7)
-    c186:	3dc2 	ld	r6, 4(r7)
-    c188:	3bc3 	ld	r5, 6(r7)
-    c18a:	2fc8 	addi	r7, r7, 8
-    c18c:	a143 	jmp	r5
-
-0000c18e <sched_next_rr>:
-
-void sched_next_rr(void)
-{
-    c18e:	2ffa 	addi	r7, r7, -6
-    c190:	4bc2 	st	4(r7), r5
-    c192:	4dc1 	st	2(r7), r6
-    c194:	2dc2 	addi	r6, r7, 2
-    c196:	45c0 	st	0(r7), r2
   remaining_quantum=DEFAULT_QUANTUM;
-    c198:	5434 	movi	r2, 52
-    c19a:	5580 	movhi	r2, -128
-    c19c:	520a 	movi	r1, 10
-    c19e:	4280 	st	0(r2), r1
+    c148:	5438 	movi	r2, 56
+    c14a:	5580 	movhi	r2, -128
+    c14c:	520a 	movi	r1, 10
+    c14e:	4280 	st	0(r2), r1
 
   task_switch();
-    c1a0:	52e8 	movi	r1, -24
-    c1a2:	53c0 	movhi	r1, -64
-    c1a4:	aa44 	jal	r5, r1
+    c150:	52e8 	movi	r1, -24
+    c152:	53c0 	movhi	r1, -64
+    c154:	aa44 	jal	r5, r1
   running = !running;
-    c1a6:	5200 	movi	r1, 0
-    c1a8:	53aa 	movhi	r1, -86
-    c1aa:	3440 	ld	r2, 0(r1)
-    c1ac:	5200 	movi	r1, 0
-    c1ae:	1499 	cmpeq	r2, r2, r1
-    c1b0:	5200 	movi	r1, 0
-    c1b2:	53aa 	movhi	r1, -86
-    c1b4:	4440 	st	0(r1), r2
+    c156:	5200 	movi	r1, 0
+    c158:	534a 	movhi	r1, 74
+    c15a:	3440 	ld	r2, 0(r1)
+    c15c:	5200 	movi	r1, 0
+    c15e:	1499 	cmpeq	r2, r2, r1
+    c160:	5200 	movi	r1, 0
+    c162:	534a 	movhi	r1, 74
+    c164:	4440 	st	0(r1), r2
 }
-    c1b6:	35c0 	ld	r2, 0(r7)
-    c1b8:	3dc1 	ld	r6, 2(r7)
-    c1ba:	3bc2 	ld	r5, 4(r7)
-    c1bc:	2fc6 	addi	r7, r7, 6
-    c1be:	a143 	jmp	r5
+    c166:	35c0 	ld	r2, 0(r7)
+    c168:	3dc1 	ld	r6, 2(r7)
+    c16a:	3bc2 	ld	r5, 4(r7)
+    c16c:	2fc6 	addi	r7, r7, 6
+    c16e:	a143 	jmp	r5
 
-0000c1c0 <schedule>:
+0000c170 <schedule>:
 
 void schedule()
 {
-    c1c0:	2ffc 	addi	r7, r7, -4
-    c1c2:	4bc1 	st	2(r7), r5
-    c1c4:	4dc0 	st	0(r7), r6
-    c1c6:	2dc0 	addi	r6, r7, 0
-  update_sched_data_rr();
-    c1c8:	523e 	movi	r1, 62
-    c1ca:	53c1 	movhi	r1, -63
-    c1cc:	aa44 	jal	r5, r1
-  if (needs_sched_rr())
-    c1ce:	5260 	movi	r1, 96
-    c1d0:	53c1 	movhi	r1, -63
-    c1d2:	aa44 	jal	r5, r1
-    c1d4:	6203 	bz	r1, 8
+    c170:	2ffa 	addi	r7, r7, -6
+    c172:	4bc2 	st	4(r7), r5
+    c174:	4dc1 	st	2(r7), r6
+    c176:	2dc2 	addi	r6, r7, 2
+    c178:	45c0 	st	0(r7), r2
+  //update_sched_data_rr();
+  remaining_quantum--;
+    c17a:	5238 	movi	r1, 56
+    c17c:	5380 	movhi	r1, -128
+    c17e:	3240 	ld	r1, 0(r1)
+    c180:	247f 	addi	r2, r1, -1
+    c182:	5238 	movi	r1, 56
+    c184:	5380 	movhi	r1, -128
+    c186:	4440 	st	0(r1), r2
+  
+  //if (needs_sched_rr())
+  if (remaining_quantum <= 0) 
+    c188:	5238 	movi	r1, 56
+    c18a:	5380 	movhi	r1, -128
+    c18c:	3440 	ld	r2, 0(r1)
+    c18e:	5200 	movi	r1, 0
+    c190:	1289 	cmple	r1, r2, r1
+    c192:	620f 	bz	r1, 32
   {
-    sched_next_rr();
-    c1d6:	528e 	movi	r1, -114
-    c1d8:	53c1 	movhi	r1, -63
-    c1da:	aa44 	jal	r5, r1
+    //sched_next_rr();
+      remaining_quantum=DEFAULT_QUANTUM;
+    c194:	5438 	movi	r2, 56
+    c196:	5580 	movhi	r2, -128
+    c198:	520a 	movi	r1, 10
+    c19a:	4280 	st	0(r2), r1
+
+      task_switch();
+    c19c:	52e8 	movi	r1, -24
+    c19e:	53c0 	movhi	r1, -64
+    c1a0:	aa44 	jal	r5, r1
+      running = !running;
+    c1a2:	5200 	movi	r1, 0
+    c1a4:	534a 	movhi	r1, 74
+    c1a6:	3440 	ld	r2, 0(r1)
+    c1a8:	5200 	movi	r1, 0
+    c1aa:	1499 	cmpeq	r2, r2, r1
+    c1ac:	5200 	movi	r1, 0
+    c1ae:	534a 	movhi	r1, 74
+    c1b0:	4440 	st	0(r1), r2
   }
   
    __asm__ (  
-    c1dc:	a0c3 	jmp	r3
+    c1b2:	3dc0 	ld	r6, 0(r7)
+    c1b4:	3bc1 	ld	r5, 2(r7)
+    c1b6:	2fc6 	addi	r7, r7, 6
+    c1b8:	a0c3 	jmp	r3
+            "ld	r6, 0(r7)\n\t"
+            "ld	r5, 2(r7)\n\t"
+            "addi r7, r7, 6\n\t"
             "jmp r3\n\t"
             : 
             : );
   
 }
-    c1de:	3dc0 	ld	r6, 0(r7)
-    c1e0:	3bc1 	ld	r5, 2(r7)
-    c1e2:	2fc4 	addi	r7, r7, 4
-    c1e4:	a143 	jmp	r5
+    c1ba:	35c0 	ld	r2, 0(r7)
+    c1bc:	3dc1 	ld	r6, 2(r7)
+    c1be:	3bc2 	ld	r5, 4(r7)
+    c1c0:	2fc6 	addi	r7, r7, 6
+    c1c2:	a143 	jmp	r5
 
-0000c1e6 <init_sched>:
-
+0000c1c4 <main>:
+/*
 void init_sched() {
-    c1e6:	2ffa 	addi	r7, r7, -6
-    c1e8:	4bc2 	st	4(r7), r5
-    c1ea:	4dc1 	st	2(r7), r6
-    c1ec:	2dc2 	addi	r6, r7, 2
-    c1ee:	45c0 	st	0(r7), r2
     running = 0;
-    c1f0:	5400 	movi	r2, 0
-    c1f2:	55aa 	movhi	r2, -86
-    c1f4:	5200 	movi	r1, 0
-    c1f6:	4280 	st	0(r2), r1
-    correletras.register_esp = 0xD4C6;
-    c1f8:	5402 	movi	r2, 2
-    c1fa:	55aa 	movhi	r2, -86
-    c1fc:	52c6 	movi	r1, -58
-    c1fe:	53d4 	movhi	r1, -44
-    c200:	4280 	st	0(r2), r1
-    fibonacci.register_esp = 0xF000;
-    c202:	5404 	movi	r2, 4
-    c204:	55aa 	movhi	r2, -86
-    c206:	5200 	movi	r1, 0
-    c208:	53f0 	movhi	r1, -16
-    c20a:	4280 	st	0(r2), r1
+    //correletras.register_esp = ;
+   // fibonacci.register_esp = ;
 }
-    c20c:	35c0 	ld	r2, 0(r7)
-    c20e:	3dc1 	ld	r6, 2(r7)
-    c210:	3bc2 	ld	r5, 4(r7)
-    c212:	2fc6 	addi	r7, r7, 6
-    c214:	a143 	jmp	r5
-
-0000c216 <init_interrupts>:
 
 void init_interrupts() {
-    c216:	2ffc 	addi	r7, r7, -4
-    c218:	4bc1 	st	2(r7), r5
-    c21a:	4dc0 	st	0(r7), r6
-    c21c:	2dc0 	addi	r6, r7, 0
     __asm__ (  
-    c21e:	f020 	ei	
             "ei\n\t"
             : 
             : );
-}
-    c220:	3dc0 	ld	r6, 0(r7)
-    c222:	3bc1 	ld	r5, 2(r7)
-    c224:	2fc4 	addi	r7, r7, 4
-    c226:	a143 	jmp	r5
-
-0000c228 <main>:
+}*/
 
 int main (void) {
-    c228:	2ffc 	addi	r7, r7, -4
-    c22a:	4bc1 	st	2(r7), r5
-    c22c:	4dc0 	st	0(r7), r6
-    c22e:	2dc0 	addi	r6, r7, 0
+    c1c4:	2ffa 	addi	r7, r7, -6
+    c1c6:	4bc2 	st	4(r7), r5
+    c1c8:	4dc1 	st	2(r7), r6
+    c1ca:	2dc2 	addi	r6, r7, 2
+    c1cc:	45c0 	st	0(r7), r2
 
-    init_sched();
-    c230:	52e6 	movi	r1, -26
-    c232:	53c1 	movhi	r1, -63
-    c234:	aa44 	jal	r5, r1
+    //init_sched();
+    running = 0;
+    c1ce:	5400 	movi	r2, 0
+    c1d0:	554a 	movhi	r2, 74
+    c1d2:	5200 	movi	r1, 0
+    c1d4:	4280 	st	0(r2), r1
     
-    init_interrupts();
-    c236:	5216 	movi	r1, 22
-    c238:	53c2 	movhi	r1, -62
-    c23a:	aa44 	jal	r5, r1
+    //init_interrupts();
+    __asm__ (  
+    c1d6:	f020 	ei	
+            "ei\n\t"
+            : 
+            : );
     
     //run_first_program();
     
     while(1);
-    c23c:	5a00 	movi	r5, 0
-    c23e:	6afe 	bz	r5, -2
+    c1d8:	5a00 	movi	r5, 0
+    c1da:	6afe 	bz	r5, -2
 
 temp_so.o:     file format elf32-sisa
 temp_so.o
@@ -473,35 +426,37 @@ EXEC_P, HAS_SYMS, D_PAGED
 start address 0x00000000
 
 Encabezado del Programa:
-    LOAD off    0x00000000 vaddr 0x00007f0c paddr 0x00007f0c align 2**0
-         filesz 0x0000012a memsz 0x0000012a flags rw-
-    LOAD off    0x0000012a vaddr 0x0000a000 paddr 0x0000a000 align 2**0
-         filesz 0x00000062 memsz 0x00000062 flags rw-
-    LOAD off    0x00000180 vaddr 0x0000aa00 paddr 0x0000aa00 align 2**0
-         filesz 0x00000000 memsz 0x00000040 flags rw-
-    LOAD off    0x0000018c vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x00000240 memsz 0x00000240 flags r-x
-    LOAD off    0x000003cc vaddr 0x0000d000 paddr 0x0000d000 align 2**0
-         filesz 0x0000087e memsz 0x0000087e flags r-x
-    LOAD off    0x00000c4a vaddr 0x0000f000 paddr 0x0000f000 align 2**0
+    LOAD off    0x00000000 vaddr 0x00001f0c paddr 0x00001f0c align 2**0
+         filesz 0x00000972 memsz 0x00000972 flags r-x
+    LOAD off    0x00000972 vaddr 0x00004000 paddr 0x00004000 align 2**0
          filesz 0x00000160 memsz 0x00000160 flags r-x
+    LOAD off    0x00000ad0 vaddr 0x00004a00 paddr 0x00004a00 align 2**0
+         filesz 0x00000000 memsz 0x00000040 flags rw-
+    LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
+         filesz 0x00000062 memsz 0x00000062 flags rw-
+    LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
+         filesz 0x0000003a memsz 0x0000003a flags rw-
+    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x000001dc memsz 0x000001dc flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      00000240  0000c000  0000c000  0000018c  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .userCorreletras 0000087e  0000d000  0000d000  000003cc  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .userFibonacci 00000160  0000f000  0000f000  00000c4a  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      00000036  00008000  00008000  000000f4  2**1  CONTENTS, ALLOC, LOAD, DATA
-  4 .userdataCorreletras 00000062  0000a000  0000a000  0000012a  2**1  CONTENTS, ALLOC, LOAD, DATA
-  5 .bss          00000040  0000aa00  0000aa00  0000018c  2**4  ALLOC
-  6 .stab         000010c8  0000aa40  0000aa40  00000dac  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      000007e7  0000bb08  0000bb08  00001e74  2**0  CONTENTS, READONLY, DEBUGGING
+  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
+  5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
+  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00008000 l    d  .sysdata	00000000 .sysdata
 00008000 l       .sysdata	00000000 interrupts_vector
 00008008 l       .sysdata	00000000 exceptions_vector
 00008024 l       .sysdata	00000000 call_sys_vector
-00008034 g     O .sysdata	00000002 remaining_quantum
+00008034 g     O .sysdata	00000002 correletras_esp
+00008036 g     O .sysdata	00000002 fibonacci_esp
+00008038 g     O .sysdata	00000002 remaining_quantum
 
 
 Disassembly of section .sysdata:
@@ -538,5 +493,11 @@ Disassembly of section .sysdata:
     8030:	c01a 	stf	52(r0), f0
     8032:	c01a 	stf	52(r0), f0
 
-00008034 <remaining_quantum>:
-    8034:	0001                                        ..
+00008034 <correletras_esp>:
+    8034:	24c6                                        .$
+
+00008036 <fibonacci_esp>:
+    8036:	40be                                        .@
+
+00008038 <remaining_quantum>:
+    8038:	0001                                        ..

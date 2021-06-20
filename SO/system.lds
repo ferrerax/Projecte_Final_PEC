@@ -16,12 +16,12 @@ SECTIONS
      data: 0x4000 => 0x8000
 
    correletras
-     codi: 0x6800 => 0xD000
-     data: 0x5000 => 0xA000
+     codi: 0x1000 => 0x2000
+     data: 0x3000 => 0x6000
 
    fibonacci
-     codi: 0x7800 => 0xF000
-     data: 0x5500 => 0xAA00
+     codi: 0x2000 => 0x4000
+     data: 0x2500 => 0x4A00
 
 */
 
@@ -39,7 +39,7 @@ SECTIONS
 
   PROVIDE (__user_start = .);
   
-  . = 0xD000 ; /* Part d'usuari */
+  . = 0x2000 ; /* Part d'usuari */
 
   .userCorreletras :
   {
@@ -47,7 +47,7 @@ SECTIONS
       corre_letras.o(.rodata)
   }
   
-  . = 0xF000 ;
+  . = 0x4000 ;
   
   .userFibonacci :
   {
@@ -61,9 +61,9 @@ SECTIONS
   . = 0x8000 ;
   .sysdata : {  sos.o(.data) so.o(.data)  }
   
-  . = 0xA000 ;
+  . = 0x6000 ;
   .userdataCorreletras : {  corre_letras.o(.data)  }
   
-  . = 0xAA00 ;
+  . = 0x4A00 ;
   .userdataFibonacci : {  fibonacci.o(.data)  }
 }
