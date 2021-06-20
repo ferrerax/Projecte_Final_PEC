@@ -1,6 +1,7 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /test_sisa/SoC/io0/sd_ctr/uut/state
+add wave -noupdate /test_sisa/SoC/io0/sd_ctr/uut/new_state
 add wave -noupdate /test_sisa/SoC/io0/sd_ctr/uut/sd_busy
 add wave -noupdate -divider {I/O PORTS SD}
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(22)
@@ -362,7 +363,7 @@ add wave -noupdate -group core_state -radix hexadecimal /test_sisa/SoC/proc0/c0/
 add wave -noupdate -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/BR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/BR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/BR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/BR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/BR/BR
 add wave -noupdate -group core_state -radix hexadecimal -childformat {{/test_sisa/SoC/proc0/e0/SBR/BR(0) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(1) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(2) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(3) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(4) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(5) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(6) -radix hexadecimal} {/test_sisa/SoC/proc0/e0/SBR/BR(7) -radix hexadecimal}} -subitemconfig {/test_sisa/SoC/proc0/e0/SBR/BR(0) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(1) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(2) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(3) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(4) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(5) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(6) {-height 16 -radix hexadecimal} /test_sisa/SoC/proc0/e0/SBR/BR(7) {-height 16 -radix hexadecimal}} /test_sisa/SoC/proc0/e0/SBR/BR
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{rd rising_edge} {14710000 ps} 1} {{busy falling_edge} {2065230000 ps} 0}
+WaveRestoreCursors {{rd rising_edge} {14710000 ps} 1} {{stuck in CMD59R1} {2064850000 ps} 1}
 quietly wave cursor active 2
 configure wave -namecolwidth 357
 configure wave -valuecolwidth 132
@@ -378,4 +379,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {1948266992 ps} {2182193008 ps}
+WaveRestoreZoom {1596997968 ps} {2532702032 ps}
