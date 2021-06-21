@@ -36,21 +36,51 @@ begin
 	 rd_out <= rd_out_tmp;
 				  
 	
-	process (dout_avail, busy, rd_out_tmp) begin
-		
+	
+process (clk, reset)
+	begin
+			case state is
+				when s0=>
+					if input = '1' then
+						state <= s1;
+					else
+						state <= s0;
+					end if;
+				when s1=>
+					if input = '1' then
+						state <= s2;
+					else
+						state <= s1;
+					end if;
+				when s2=>
+					if input = '1' then
+						state <= s3;
+					else
+						state <= s2;
+					end if;
+				when s3 =>
+					if input = '1' then
+						state <= s0;
+					else
+						state <= s3;
+					end if;
+			end case;
+	end process;
+	
+	process (dout_avail, busy, rd_out_tmp) begin		
 --    if (rising_edge(rd)) then
 --        valid <= '0';
 --		 byte_counter <= (others => '0');
-    if (rd_out_tmp = '1' and validat) then
-		 valid <= '0';
-		 validat <= false;
+    if (busy = '0') then
+		 --valid <= '0';
+		 --validat <= false;
 		 byte_counter <= (others => '0');
     else -- during read operation
         if ( rising_edge(dout_avail) ) then -- new byte readed
             if ( offset = byte_counter(8 downto 1) & '0' ) then
                 if ( byte_counter(0) = '1' ) then
                     data(15 downto 8) <= dout;
-                    valid <= '1'; -- and abort read
+                    --valid <= '1'; -- and abort read
 						  validat <= true;
                 else 
                     data(7 downto 0) <= dout;
