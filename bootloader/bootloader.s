@@ -50,10 +50,10 @@
     out HEX_PORT_ENABLE, r2
     
     ; comprovem existencia SD i que no hi hagi errors
-__check_error_again:
+__check_error:
     in r1, SD_PORT_ERROR
     out HEX_PORT_NUMBER, r1
-    bnz r1, __check_error_again
+    bnz r1, __check_error
 
 
     ;Comprovem magic number elf
