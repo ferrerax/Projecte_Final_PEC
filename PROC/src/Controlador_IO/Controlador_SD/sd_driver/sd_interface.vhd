@@ -32,12 +32,12 @@ begin
               rd when rd   = '0';
 				  
 	
-	process (dout_avail, busy, rd) begin
+	process (dout_avail, busy, rd_out) begin
 		
 --    if (rising_edge(rd)) then
 --        valid <= '0';
 --		 byte_counter <= (others => '0');
-    if (rd = '1' and validat) then
+    if (rd_out = '1' and validat) then
 		 valid <= '0';
 		 validat <= false;
 		 byte_counter <= (others => '0');
