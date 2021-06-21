@@ -23,6 +23,10 @@
 .set  SD_PORT_AVALID ,  24
 .set  SD_PORT_VVALID ,  25
 .set  SD_PORT_VALUE  ,  23
+.set  SD_PORT_ERROR  ,  26
+
+.set  HEX_PORT_NUMBER,  9
+.set  HEX_PORT_ENABLE,  10
 
 .set MAGICNUMBER_L, 0x457F
 .set MAGICNUMBER_H, 0x464C
@@ -42,7 +46,14 @@
     $pst   r7, r0 ; variable local limit    2(r7)
     $pst   r7, r0 ; variable local position 0(r7)
     
-    ; comprovem existencia SD
+    movi r2, 0xFF
+    out HEX_PORT_ENABLE, r2
+    
+    ; comprovem existencia SD i que no hi hagi errors
+__check_error_again:
+    in r1, SD_PORT_ERROR
+    out HEX_PORT_NUMBER, r1
+    bnz r1, __check_error_again
 
 
     ;Comprovem magic number elf
