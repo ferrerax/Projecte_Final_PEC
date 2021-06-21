@@ -17,6 +17,7 @@ constant IO_PORT_SD_ADDR		  : integer := 22;
 constant IO_PORT_SD_DATA		  : integer := 23;
 constant IO_PORT_SD_RD			  : integer := 24;
 constant IO_PORT_SD_VALID		  : integer := 25;
+constant IO_PORT_SD_ERROR		  : integer := 26;
 
 constant INT_IID_TIMER          : std_logic_vector(7 downto 0) := "00000000";
 constant INT_IID_PULSADORES     : std_logic_vector(7 downto 0) := "00000001";

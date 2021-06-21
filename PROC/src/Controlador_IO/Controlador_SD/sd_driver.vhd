@@ -16,7 +16,8 @@ ENTITY sd_driver IS
 			rd    : IN std_logic;
 			data  : OUT std_logic_vector(15 downto 0) := (others => '0');
 			valid : OUT std_logic;
-			reset : IN std_logic
+			reset : IN std_logic;
+			error : OUT std_logic_vector(2 downto 0)
 			
 	);
 END sd_driver;
@@ -151,6 +152,6 @@ BEGIN
 																data  => data,
 																valid => valid);
 																
-		--LEDG <= sd_error_code;
+		error <= sd_error_code;
 
 END Structure;
