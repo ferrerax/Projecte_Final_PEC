@@ -187,8 +187,8 @@ BEGIN
 					mem(IO_PORT_SD_RD) 			<= x"0000";
 				end if;
 				
-				hex_num        <= mem(IO_PORT_HEX_DISPLAY_EN);
-				hex_display_en <= mem(IO_PORT_HEX_NUM)(3 downto 0);
+				hex_num        <= mem(IO_PORT_HEX_NUM);
+				hex_display_en <= mem(IO_PORT_HEX_DISPLAY_EN)(3 downto 0);
 				
 				if wr_out = PE then
 					if    addr_io = IO_PORT_KEY then
@@ -236,8 +236,8 @@ BEGIN
           clear_char => inta_ps2,
 			 data_ready => kb_data_ready); 
 			 
-	 hex : driverHex port map    (num        => mem(IO_PORT_SD_DATA), --hex_num, 
-											display_en => "1111", --hex_display_en,
+	 hex : driverHex port map    (num        => hex_num,
+											display_en => hex_display_en,
 											HEX0       => HEX0,
 											HEX1       => HEX1,
 											HEX2       => HEX2,

@@ -385,8 +385,8 @@ add wave -noupdate -group sd_interface /test_sisa/sd0/tx_byte_counter
 add wave -noupdate -group sd_interface /test_sisa/sd0/tx_bit_counter
 add wave -noupdate -group sd_interface /test_sisa/sd0/cs
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{final reset} {2064850000 ps} 1} {{__OFF_E_SHOFF sd read valid} {2418510000 ps} 1} {{__OFF_E_SHNUM sd read valid} {2592730000 ps} 1} {{__OFF_SH_FLAGS sd first read valid} {2782310000 ps} 1} {{__OFF_SH_FLAGS sd second read valid} {2964210000 ps} 1} {{__OFF_SH_ADDR .text} {3134590000 ps} 1} {{lectura offset .text} {3304970000 ps} 1} {{lectura mida sector .text} {3475350000 ps} 1} {{INICI COPIA CODI SD TO SRAM (.text)} {3616290000 ps} 1} {{FINAL COPIA DE SD TO SRAM (.text)} {3955890000 ps} 1} {{Jump a 0xC000, (execucio del elf)} {5919490000 ps} 1} {{Cursor 13} {3955736000 ps} 0}
-quietly wave cursor active 6
+WaveRestoreCursors {{final reset} {2064850000 ps} 1} {{__OFF_E_SHOFF sd read valid} {2428610000 ps} 1} {{__OFF_E_SHNUM sd read valid} {2602830000 ps} 1} {{__OFF_SH_FLAGS sd first read valid} {2792410000 ps} 1} {{__OFF_SH_FLAGS sd second read valid} {2974310000 ps} 1} {{__OFF_SH_ADDR .text} {3144690000 ps} 1} {{lectura offset .text} {3315070000 ps} 1} {{lectura mida sector .text} {3485450000 ps} 1} {{INICI COPIA CODI SD TO SRAM (.text)} {3626690000 ps} 1} {{FINAL COPIA DE SD TO SRAM (.text)} {3965890000 ps} 1} {{Jump a 0xC000, (execucio del elf)} {5929890000 ps} 1} {{Cursor 13} {2065230000 ps} 0}
+quietly wave cursor active 12
 configure wave -namecolwidth 357
 configure wave -valuecolwidth 132
 configure wave -justifyvalue left
@@ -401,4 +401,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {3130971798 ps} {3138208203 ps}
+WaveRestoreZoom {2061973615 ps} {2069210020 ps}
