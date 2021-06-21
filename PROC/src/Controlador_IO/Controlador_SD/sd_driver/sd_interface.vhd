@@ -29,16 +29,16 @@ begin
     rd_out <= rd when busy = '0' else
               rd when rd   = '0';
 				  
-
+	
 	process (dout_avail, busy, rd) begin
 		
 --    if (rising_edge(rd)) then
 --        valid <= '0';
 --		 byte_counter <= (others => '0');
-    if (busy = '0') then
+    if (busy = '0' and rd = '1') then
 		 valid <= '0';
 		 byte_counter <= (others => '0');
-    else  -- during read operation
+    else -- during read operation
         if ( rising_edge(dout_avail) ) then -- new byte readed
             if ( offset = byte_counter(8 downto 1) & '0' ) then
                 if ( byte_counter(0) = '1' ) then
