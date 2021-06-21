@@ -157,12 +157,8 @@
         st     0(r4), r3           ;actualiza la variable sobre el numero de ticks
         out 6,r3        ; Solo para DEBUG; mostramos el valor por los leds rojos
         
-       
-       
-       
         $MOVEI r2, schedule 
         jal r3, r2
-        
         
         $MOVEI r4, __finRSG_timer
         jmp r4

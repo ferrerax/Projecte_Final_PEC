@@ -3,9 +3,6 @@
 int correletras_esp = 0x24C6;
 int fibonacci_esp   = 0x40BE;
 
-int correletras_pila = 0x4C00;
-int fibonacci_pila   = 0x4A00;
-
 int correletras_r0 = 1;
 int correletras_r1 = 1;
 int correletras_r2 = 1;
@@ -15,15 +12,6 @@ int correletras_r5 = 1;
 int correletras_r6 = 1;
 int correletras_r7 = 1;
 
-int correletras_s0 = 1;
-int correletras_s1 = 1;
-int correletras_s2 = 1;
-int correletras_s3 = 1;
-int correletras_s4 = 1;
-int correletras_s5 = 1;
-int correletras_s6 = 1;
-int correletras_s7 = 1;
-
 int fibonacci_r0 = 1;
 int fibonacci_r1 = 1;
 int fibonacci_r2 = 1;
@@ -32,15 +20,6 @@ int fibonacci_r4 = 1;
 int fibonacci_r5 = 1;
 int fibonacci_r6 = 1;
 int fibonacci_r7 = 1;
-
-int fibonacci_s0 = 1;
-int fibonacci_s1 = 1;
-int fibonacci_s2 = 1;
-int fibonacci_s3 = 1;
-int fibonacci_s4 = 1;
-int fibonacci_s5 = 1;
-int fibonacci_s6 = 1;
-int fibonacci_s7 = 1;
 
 int remaining_quantum=1;
 int running=1;
@@ -122,18 +101,6 @@ void task_switch()
         : "r" (espOLD));
     
     if (running) {
-      /*  
-    c024:	2ff2 	addi	r7, r7, -14
-    c026:	41c6 	st	12(r7), r0
-    c028:	43c5 	st	10(r7), r1
-    c02a:	45c4 	st	8(r7), r2
-    c02c:	47c3 	st	6(r7), r3
-    c02e:	49c2 	st	4(r7), r4
-    c030:	4bc1 	st	2(r7), r5
-    c032:	4dc0 	st	0(r7), r6
-    
-        */
-      
         __asm__ (
             "movi  r7, 0\n\t"
             "movhi r7, 76\n\t"
@@ -232,5 +199,5 @@ int main (void) {
         : "r" (correletras_esp));
     
     while(1);
-    return 0; //mai arribarà xD
+    return 0; //mai arribarà
 }
