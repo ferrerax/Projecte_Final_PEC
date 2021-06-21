@@ -77,6 +77,7 @@ __magicnumber_ok:
 __begin_for_headers:
     ld    r3, 2(r7)  ; pillem var local limit de memoria
     cmpltu r1, r5, r3    
+    st    (r7), r5   ; guardem la posicio de headers de seccio per utlitar r5
     bz    r1, __end_for_headers
     addi  r1, r5, __OFF_SH_FLAGS
     jal   r6, r4
@@ -91,7 +92,6 @@ __begin_for_headers:
     addi  r1, r5, __OFF_SH_OFFSET
     jal   r6, r4
     addi  r2, r1, 0  ; R2 <- sh_offset
-    st    (r7), r5   ; guardem la posicio de headers de seccio per utlitar r5
     addi  r1, r5, __OFF_SH_SIZE
     jal   r6, r4
     addi  r5, r1, 0  ; R5 <- sh_size
