@@ -27,7 +27,11 @@ ENTITY sisa IS
 			 HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 			 HEX1 : OUT std_logic_vector(6 DOWNTO 0);
 			 HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-			 HEX3 : OUT std_logic_vector(6 DOWNTO 0));
+			 HEX3 : OUT std_logic_vector(6 DOWNTO 0);
+			 SD_CLK  : OUT std_logic; -- sclk 
+			 SD_CMD  : OUT std_logic; -- mosi
+			 SD_DAT  : IN  std_logic; -- miso
+			 SD_DAT3 : OUT std_logic);
 END sisa;
 
 ARCHITECTURE Structure OF sisa IS
@@ -38,7 +42,7 @@ component MemoryController is
           rd_data   : out std_logic_vector(15 downto 0);
           we        : in  std_logic;
           byte_m    : in  std_logic;
-          -- seÃ¯Â¿Â½ales para la placa de desarrollo
+          -- seÃƒÂ¯Ã‚Â¿Ã‚Â½ales para la placa de desarrollo
 			 SRAM_ADDR : out   std_logic_vector(17 downto 0);
           SRAM_DQ   : inout std_logic_vector(15 downto 0);
           SRAM_UB_N : out   std_logic;
@@ -103,7 +107,11 @@ COMPONENT controladores_IO IS
 		HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX1 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX3 : OUT std_logic_vector(6 DOWNTO 0)
+		HEX3 : OUT std_logic_vector(6 DOWNTO 0);
+		SD_CLK  : OUT std_logic; -- sclk 
+		SD_CMD  : OUT std_logic; -- mosi
+		SD_DAT  : IN  std_logic; -- miso
+		SD_DAT3 : OUT std_logic -- ss_n
 	);
 END COMPONENT;
 component vga_controller is
@@ -122,6 +130,10 @@ component vga_controller is
          byte_m            : in std_logic);                     -- simplemente lo ignoramos, este controlador no lo tiene implementado
 end component;
 
+component bootrom IS
+    port (addr : IN  STD_LOGIC_VECTOR(6 DOWNTO 0);
+			    a    : OUT STD_LOGIC_VECTOR(15 DOWNTO 0));
+END component;
 
 signal rellotge, proc0_word_byte, wr_m_t : std_logic;
 signal proc0_addr_m, proc0_data_wr, proc0_datard_m, vga_rd_data, mem0_rd_data : STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -140,6 +152,9 @@ signal proc0_int_en: std_logic;
 signal io0_intr: std_logic;
 
 signal vga_addr_vga: std_logic_vector(15 downto 0);
+signal bootrom_addr: std_logic_vector(6 downto 0);
+signal bootrom_rd_data: std_logic_vector(15 downto 0);
+
 BEGIN
 --	rel0  : Reloj GENERIC MAP ( factor => 8) PORT MAP (CLOCK_50 => CLOCK_50, reloj => rellotge);
 	
@@ -197,25 +212,34 @@ BEGIN
 		HEX0 => HEX0,
 		HEX1 => HEX1,
 		HEX2 => HEX2,
-		HEX3 => HEX3
+		HEX3 => HEX3,
+		SD_CLK => SD_CLK,
+		SD_CMD => SD_CMD,
+		SD_DAT => SD_DAT,
+		SD_DAT3 => SD_DAT3
 	);
 	
 	--blank_out, csync_out, horiz_sync_out, vert_sync_out, red_out, green_out y blue_out s
-	vga: vga_controller  port map(clk_50mhz  => CLOCK_50, -- system clock signal
-         reset         => SW(8), -- system reset
-         red_out(3 downto 0)   => VGA_R, -- vga red pixel value
-         green_out(3 downto 0) =>  VGA_G, -- vga green pixel value
-         blue_out(3 downto 0)  => VGA_B, -- vga blue pixel value
-         horiz_sync_out => VGA_HS, -- vga control signal
-         vert_sync_out  => VGA_VS, -- vga control signal
-         --
-         addr_vga       => vga_addr_vga(12 downto 0),
-         we             => vga_we,
-         wr_data        => proc0_data_wr,
-         rd_data        => vga_rd_data,
-         byte_m         => proc0_word_byte);  
+--	vga: vga_controller  port map(clk_50mhz  => CLOCK_50, -- system clock signal
+--         reset         => SW(8), -- system reset
+--         red_out(3 downto 0)   => VGA_R, -- vga red pixel value
+--         green_out(3 downto 0) =>  VGA_G, -- vga green pixel value
+--         blue_out(3 downto 0)  => VGA_B, -- vga blue pixel value
+--         horiz_sync_out => VGA_HS, -- vga control signal
+--         vert_sync_out  => VGA_VS, -- vga control signal
+--         --
+--         addr_vga       => vga_addr_vga(12 downto 0),
+--         we             => vga_we,
+--         wr_data        => proc0_data_wr,
+--         rd_data        => vga_rd_data,
+--         byte_m         => proc0_word_byte);  
 		
-
+	bootrom0: bootrom port map(
+		addr => bootrom_addr,
+		a    => bootrom_rd_data 
+	);
+	
+	 bootrom_addr <= proc0_addr_m(7 downto 1);
 	 vga_addr_vga <= proc0_addr_m - x"A000";
 	 process (CLOCK_50, SW(8)) begin
 	   if SW(8) = '1' then
@@ -229,9 +253,15 @@ BEGIN
 				mem0_we <= '0';
 				proc0_datard_m <= vga_rd_data;
 			 else
-			   vga_we <= '0';
+			    vga_we <= '0';
 				mem0_we <= proc0_wr_m;
-				proc0_datard_m <= mem0_rd_data;
+				if (proc0_addr_m < x"0100") then
+					proc0_datard_m <= bootrom_rd_data;
+					-- mem0_we <= '0';
+				else 
+					-- mem0_we <= proc0_wr_m;
+					proc0_datard_m <= mem0_rd_data;
+				end if;
 			 end if;
 		  end if;
 		end if;

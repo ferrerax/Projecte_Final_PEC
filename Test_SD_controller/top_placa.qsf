@@ -18,14 +18,14 @@
 #
 # Quartus II 64-Bit
 # Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-# Date created = 21:02:34  May 09, 2021
+# Date created = 17:36:20  June 17, 2021
 #
 # -------------------------------------------------------------------------- #
 #
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		sisa_assignment_defaults.qdf
+#		top_placa_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -38,14 +38,21 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C20F484C7
-set_global_assignment -name TOP_LEVEL_ENTITY sisa
+set_global_assignment -name TOP_LEVEL_ENTITY top_placa
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:02:34  MAY 09, 2021"
-set_global_assignment -name LAST_QUARTUS_VERSION "20.1.1 LITE EDITION"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:36:20  JUNE 17, 2021"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name VHDL_FILE sd_driver/sd_spi.vhd
+set_global_assignment -name VHDL_FILE sd_driver/sd_driver.vhd
+set_global_assignment -name VHDL_FILE top_placa.vhd
+set_global_assignment -name VHDL_FILE driverHex.vhd
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_A13 -to GPIO_0[0]
 set_location_assignment PIN_B13 -to GPIO_0[1]
 set_location_assignment PIN_A14 -to GPIO_0[2]
@@ -491,42 +498,63 @@ set_location_assignment PIN_Y7 -to SRAM_LB_N
 set_location_assignment PIN_T8 -to SRAM_OE_N
 set_location_assignment PIN_W7 -to SRAM_UB_N
 set_location_assignment PIN_AA10 -to SRAM_WE_N
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VHDL_FILE src/Proc/bootrom.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/cte_tipos_IO_pkg.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_SD/sd_driver.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_SD/sd_driver/sd_interface.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/sisa16_coop_funct_pkg.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/cte_tipos_UF_pkg.vhd
-set_global_assignment -name VHDL_FILE src/tipos_constantes_pkg/cte_tipos_UC_pkg.vhd
-set_global_assignment -name VHDL_FILE src/Proc/unidad_control.vhd
-set_global_assignment -name VHDL_FILE src/Proc/sregfile.vhd
-set_global_assignment -name VHDL_FILE src/Proc/regfile.vhd
-set_global_assignment -name VHDL_FILE src/Proc/proc.vhd
-set_global_assignment -name VHDL_FILE src/Proc/multi.vhd
-set_global_assignment -name VHDL_FILE src/Proc/exception_controller.vhd
-set_global_assignment -name VHDL_FILE src/Proc/datapath.vhd
-set_global_assignment -name VHDL_FILE src/Proc/control_l.vhd
-set_global_assignment -name VHDL_FILE src/Proc/alu.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_sync.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_ram_dual.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_font_rom.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_VGA/Controlador_VGA1/vga_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_SDRAM/SRAMController.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_SDRAM/MemoryController.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_PS2_Keyboard/ps2_keyboard.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_PS2_Keyboard/keyboard_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/timer_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/pulsadores_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/interruptores_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/interrupt_controller.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/driverHex.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/controladores_IO.vhd
-set_global_assignment -name VHDL_FILE src/sisa.vhd
-set_global_assignment -name VHDL_FILE src/Reloj.vhd
-set_global_assignment -name VHDL_FILE src/Controlador_IO/Controlador_SD/sd_driver/sd_spi.vhd
+set_location_assignment PIN_V20 -to SD_CLK
+set_location_assignment PIN_Y20 -to SD_CMD
+set_location_assignment PIN_W20 -to SD_DAT
+set_location_assignment PIN_U20 -to SD_DAT3
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name ENABLE_SIGNALTAP ON
+set_global_assignment -name USE_SIGNALTAP_FILE output_files/stp1.stp
+set_global_assignment -name SIGNALTAP_FILE output_files/stp1.stp
+set_global_assignment -name CDF_FILE output_files/Chain2.cdf
+set_global_assignment -name SLD_NODE_CREATOR_ID 110 -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_ENTITY_NAME sld_signaltap -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_clk -to CLOCK_50 -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_BITS=1" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_INFO=805334528" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_POWER_UP_TRIGGER=0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ATTRIBUTE_MEM_MODE=OFF" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_FLOW_USE_GENERATED=0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_STATE_BITS=11" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_BUFFER_FULL_STOP=1" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_CURRENT_RESOURCE_WIDTH=1" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL=1" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_IN_ENABLED=0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[0] -to SD_CMD -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[1] -to SD_DAT -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[2] -to SD_DAT3 -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[3] -to SW[0] -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[4] -to SW[9] -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[5] -to "sd_controller:uut|sd_error" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[6] -to "sd_controller:uut|state.CMD0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SEGMENT_SIZE=4096" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SAMPLE_DEPTH=4096" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to "sd_controller:uut|state.CMD0" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=1" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK=00000000000000000000000000" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_INVERSION_MASK_LENGTH=26" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=sld_reserved_top_placa_auto_signaltap_0_1_5bd9," -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[7] -to "sd_controller:uut|state.IDLE" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[8] -to "sd_controller:uut|state.IDLE2" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[9] -to "sd_controller:uut|state.INIT" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[10] -to "sd_controller:uut|state.POLL_CMD" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[11] -to "sd_controller:uut|state.RST" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[12] -to "sd_controller:uut|state.RST2" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[13] -to "sd_controller:uut|state.SEND_CMD" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[14] -to "sd_controller:uut|state.SEND_CMD_1" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[15] -to "sd_controller:uut|state.SEND_CMD_2" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[16] -to "sd_controller:uut|state.SEND_CMD_3" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[17] -to "sd_controller:uut|state.SEND_CMD_4" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[18] -to "sd_controller:uut|state.SEND_CMD_5" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[19] -to "sd_controller:uut|state.SEND_RCV" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[20] -to "sd_controller:uut|state.SEND_RCV_CLK1" -section_id auto_signaltap_0
+set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[21] -to "sd_driver:sd_drv|busy" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_DATA_BITS=22" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_LOWORD=11327" -section_id auto_signaltap_0
+set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_NODE_CRC_HIWORD=65194" -section_id auto_signaltap_0
+set_global_assignment -name SLD_FILE "Z:/UPC/PEC/Projecte_Final_PEC/top_placa/output_files/stp1_auto_stripped.stp"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

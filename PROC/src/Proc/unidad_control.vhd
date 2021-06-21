@@ -187,7 +187,7 @@ BEGIN
 	
 
 
-	 pc_d <= 	x"C000" when boot  = '1' else pc_in;
+	 pc_d <= 	PC_INI when boot  = '1' else pc_in;
 					
 	 -- pc_new <= pc_tmp when rising_edge(clk);
 	 

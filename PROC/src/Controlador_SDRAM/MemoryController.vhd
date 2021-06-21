@@ -41,8 +41,9 @@ architecture comportament of MemoryController is
 	
 	signal sram_wr : std_logic;
 begin
-	 sram_wr <= '0' when (addr(15) = '1'  and addr(14) = '1') or 
-								(addr >= x"4000" and addr < x"8000") else we;
+	 --sram_wr <= '0' when (addr(15) = '1'  and addr(14) = '1') or 
+	 --							(addr >= x"4000" and addr < x"8000") else we;
+   sram_wr <= we;
 	 
 	sram : SRAMController
 		port map(clk => CLOCK_50,

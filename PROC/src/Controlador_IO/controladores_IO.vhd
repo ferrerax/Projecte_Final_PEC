@@ -28,20 +28,25 @@ ENTITY controladores_IO IS
 		HEX0 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX1 : OUT std_logic_vector(6 DOWNTO 0);
 		HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX3 : OUT std_logic_vector(6 DOWNTO 0)
+		HEX3 : OUT std_logic_vector(6 DOWNTO 0);
+		
+		-- Senyals SD
+		SD_CLK  : OUT std_logic; -- sclk 
+		SD_CMD  : OUT std_logic; -- mosi
+		SD_DAT  : IN  std_logic; -- miso
+		SD_DAT3 : OUT std_logic -- ss_n
 		
 	);
 END controladores_IO;
 ARCHITECTURE Structure OF controladores_IO IS 
 
 COMPONENT driverHex IS
-	PORT (
-		num : IN std_logic_vector(15 DOWNTO 0);
-		display_en : IN std_logic_vector(3 downto 0);
-		HEX0 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX1 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX2 : OUT std_logic_vector(6 DOWNTO 0);
-		HEX3 : OUT std_logic_vector(6 DOWNTO 0)
+	PORT (  num         :  IN   std_logic_vector(15  DOWNTO  0);
+            display_en  :  IN   std_logic_vector(3   downto  0);
+            HEX0        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX1        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX2        :  OUT  std_logic_vector(6   DOWNTO  0);
+            HEX3        :  OUT  std_logic_vector(6   DOWNTO  0)
 	);
 END COMPONENT;
 COMPONENT keyboard_controller IS
@@ -51,45 +56,66 @@ COMPONENT keyboard_controller IS
           ps2_data   : inout STD_LOGIC;
           read_char  : out   STD_LOGIC_VECTOR (7 downto 0);
           clear_char : in    STD_LOGIC;
-			 data_ready : out   STD_LOGIC);
+		  data_ready : out   STD_LOGIC);
 END COMPONENT;
 COMPONENT pulsadores_controller IS
-    Port (clk        : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 keys       : in    STD_LOGIC_VECTOR(3 DOWNTO 0);
-			 intr       : out   STD_LOGIC;
-			 read_key   : out   STD_LOGIC_VECTOR(3 DOWNTO 0));
+    Port (  clk       :  in   STD_LOGIC;                  
+            boot      :  in   STD_LOGIC;                  
+            inta      :  in   STD_LOGIC;                  
+            keys      :  in   STD_LOGIC_VECTOR(3  DOWNTO  0);
+            intr      :  out  STD_LOGIC;                  
+            read_key  :  out  STD_LOGIC_VECTOR(3  DOWNTO  0));
 END COMPONENT;
+
 COMPONENT interruptores_controller IS
-    Port (clk        : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 switches   : in    STD_LOGIC_VECTOR(7 DOWNTO 0);
-			 intr       : out   STD_LOGIC;
-			 rd_switch  : out   STD_LOGIC_VECTOR(7 DOWNTO 0));
+    Port (  clk        :  in   STD_LOGIC;                  
+            boot       :  in   STD_LOGIC;                  
+            inta       :  in   STD_LOGIC;                  
+            switches   :  in   STD_LOGIC_VECTOR(7  DOWNTO  0);
+            intr       :  out  STD_LOGIC;                  
+            rd_switch  :  out  STD_LOGIC_VECTOR(7  DOWNTO  0));
 END COMPONENT;
+
 COMPONENT timer_controller IS
-    Port (CLOCK_50   : in    STD_LOGIC;
-          boot       : in    STD_LOGIC;
-			 inta       : in    STD_LOGIC;
-			 intr       : out   STD_LOGIC);
+    Port (  CLOCK_50  :  in   STD_LOGIC;
+            boot      :  in   STD_LOGIC;
+            inta      :  in   STD_LOGIC;
+            intr      :  out  STD_LOGIC);
 END COMPONENT;
+
 COMPONENT interrupt_controller IS
-    Port (clk         : in   STD_LOGIC;
-          boot        : in   STD_LOGIC;
-			 inta        : in   STD_LOGIC;
-			 key_intr    : in   STD_LOGIC;
-			 ps2_intr    : in   STD_LOGIC;
-			 switch_intr : in   STD_LOGIC;
-			 timer_intr  : in   STD_LOGIC;
-			 
-			 intr        : out  STD_LOGIC;
-			 key_inta    : out  STD_LOGIC;
-			 ps2_inta    : out  STD_LOGIC;
-			 switch_inta : out  STD_LOGIC;
-			 timer_inta  : out  STD_LOGIC;
-			 iid         : out  STD_LOGIC_VECTOR(7 DOWNTO 0));
+    Port (  clk          :  in   STD_LOGIC;                  
+            boot         :  in   STD_LOGIC;                  
+            inta         :  in   STD_LOGIC;                  
+            key_intr     :  in   STD_LOGIC;                  
+            ps2_intr     :  in   STD_LOGIC;                  
+            switch_intr  :  in   STD_LOGIC;                  
+            timer_intr   :  in   STD_LOGIC;                  
+
+            intr         :  out  STD_LOGIC;                  
+            key_inta     :  out  STD_LOGIC;                  
+            ps2_inta     :  out  STD_LOGIC;                  
+            switch_inta  :  out  STD_LOGIC;                  
+            timer_inta   :  out  STD_LOGIC;                  
+            iid          :  out  STD_LOGIC_VECTOR(7  DOWNTO  0));
+END COMPONENT;
+
+COMPONENT sd_driver IS
+	PORT (CLOCK_50 : IN std_logic;
+			SD_CLK  : OUT std_logic; -- sclk 
+			SD_CMD  : OUT std_logic; -- mosi
+			SD_DAT  : IN  std_logic; -- miso
+			SD_DAT3 : OUT std_logic; -- ss_n
+			
+			--Ports del controlador.
+			addr  : IN std_logic_vector(15 downto 0);
+			rd    : IN std_logic;
+			data  : OUT std_logic_vector(15 downto 0) := (others => '0');
+			valid : OUT std_logic;
+			reset : IN std_logic;
+			error : OUT std_logic_vector(2 downto 0)
+			
+	);
 END COMPONENT;
 
 	type bancRegistres is array (0 to 31) of std_logic_vector(15 downto 0);
@@ -123,15 +149,21 @@ END COMPONENT;
 	signal cont_ciclos  : STD_LOGIC_VECTOR(15 downto 0):=x"0000";
 	signal cont_mili    : STD_LOGIC_VECTOR(15 downto 0):=x"0000";
 
-	signal inta_pulsa  : std_logic;
-	signal inta_sw  : std_logic;
-	signal inta_ps2  : std_logic;
+    signal  inta_pulsa  :  std_logic;
+    signal  inta_sw     :  std_logic;
+    signal  inta_ps2    :  std_logic;
+	
+	signal sd_data : std_logic_vector(15 downto 0);
+	signal sd_rd : std_logic := '0';
+	signal sd_valid : std_logic := '0';
+	signal sd_error : std_logic_vector(2 downto 0);
 
 BEGIN
 	 rd_io      <= mem(conv_integer(addr_io(4 downto 0))) when inta = '0' else 
 	               x"00" & iid;
 	 led_rojos  <= mem(IO_PORT_LEDR)(7 downto 0);
 	 led_verdes <= mem(IO_PORT_LEDG)(7 downto 0);
+	 
 	 
 	 process(CLOCK_50,wr_out)
 	 begin
@@ -140,6 +172,7 @@ BEGIN
 			  clear_char  <= '0';
 				key_inta    <= '0';
 			  switch_inta <= '0';
+              sd_rd <= mem(IO_PORT_SD_RD)(0);
 				
 				mem(IO_PORT_KEY)           <= "000000000000"    & keys_q;
 				mem(IO_PORT_SW)            <= "00000000"     	& switches_q;
@@ -147,9 +180,15 @@ BEGIN
 				mem(IO_PORT_KB_DATA_READY) <= "000000000000000" & kb_data_ready;
 				mem(IO_PORT_CONT_CICLOS)   <= cont_ciclos;
 				mem(IO_PORT_CONT_MILI)     <= cont_mili;
+				mem(IO_PORT_SD_DATA)			<= sd_data;
+				mem(IO_PORT_SD_VALID)		<= "000000000000000" & sd_valid;
+				mem(IO_PORT_SD_ERROR)		<= "0000000000000" & sd_error;
+				if sd_valid = '1' then
+					mem(IO_PORT_SD_RD) 			<= x"0000";
+				end if;
 				
-				hex_num        <= mem(IO_PORT_HEX_DISPLAY_EN);
-				hex_display_en <= mem(IO_PORT_HEX_NUM)(3 downto 0);
+				hex_num        <= mem(IO_PORT_HEX_NUM);
+				hex_display_en <= mem(IO_PORT_HEX_DISPLAY_EN)(3 downto 0);
 				
 				if wr_out = PE then
 					if    addr_io = IO_PORT_KEY then
@@ -161,6 +200,8 @@ BEGIN
 					  clear_char <= not int_en;
 					elsif addr_io = IO_PORT_CONT_CICLOS then
 					elsif addr_io = IO_PORT_CONT_MILI then
+					elsif addr_io = IO_PORT_SD_DATA then 
+					elsif addr_io = IO_PORT_SD_VALID then
 					else
 					  mem(conv_integer(addr_io(4 downto 0))) <= wr_io;
 					end if;
@@ -195,7 +236,7 @@ BEGIN
           clear_char => inta_ps2,
 			 data_ready => kb_data_ready); 
 			 
-	 hex : driverHex port map    (num        => hex_num, 
+	 hex : driverHex port map    (num        => hex_num,
 											display_en => hex_display_en,
 											HEX0       => HEX0,
 											HEX1       => HEX1,
@@ -236,6 +277,20 @@ BEGIN
 															switch_inta => int_switch_inta,
 															timer_inta  => timer_inta,
 															iid         => iid);			
+															
+	sd_ctr : sd_driver
+	PORT MAP(CLOCK_50 => CLOCK_50,
+				SD_CLK  	=> SD_CLK,
+				SD_CMD   => SD_CMD, -- mosi
+				SD_DAT   => SD_DAT, -- miso
+				SD_DAT3  => SD_DAT3, -- ss_n
+				addr 		=> mem(IO_PORT_SD_ADDR),
+				rd       => sd_rd,
+				data     => sd_data,
+				valid		=> sd_valid,
+				reset 	=> boot,
+				error		=> sd_error
+	);
 
 
 END Structure;

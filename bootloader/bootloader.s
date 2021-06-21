@@ -23,6 +23,10 @@
 .set  SD_PORT_AVALID ,  24
 .set  SD_PORT_VVALID ,  25
 .set  SD_PORT_VALUE  ,  23
+.set  SD_PORT_ERROR  ,  26
+
+.set  HEX_PORT_NUMBER,  10
+.set  HEX_PORT_ENABLE,  9
 
 .set MAGICNUMBER_L, 0x457F
 .set MAGICNUMBER_H, 0x464C
@@ -42,7 +46,14 @@
     $pst   r7, r0 ; variable local limit    2(r7)
     $pst   r7, r0 ; variable local position 0(r7)
     
-    ; comprovem existencia SD
+    movi r2, 0xFF
+    out HEX_PORT_ENABLE, r2
+    
+    ; comprovem existencia SD i que no hi hagi errors
+__check_error:
+    in r1, SD_PORT_ERROR
+    out HEX_PORT_NUMBER, r1
+    bnz r1, __check_error
 
 
     ;Comprovem magic number elf
@@ -58,7 +69,7 @@
     movhi r3, hi(MAGICNUMBER_H)
     cmpeq r1, r3, r1
     and   r1, r1, r2
-    bz    r1, __magicnumber_ok
+    bnz    r1, __magicnumber_ok
     halt
     
     ; Obtenim offset dels headers de seccio
@@ -77,6 +88,7 @@ __magicnumber_ok:
 __begin_for_headers:
     ld    r3, 2(r7)  ; pillem var local limit de memoria
     cmpltu r1, r5, r3    
+    st    (r7), r5   ; guardem la posicio de headers de seccio per utlitar r5
     bz    r1, __end_for_headers
     addi  r1, r5, __OFF_SH_FLAGS
     jal   r6, r4
@@ -91,7 +103,6 @@ __begin_for_headers:
     addi  r1, r5, __OFF_SH_OFFSET
     jal   r6, r4
     addi  r2, r1, 0  ; R2 <- sh_offset
-    st    (r7), r5   ; guardem la posicio de headers de seccio per utlitar r5
     addi  r1, r5, __OFF_SH_SIZE
     jal   r6, r4
     addi  r5, r1, 0  ; R5 <- sh_size
@@ -150,7 +161,7 @@ __polling_while:
     in   r0, SD_PORT_VVALID
     bz   r0, __polling_while
     in   r2, SD_PORT_VALUE
-    st   -6(r7), r2 ; Posem retorn a R1 (pila)
+    st   0xA(r7), r2 ; Posem retorn a R1 (pila)
 
     $ppt r7, r6
     $ppt r7, r5
