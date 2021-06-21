@@ -21,6 +21,8 @@ signal byte_counter   : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 signal byte_counter_d : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 signal offset         : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 
+signal rd_out_tmp : std_logic;
+
 signal validat : boolean := false; 
 
 begin
@@ -28,16 +30,18 @@ begin
 	offset <= addr(8 downto 1) & '0'; -- 2 byte align addr%512
 	dout_taken <= dout_avail;
 
-    rd_out <= rd when busy = '0' else
+    rd_out_tmp <= rd when busy = '0' else
               rd when rd   = '0';
 				  
+	 rd_out <= rd_out_tmp;
+				  
 	
-	process (dout_avail, busy, rd_out) begin
+	process (dout_avail, busy, rd_out_tmp) begin
 		
 --    if (rising_edge(rd)) then
 --        valid <= '0';
 --		 byte_counter <= (others => '0');
-    if (rd_out = '1' and validat) then
+    if (rd_out_tmp = '1' and validat) then
 		 valid <= '0';
 		 validat <= false;
 		 byte_counter <= (others => '0');
