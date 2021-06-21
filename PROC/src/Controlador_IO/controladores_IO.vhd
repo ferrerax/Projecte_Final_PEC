@@ -112,7 +112,8 @@ COMPONENT sd_driver IS
 			rd    : IN std_logic;
 			data  : OUT std_logic_vector(15 downto 0) := (others => '0');
 			valid : OUT std_logic;
-			reset : IN std_logic
+			reset : IN std_logic;
+			error : OUT std_logic_vector(2 downto 0)
 			
 	);
 END COMPONENT;
@@ -155,6 +156,7 @@ END COMPONENT;
 	signal sd_data : std_logic_vector(15 downto 0);
 	signal sd_rd : std_logic := '0';
 	signal sd_valid : std_logic := '0';
+	signal sd_error : std_logic_vector(2 downto 0);
 
 BEGIN
 	 rd_io      <= mem(conv_integer(addr_io(4 downto 0))) when inta = '0' else 
@@ -180,6 +182,7 @@ BEGIN
 				mem(IO_PORT_CONT_MILI)     <= cont_mili;
 				mem(IO_PORT_SD_DATA)			<= sd_data;
 				mem(IO_PORT_SD_VALID)		<= "000000000000000" & sd_valid;
+				mem(IO_PORT_SD_ERROR)		<= "0000000000000" & sd_error;
 				if sd_valid = '1' then
 					mem(IO_PORT_SD_RD) 			<= x"0000";
 				end if;
@@ -285,7 +288,8 @@ BEGIN
 				rd       => sd_rd,
 				data     => sd_data,
 				valid		=> sd_valid,
-				reset 	=> boot
+				reset 	=> boot,
+				error		=> sd_error
 	);
 
 
