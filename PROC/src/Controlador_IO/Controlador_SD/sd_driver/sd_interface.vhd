@@ -11,7 +11,7 @@ ENTITY sd_interface IS
             dout_taken  : OUT std_logic;                                         
 			rd_out      : OUT std_logic := '0';
             data        : OUT std_logic_vector(15 downto 0) := (others => '0');
-            valid       : OUT std_logic                                          
+            valid       : OUT std_logic := '0'                                          
 );
 END sd_interface;
 
@@ -28,6 +28,7 @@ begin
 
     rd_out <= rd when busy = '0' else
               rd when rd   = '0';
+				  
 
 	process (dout_avail, busy, rd) begin
 		
