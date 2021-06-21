@@ -15,20 +15,20 @@ Encabezado del Programa:
     LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
          filesz 0x00000062 memsz 0x00000062 flags rw-
     LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
-         filesz 0x0000003a memsz 0x0000003a flags rw-
-    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x000001dc memsz 0x000001dc flags r-x
+         filesz 0x00000080 memsz 0x00000080 flags rw-
+    LOAD off    0x00000bb4 vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x0000031c memsz 0x0000031c flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  0 .sistema      0000031c  0000c000  0000c000  00000bb4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  3 .sysdata      00000080  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
   4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
   5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
-  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
+  6 .stab         00001110  00004a40  00004a40  00000ed0  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000a2e  00005b50  00005b50  00001fe0  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00002000 l    d  .userCorreletras	00000000 .userCorreletras
 0000201e l       .userCorreletras	00000000 __repe
@@ -853,7 +853,7 @@ int mainC (void) {
 
         while (1) {
             switch (tecla_pulsada)
-    24e8:	5202 	movi	r1, 2
+    24e8:	5200 	movi	r1, 0
     24ea:	534a 	movhi	r1, 74
     24ec:	3240 	ld	r1, 0(r1)
     24ee:	43b7 	st	-18(r6), r1
@@ -889,7 +889,7 @@ int mainC (void) {
     2524:	5321 	movhi	r1, 33
     2526:	aa44 	jal	r5, r1
                 tecla_pulsada=0;
-    2528:	5402 	movi	r2, 2
+    2528:	5400 	movi	r2, 0
     252a:	554a 	movhi	r2, 74
     252c:	5200 	movi	r1, 0
     252e:	4280 	st	0(r2), r1
@@ -908,7 +908,7 @@ int mainC (void) {
     2540:	5200 	movi	r1, 0
     2542:	43be 	st	-4(r6), r1
                 tecla_pulsada=0;
-    2544:	5402 	movi	r2, 2
+    2544:	5400 	movi	r2, 0
     2546:	554a 	movhi	r2, 74
     2548:	5200 	movi	r1, 0
     254a:	4280 	st	0(r2), r1
@@ -1369,20 +1369,20 @@ Encabezado del Programa:
     LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
          filesz 0x00000062 memsz 0x00000062 flags rw-
     LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
-         filesz 0x0000003a memsz 0x0000003a flags rw-
-    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x000001dc memsz 0x000001dc flags r-x
+         filesz 0x00000080 memsz 0x00000080 flags rw-
+    LOAD off    0x00000bb4 vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x0000031c memsz 0x0000031c flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  0 .sistema      0000031c  0000c000  0000c000  00000bb4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  3 .sysdata      00000080  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
   4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
   5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
-  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
+  6 .stab         00001110  00004a40  00004a40  00000ed0  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000a2e  00005b50  00005b50  00001fe0  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00006000 l    d  .userdataCorreletras	00000000 .userdataCorreletras
 00006034 g     O .userdataCorreletras	0000002b mensaje

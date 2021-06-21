@@ -15,40 +15,39 @@ Encabezado del Programa:
     LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
          filesz 0x00000062 memsz 0x00000062 flags rw-
     LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
-         filesz 0x0000003a memsz 0x0000003a flags rw-
-    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x000001dc memsz 0x000001dc flags r-x
+         filesz 0x00000080 memsz 0x00000080 flags rw-
+    LOAD off    0x00000bb4 vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x0000031c memsz 0x0000031c flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  0 .sistema      0000031c  0000c000  0000c000  00000bb4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  3 .sysdata      00000080  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
   4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
   5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
-  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
+  6 .stab         00001110  00004a40  00004a40  00000ed0  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000a2e  00005b50  00005b50  00001fe0  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 0000c000 l    d  .sistema	00000000 .sistema
-0000c0c4 l       .sistema	00000000 RSI__interrup_timer
+0000c0f6 l       .sistema	00000000 RSI__interrup_timer
 0000c016 l       .sistema	00000000 RSI_default_resume
-0000c0e6 l       .sistema	00000000 RSI__interrup_keyboard
+0000c118 l       .sistema	00000000 RSI__interrup_keyboard
 0000c018 l       .sistema	00000000 RSE_default_halt
 0000c01a l       .sistema	00000000 RSE_default_resume
 0000c01c l       .sistema	00000000 RSE_excepcion_TLB
 0000c014 l       .sistema	00000000 __exit
-0000c05e l       .sistema	00000000 __call_sistema
-0000c072 l       .sistema	00000000 __interrupcion
-0000c050 l       .sistema	00000000 __excepcion
-0000c080 l       .sistema	00000000 __finRSG
-0000c0a0 l       .sistema	00000000 __finRSG_timer
+0000c076 l       .sistema	00000000 __call_sistema
+0000c08a l       .sistema	00000000 __interrupcion
+0000c068 l       .sistema	00000000 __excepcion
+0000c098 l       .sistema	00000000 __finRSG
+0000c0b8 l       .sistema	00000000 __finRSG_timer
 0000c000 g       .sistema	00000000 __entry_point
-0000c170 g     F .sistema	00000054 schedule
-0000c13e g     F .sistema	00000032 sched_next_rr
-0000c1c4 g     F .sistema	00000018 main
+0000c2a8 g     F .sistema	00000054 schedule
+0000c2fc g     F .sistema	00000020 main
 0000c024 g       .sistema	00000000 RSG
-0000c0e8 g     F .sistema	00000056 task_switch
+0000c122 g     F .sistema	00000186 task_switch
 
 
 Disassembly of section .sistema:
@@ -61,8 +60,8 @@ Disassembly of section .sistema:
     c008:	5f40 	movhi	r7, 64
     c00a:	5a14 	movi	r5, 20
     c00c:	5bc0 	movhi	r5, -64
-    c00e:	5cc4 	movi	r6, -60
-    c010:	5dc1 	movhi	r6, -63
+    c00e:	5cfc 	movi	r6, -4
+    c010:	5dc2 	movhi	r6, -62
     c012:	a183 	jmp	r6
 
 0000c014 <__exit>:
@@ -84,6 +83,334 @@ Disassembly of section .sistema:
     c022:	a183 	jmp	r6
 
 0000c024 <RSG>:
+    c024:	f9f0 	wrs	s4, r7
+    c026:	5e00 	movi	r7, 0
+    c028:	5f4c 	movhi	r7, 76
+    c02a:	2ff2 	addi	r7, r7, -14
+    c02c:	41c6 	st	12(r7), r0
+    c02e:	43c5 	st	10(r7), r1
+    c030:	45c4 	st	8(r7), r2
+    c032:	47c3 	st	6(r7), r3
+    c034:	49c2 	st	4(r7), r4
+    c036:	4bc1 	st	2(r7), r5
+    c038:	4dc0 	st	0(r7), r6
+    c03a:	ff2c 	rds	r7, s4
+    c03c:	2ff2 	addi	r7, r7, -14
+    c03e:	41c6 	st	12(r7), r0
+    c040:	43c5 	st	10(r7), r1
+    c042:	45c4 	st	8(r7), r2
+    c044:	47c3 	st	6(r7), r3
+    c046:	49c2 	st	4(r7), r4
+    c048:	4bc1 	st	2(r7), r5
+    c04a:	4dc0 	st	0(r7), r6
+    c04c:	f22c 	rds	r1, s0
+    c04e:	f46c 	rds	r2, s1
+    c050:	f6ec 	rds	r3, s3
+    c052:	2ffa 	addi	r7, r7, -6
+    c054:	43c2 	st	4(r7), r1
+    c056:	45c1 	st	2(r7), r2
+    c058:	47c0 	st	0(r7), r3
+    c05a:	f2ac 	rds	r1, s2
+    c05c:	540e 	movi	r2, 14
+    c05e:	165a 	cmpeq	r3, r1, r2
+    c060:	670a 	bnz	r3, 22
+    c062:	540f 	movi	r2, 15
+    c064:	165a 	cmpeq	r3, r1, r2
+    c066:	6711 	bnz	r3, 36
+
+0000c068 <__excepcion>:
+    c068:	5408 	movi	r2, 8
+    c06a:	5580 	movhi	r2, -128
+    c06c:	0261 	add	r1, r1, r1
+    c06e:	04a1 	add	r2, r2, r1
+    c070:	3480 	ld	r2, 0(r2)
+    c072:	ac84 	jal	r6, r2
+    c074:	6611 	bz	r3, 36
+
+0000c076 <__call_sistema>:
+    c076:	f2ec 	rds	r1, s3
+    c078:	5407 	movi	r2, 7
+    c07a:	0242 	and	r1, r1, r2
+    c07c:	0261 	add	r1, r1, r1
+    c07e:	5424 	movi	r2, 36
+    c080:	5580 	movhi	r2, -128
+    c082:	04a1 	add	r2, r2, r1
+    c084:	3480 	ld	r2, 0(r2)
+    c086:	ac84 	jal	r6, r2
+    c088:	6707 	bnz	r3, 16
+
+0000c08a <__interrupcion>:
+    c08a:	f228 	getiid	r1
+    c08c:	0261 	add	r1, r1, r1
+    c08e:	5400 	movi	r2, 0
+    c090:	5580 	movhi	r2, -128
+    c092:	04a1 	add	r2, r2, r1
+    c094:	3480 	ld	r2, 0(r2)
+    c096:	ac84 	jal	r6, r2
+
+0000c098 <__finRSG>:
+    c098:	37c0 	ld	r3, 0(r7)
+    c09a:	35c1 	ld	r2, 2(r7)
+    c09c:	33c2 	ld	r1, 4(r7)
+    c09e:	2fc6 	addi	r7, r7, 6
+    c0a0:	f6f0 	wrs	s3, r3
+    c0a2:	f2b0 	wrs	s1, r2
+    c0a4:	f070 	wrs	s0, r1
+    c0a6:	3dc0 	ld	r6, 0(r7)
+    c0a8:	3bc1 	ld	r5, 2(r7)
+    c0aa:	39c2 	ld	r4, 4(r7)
+    c0ac:	37c3 	ld	r3, 6(r7)
+    c0ae:	35c4 	ld	r2, 8(r7)
+    c0b0:	33c5 	ld	r1, 10(r7)
+    c0b2:	31c6 	ld	r0, 12(r7)
+    c0b4:	2fce 	addi	r7, r7, 14
+    c0b6:	f024 	reti	
+
+0000c0b8 <__finRSG_timer>:
+    c0b8:	39c0 	ld	r4, 0(r7)
+    c0ba:	37c1 	ld	r3, 2(r7)
+    c0bc:	35c2 	ld	r2, 4(r7)
+    c0be:	33c3 	ld	r1, 6(r7)
+    c0c0:	2fc8 	addi	r7, r7, 8
+    c0c2:	37c0 	ld	r3, 0(r7)
+    c0c4:	35c1 	ld	r2, 2(r7)
+    c0c6:	33c2 	ld	r1, 4(r7)
+    c0c8:	2fc6 	addi	r7, r7, 6
+    c0ca:	3dc0 	ld	r6, 0(r7)
+    c0cc:	3bc1 	ld	r5, 2(r7)
+    c0ce:	39c2 	ld	r4, 4(r7)
+    c0d0:	37c3 	ld	r3, 6(r7)
+    c0d2:	35c4 	ld	r2, 8(r7)
+    c0d4:	33c5 	ld	r1, 10(r7)
+    c0d6:	31c6 	ld	r0, 12(r7)
+    c0d8:	2fce 	addi	r7, r7, 14
+    c0da:	f9f0 	wrs	s4, r7
+    c0dc:	5e00 	movi	r7, 0
+    c0de:	5f4c 	movhi	r7, 76
+    c0e0:	2ff2 	addi	r7, r7, -14
+    c0e2:	3dc0 	ld	r6, 0(r7)
+    c0e4:	3bc1 	ld	r5, 2(r7)
+    c0e6:	39c2 	ld	r4, 4(r7)
+    c0e8:	37c3 	ld	r3, 6(r7)
+    c0ea:	35c4 	ld	r2, 8(r7)
+    c0ec:	33c5 	ld	r1, 10(r7)
+    c0ee:	31c6 	ld	r0, 12(r7)
+    c0f0:	2fce 	addi	r7, r7, 14
+    c0f2:	ff2c 	rds	r7, s4
+    c0f4:	f024 	reti	
+
+0000c0f6 <RSI__interrup_timer>:
+    c0f6:	2ff8 	addi	r7, r7, -8
+    c0f8:	43c3 	st	6(r7), r1
+    c0fa:	45c2 	st	4(r7), r2
+    c0fc:	47c1 	st	2(r7), r3
+    c0fe:	49c0 	st	0(r7), r4
+    c100:	5860 	movi	r4, 96
+    c102:	5960 	movhi	r4, 96
+    c104:	3700 	ld	r3, 0(r4)
+    c106:	26c1 	addi	r3, r3, 1
+    c108:	4700 	st	0(r4), r3
+    c10a:	7706 	out	6, r3
+    c10c:	54a8 	movi	r2, -88
+    c10e:	55c2 	movhi	r2, -62
+    c110:	a684 	jal	r3, r2
+    c112:	58b8 	movi	r4, -72
+    c114:	59c0 	movhi	r4, -64
+    c116:	a103 	jmp	r4
+
+0000c118 <RSI__interrup_keyboard>:
+    c118:	760f 	in	r3, 15
+    c11a:	5800 	movi	r4, 0
+    c11c:	594a 	movhi	r4, 74
+    c11e:	4700 	st	0(r4), r3
+    c120:	a183 	jmp	r6
+
+0000c122 <task_switch>:
+
+/* running = 0 -> fibonacci a correletras
+   running = 1 -> correletras a fibonacci*/
+void task_switch()
+{
+    c122:	2ff0 	addi	r7, r7, -16
+    c124:	4bc7 	st	14(r7), r5
+    c126:	4dc6 	st	12(r7), r6
+    c128:	2dcc 	addi	r6, r7, 12
+    c12a:	41c3 	st	6(r7), r0
+    c12c:	45c2 	st	4(r7), r2
+    c12e:	47c1 	st	2(r7), r3
+    c130:	49c0 	st	0(r7), r4
+    int espOLD, espNEW;
+    if (running) {
+    c132:	527e 	movi	r1, 126
+    c134:	5380 	movhi	r1, -128
+    c136:	3240 	ld	r1, 0(r1)
+    c138:	5a92 	movi	r5, -110
+    c13a:	5bc1 	movhi	r5, -63
+    c13c:	a340 	jz	r1, r5
+        __asm__ (
+    c13e:	f9f0 	wrs	s4, r7
+    c140:	5e00 	movi	r7, 0
+    c142:	5f4c 	movhi	r7, 76
+    c144:	2ff2 	addi	r7, r7, -14
+    c146:	35c6 	ld	r2, 12(r7)
+    c148:	37c5 	ld	r3, 10(r7)
+    c14a:	39c4 	ld	r4, 8(r7)
+    c14c:	523c 	movi	r1, 60
+    c14e:	5380 	movhi	r1, -128
+    c150:	4440 	st	0(r1), r2
+    c152:	523e 	movi	r1, 62
+    c154:	5380 	movhi	r1, -128
+    c156:	4640 	st	0(r1), r3
+    c158:	5240 	movi	r1, 64
+    c15a:	5380 	movhi	r1, -128
+    c15c:	4840 	st	0(r1), r4
+            "wrs    S4, R7\n\t"
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "ld	%0, 12(r7)\n\t"
+            "ld	%1, 10(r7)\n\t"
+            "ld	%2, 8(r7)\n\t"
+            : "=r" (correletras_r0),
+             "=r" (correletras_r1),
+             "=r" (correletras_r2)
+            :
+           );
+        
+        __asm__ (
+    c15e:	5e00 	movi	r7, 0
+    c160:	5f4c 	movhi	r7, 76
+    c162:	2ff2 	addi	r7, r7, -14
+    c164:	35c3 	ld	r2, 6(r7)
+    c166:	37c2 	ld	r3, 4(r7)
+    c168:	31c1 	ld	r0, 2(r7)
+    c16a:	39c0 	ld	r4, 0(r7)
+    c16c:	5242 	movi	r1, 66
+    c16e:	5380 	movhi	r1, -128
+    c170:	4440 	st	0(r1), r2
+    c172:	5244 	movi	r1, 68
+    c174:	5380 	movhi	r1, -128
+    c176:	4640 	st	0(r1), r3
+    c178:	5246 	movi	r1, 70
+    c17a:	5380 	movhi	r1, -128
+    c17c:	4040 	st	0(r1), r0
+    c17e:	5248 	movi	r1, 72
+    c180:	5380 	movhi	r1, -128
+    c182:	4840 	st	0(r1), r4
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "ld	%0, 6(r7)\n\t"
+            "ld	%1, 4(r7)\n\t"
+            "ld	%2, 2(r7)\n\t"
+            "ld	%3, 0(r7)\n\t"
+            : "=r" (correletras_r3),
+             "=r" (correletras_r4),
+             "=r" (correletras_r5),
+             "=r" (correletras_r6)
+            :
+           );
+        
+        espOLD = fibonacci_esp;
+    c184:	5236 	movi	r1, 54
+    c186:	5380 	movhi	r1, -128
+    c188:	3240 	ld	r1, 0(r1)
+    c18a:	43be 	st	-4(r6), r1
+    c18c:	5ae0 	movi	r5, -32
+    c18e:	5bc1 	movhi	r5, -63
+    c190:	a143 	jmp	r5
+    } else {
+        __asm__ (
+    c192:	f9f0 	wrs	s4, r7
+    c194:	5e00 	movi	r7, 0
+    c196:	5f4c 	movhi	r7, 76
+    c198:	2ff2 	addi	r7, r7, -14
+    c19a:	35c6 	ld	r2, 12(r7)
+    c19c:	37c5 	ld	r3, 10(r7)
+    c19e:	39c4 	ld	r4, 8(r7)
+    c1a0:	525c 	movi	r1, 92
+    c1a2:	5380 	movhi	r1, -128
+    c1a4:	4440 	st	0(r1), r2
+    c1a6:	525e 	movi	r1, 94
+    c1a8:	5380 	movhi	r1, -128
+    c1aa:	4640 	st	0(r1), r3
+    c1ac:	5260 	movi	r1, 96
+    c1ae:	5380 	movhi	r1, -128
+    c1b0:	4840 	st	0(r1), r4
+            "wrs    S4, R7\n\t"
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "ld	%0, 12(r7)\n\t"
+            "ld	%1, 10(r7)\n\t"
+            "ld	%2, 8(r7)\n\t"
+            : "=r" (fibonacci_r0),
+             "=r" (fibonacci_r1),
+             "=r" (fibonacci_r2)
+            :
+           );
+        
+        __asm__ (
+    c1b2:	5e00 	movi	r7, 0
+    c1b4:	5f4c 	movhi	r7, 76
+    c1b6:	2ff2 	addi	r7, r7, -14
+    c1b8:	35c3 	ld	r2, 6(r7)
+    c1ba:	37c2 	ld	r3, 4(r7)
+    c1bc:	31c1 	ld	r0, 2(r7)
+    c1be:	39c0 	ld	r4, 0(r7)
+    c1c0:	5262 	movi	r1, 98
+    c1c2:	5380 	movhi	r1, -128
+    c1c4:	4440 	st	0(r1), r2
+    c1c6:	5264 	movi	r1, 100
+    c1c8:	5380 	movhi	r1, -128
+    c1ca:	4640 	st	0(r1), r3
+    c1cc:	5266 	movi	r1, 102
+    c1ce:	5380 	movhi	r1, -128
+    c1d0:	4040 	st	0(r1), r0
+    c1d2:	5268 	movi	r1, 104
+    c1d4:	5380 	movhi	r1, -128
+    c1d6:	4840 	st	0(r1), r4
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "ld	%0, 6(r7)\n\t"
+            "ld	%1, 4(r7)\n\t"
+            "ld	%2, 2(r7)\n\t"
+            "ld	%3, 0(r7)\n\t"
+            : "=r" (fibonacci_r3),
+             "=r" (fibonacci_r4),
+             "=r" (fibonacci_r5),
+             "=r" (fibonacci_r6)
+            :
+           );
+        
+        espOLD = correletras_esp;
+    c1d8:	5234 	movi	r1, 52
+    c1da:	5380 	movhi	r1, -128
+    c1dc:	3240 	ld	r1, 0(r1)
+    c1de:	43be 	st	-4(r6), r1
+    }
+    
+    __asm__ (
+    c1e0:	33be 	ld	r1, -4(r6)
+    c1e2:	fa6c 	rds	r5, s1
+    c1e4:	f270 	wrs	s1, r1
+    c1e6:	2340 	addi	r1, r5, 0
+    c1e8:	43bf 	st	-2(r6), r1
+        "rds r5, s1\n\t"
+        "wrs s1, %1\n\t"
+        "addi %0, r5, 0\n\t"
+        : "=r" (espNEW)
+        : "r" (espOLD));
+    
+    if (running) {
+    c1ea:	527e 	movi	r1, 126
+    c1ec:	5380 	movhi	r1, -128
+    c1ee:	3240 	ld	r1, 0(r1)
+    c1f0:	5a4a 	movi	r5, 74
+    c1f2:	5bc2 	movhi	r5, -62
+    c1f4:	a340 	jz	r1, r5
+      /*  
     c024:	2ff2 	addi	r7, r7, -14
     c026:	41c6 	st	12(r7), r0
     c028:	43c5 	st	10(r7), r1
@@ -92,332 +419,258 @@ Disassembly of section .sistema:
     c02e:	49c2 	st	4(r7), r4
     c030:	4bc1 	st	2(r7), r5
     c032:	4dc0 	st	0(r7), r6
-    c034:	f22c 	rds	r1, s0
-    c036:	f46c 	rds	r2, s1
-    c038:	f6ec 	rds	r3, s3
-    c03a:	2ffa 	addi	r7, r7, -6
-    c03c:	43c2 	st	4(r7), r1
-    c03e:	45c1 	st	2(r7), r2
-    c040:	47c0 	st	0(r7), r3
-    c042:	f2ac 	rds	r1, s2
-    c044:	540e 	movi	r2, 14
-    c046:	165a 	cmpeq	r3, r1, r2
-    c048:	670a 	bnz	r3, 22
-    c04a:	540f 	movi	r2, 15
-    c04c:	165a 	cmpeq	r3, r1, r2
-    c04e:	6711 	bnz	r3, 36
-
-0000c050 <__excepcion>:
-    c050:	5408 	movi	r2, 8
-    c052:	5580 	movhi	r2, -128
-    c054:	0261 	add	r1, r1, r1
-    c056:	04a1 	add	r2, r2, r1
-    c058:	3480 	ld	r2, 0(r2)
-    c05a:	ac84 	jal	r6, r2
-    c05c:	6611 	bz	r3, 36
-
-0000c05e <__call_sistema>:
-    c05e:	f2ec 	rds	r1, s3
-    c060:	5407 	movi	r2, 7
-    c062:	0242 	and	r1, r1, r2
-    c064:	0261 	add	r1, r1, r1
-    c066:	5424 	movi	r2, 36
-    c068:	5580 	movhi	r2, -128
-    c06a:	04a1 	add	r2, r2, r1
-    c06c:	3480 	ld	r2, 0(r2)
-    c06e:	ac84 	jal	r6, r2
-    c070:	6707 	bnz	r3, 16
-
-0000c072 <__interrupcion>:
-    c072:	f228 	getiid	r1
-    c074:	0261 	add	r1, r1, r1
-    c076:	5400 	movi	r2, 0
-    c078:	5580 	movhi	r2, -128
-    c07a:	04a1 	add	r2, r2, r1
-    c07c:	3480 	ld	r2, 0(r2)
-    c07e:	ac84 	jal	r6, r2
-
-0000c080 <__finRSG>:
-    c080:	37c0 	ld	r3, 0(r7)
-    c082:	35c1 	ld	r2, 2(r7)
-    c084:	33c2 	ld	r1, 4(r7)
-    c086:	2fc6 	addi	r7, r7, 6
-    c088:	f6f0 	wrs	s3, r3
-    c08a:	f2b0 	wrs	s1, r2
-    c08c:	f070 	wrs	s0, r1
-    c08e:	3dc0 	ld	r6, 0(r7)
-    c090:	3bc1 	ld	r5, 2(r7)
-    c092:	39c2 	ld	r4, 4(r7)
-    c094:	37c3 	ld	r3, 6(r7)
-    c096:	35c4 	ld	r2, 8(r7)
-    c098:	33c5 	ld	r1, 10(r7)
-    c09a:	31c6 	ld	r0, 12(r7)
-    c09c:	2fce 	addi	r7, r7, 14
-    c09e:	f024 	reti	
-
-0000c0a0 <__finRSG_timer>:
-    c0a0:	39c0 	ld	r4, 0(r7)
-    c0a2:	37c1 	ld	r3, 2(r7)
-    c0a4:	35c2 	ld	r2, 4(r7)
-    c0a6:	33c3 	ld	r1, 6(r7)
-    c0a8:	2fc8 	addi	r7, r7, 8
-    c0aa:	37c0 	ld	r3, 0(r7)
-    c0ac:	35c1 	ld	r2, 2(r7)
-    c0ae:	33c2 	ld	r1, 4(r7)
-    c0b0:	2fc6 	addi	r7, r7, 6
-    c0b2:	3dc0 	ld	r6, 0(r7)
-    c0b4:	3bc1 	ld	r5, 2(r7)
-    c0b6:	39c2 	ld	r4, 4(r7)
-    c0b8:	37c3 	ld	r3, 6(r7)
-    c0ba:	35c4 	ld	r2, 8(r7)
-    c0bc:	33c5 	ld	r1, 10(r7)
-    c0be:	31c6 	ld	r0, 12(r7)
-    c0c0:	2fce 	addi	r7, r7, 14
-    c0c2:	f024 	reti	
-
-0000c0c4 <RSI__interrup_timer>:
-    c0c4:	2ff8 	addi	r7, r7, -8
-    c0c6:	43c3 	st	6(r7), r1
-    c0c8:	45c2 	st	4(r7), r2
-    c0ca:	47c1 	st	2(r7), r3
-    c0cc:	49c0 	st	0(r7), r4
-    c0ce:	5860 	movi	r4, 96
-    c0d0:	5960 	movhi	r4, 96
-    c0d2:	3700 	ld	r3, 0(r4)
-    c0d4:	26c1 	addi	r3, r3, 1
-    c0d6:	4700 	st	0(r4), r3
-    c0d8:	7706 	out	6, r3
-    c0da:	5470 	movi	r2, 112
-    c0dc:	55c1 	movhi	r2, -63
-    c0de:	a684 	jal	r3, r2
-    c0e0:	58a0 	movi	r4, -96
-    c0e2:	59c0 	movhi	r4, -64
-    c0e4:	a103 	jmp	r4
-
-0000c0e6 <RSI__interrup_keyboard>:
-    c0e6:	a183 	jmp	r6
-
-0000c0e8 <task_switch>:
-
-/* running = 0 -> fibonacci a correletras
-   running = 1 -> correletras a fibonacci*/
-void task_switch()
-{
-    c0e8:	2ff6 	addi	r7, r7, -10
-    c0ea:	4bc4 	st	8(r7), r5
-    c0ec:	4dc3 	st	6(r7), r6
-    c0ee:	2dc6 	addi	r6, r7, 6
-    c0f0:	45c0 	st	0(r7), r2
-    int espOLD, espNEW;
-    if (running) espOLD = fibonacci_esp;
-    c0f2:	5200 	movi	r1, 0
-    c0f4:	534a 	movhi	r1, 74
-    c0f6:	3240 	ld	r1, 0(r1)
-    c0f8:	6206 	bz	r1, 14
-    c0fa:	5236 	movi	r1, 54
-    c0fc:	5380 	movhi	r1, -128
-    c0fe:	3240 	ld	r1, 0(r1)
-    c100:	43be 	st	-4(r6), r1
-    c102:	5a00 	movi	r5, 0
-    c104:	6a04 	bz	r5, 10
-    else         espOLD = correletras_esp;
-    c106:	5234 	movi	r1, 52
-    c108:	5380 	movhi	r1, -128
-    c10a:	3240 	ld	r1, 0(r1)
-    c10c:	43be 	st	-4(r6), r1
     
-    __asm__ (  
-    c10e:	33be 	ld	r1, -4(r6)
-    c110:	fa6c 	rds	r5, s1
-    c112:	f270 	wrs	s1, r1
-    c114:	2340 	addi	r1, r5, 0
-    c116:	43bf 	st	-2(r6), r1
-            "rds r5, s1\n\t"
-            "wrs s1, %1\n\t"
-            "addi %0, r5, 0\n\t"
-            : "=r" (espNEW)
-            : "r" (espOLD));
-    
-    if (running) correletras_esp = espNEW;
-    c118:	5200 	movi	r1, 0
-    c11a:	534a 	movhi	r1, 74
-    c11c:	3240 	ld	r1, 0(r1)
-    c11e:	6206 	bz	r1, 14
-    c120:	5434 	movi	r2, 52
-    c122:	5580 	movhi	r2, -128
-    c124:	33bf 	ld	r1, -2(r6)
-    c126:	4280 	st	0(r2), r1
-    c128:	5a00 	movi	r5, 0
-    c12a:	6a04 	bz	r5, 10
-    else         fibonacci_esp = espNEW;
-    c12c:	5436 	movi	r2, 54
-    c12e:	5580 	movhi	r2, -128
-    c130:	33bf 	ld	r1, -2(r6)
-    c132:	4280 	st	0(r2), r1
+        */
+      
+        __asm__ (
+    c1f6:	525c 	movi	r1, 92
+    c1f8:	5380 	movhi	r1, -128
+    c1fa:	3640 	ld	r3, 0(r1)
+    c1fc:	525e 	movi	r1, 94
+    c1fe:	5380 	movhi	r1, -128
+    c200:	3440 	ld	r2, 0(r1)
+    c202:	5260 	movi	r1, 96
+    c204:	5380 	movhi	r1, -128
+    c206:	3240 	ld	r1, 0(r1)
+    c208:	5e00 	movi	r7, 0
+    c20a:	5f4c 	movhi	r7, 76
+    c20c:	2ff2 	addi	r7, r7, -14
+    c20e:	47c6 	st	12(r7), r3
+    c210:	45c5 	st	10(r7), r2
+    c212:	43c4 	st	8(r7), r1
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "st	12(r7), %0\n\t"
+            "st	10(r7), %1\n\t"
+            "st	8(r7), %2\n\t"
+            :
+            : "r" (fibonacci_r0),
+             "r" (fibonacci_r1),
+             "r" (fibonacci_r2)
+           );
+        
+        __asm__ (
+    c214:	5262 	movi	r1, 98
+    c216:	5380 	movhi	r1, -128
+    c218:	3840 	ld	r4, 0(r1)
+    c21a:	5264 	movi	r1, 100
+    c21c:	5380 	movhi	r1, -128
+    c21e:	3640 	ld	r3, 0(r1)
+    c220:	5266 	movi	r1, 102
+    c222:	5380 	movhi	r1, -128
+    c224:	3440 	ld	r2, 0(r1)
+    c226:	5268 	movi	r1, 104
+    c228:	5380 	movhi	r1, -128
+    c22a:	3240 	ld	r1, 0(r1)
+    c22c:	5e00 	movi	r7, 0
+    c22e:	5f4c 	movhi	r7, 76
+    c230:	2ff2 	addi	r7, r7, -14
+    c232:	49c3 	st	6(r7), r4
+    c234:	47c2 	st	4(r7), r3
+    c236:	45c1 	st	2(r7), r2
+    c238:	43c0 	st	0(r7), r1
+    c23a:	ff2c 	rds	r7, s4
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "st	6(r7), %0\n\t"
+            "st	4(r7), %1\n\t"
+            "st	2(r7), %2\n\t"
+            "st	0(r7), %3\n\t"
+            "rds    R7, S4\n\t"
+            :
+            : "r" (fibonacci_r3),
+             "r" (fibonacci_r4),
+             "r" (fibonacci_r5),
+             "r" (fibonacci_r6)
+           );
+        
+        correletras_esp = espNEW;
+    c23c:	5434 	movi	r2, 52
+    c23e:	5580 	movhi	r2, -128
+    c240:	33bf 	ld	r1, -2(r6)
+    c242:	4280 	st	0(r2), r1
+    c244:	5a98 	movi	r5, -104
+    c246:	5bc2 	movhi	r5, -62
+    c248:	a143 	jmp	r5
+    } else {
+         
+        __asm__ (
+    c24a:	523c 	movi	r1, 60
+    c24c:	5380 	movhi	r1, -128
+    c24e:	3640 	ld	r3, 0(r1)
+    c250:	523e 	movi	r1, 62
+    c252:	5380 	movhi	r1, -128
+    c254:	3440 	ld	r2, 0(r1)
+    c256:	5240 	movi	r1, 64
+    c258:	5380 	movhi	r1, -128
+    c25a:	3240 	ld	r1, 0(r1)
+    c25c:	5e00 	movi	r7, 0
+    c25e:	5f4c 	movhi	r7, 76
+    c260:	2ff2 	addi	r7, r7, -14
+    c262:	47c6 	st	12(r7), r3
+    c264:	45c5 	st	10(r7), r2
+    c266:	43c4 	st	8(r7), r1
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "st	12(r7), %0\n\t"
+            "st	10(r7), %1\n\t"
+            "st	8(r7), %2\n\t"
+            :
+            : "r" (correletras_r0),
+             "r" (correletras_r1),
+             "r" (correletras_r2)
+           );
+        
+        __asm__ (
+    c268:	5242 	movi	r1, 66
+    c26a:	5380 	movhi	r1, -128
+    c26c:	3840 	ld	r4, 0(r1)
+    c26e:	5244 	movi	r1, 68
+    c270:	5380 	movhi	r1, -128
+    c272:	3640 	ld	r3, 0(r1)
+    c274:	5246 	movi	r1, 70
+    c276:	5380 	movhi	r1, -128
+    c278:	3440 	ld	r2, 0(r1)
+    c27a:	5248 	movi	r1, 72
+    c27c:	5380 	movhi	r1, -128
+    c27e:	3240 	ld	r1, 0(r1)
+    c280:	5e00 	movi	r7, 0
+    c282:	5f4c 	movhi	r7, 76
+    c284:	2ff2 	addi	r7, r7, -14
+    c286:	49c3 	st	6(r7), r4
+    c288:	47c2 	st	4(r7), r3
+    c28a:	45c1 	st	2(r7), r2
+    c28c:	43c0 	st	0(r7), r1
+    c28e:	ff2c 	rds	r7, s4
+            "movi  r7, 0\n\t"
+            "movhi r7, 76\n\t"
+            "addi  r7, r7, -14\n\t"
+            "st	6(r7), %0\n\t"
+            "st	4(r7), %1\n\t"
+            "st	2(r7), %2\n\t"
+            "st	0(r7), %3\n\t"
+            "rds    R7, S4\n\t"
+            :
+            : "r" (correletras_r3),
+             "r" (correletras_r4),
+             "r" (correletras_r5),
+             "r" (correletras_r6)
+           );
+        
+        fibonacci_esp = espNEW;
+    c290:	5436 	movi	r2, 54
+    c292:	5580 	movhi	r2, -128
+    c294:	33bf 	ld	r1, -2(r6)
+    c296:	4280 	st	0(r2), r1
+    }
     
 }
-    c134:	35c0 	ld	r2, 0(r7)
-    c136:	3dc3 	ld	r6, 6(r7)
-    c138:	3bc4 	ld	r5, 8(r7)
-    c13a:	2fca 	addi	r7, r7, 10
-    c13c:	a143 	jmp	r5
+    c298:	31c3 	ld	r0, 6(r7)
+    c29a:	35c2 	ld	r2, 4(r7)
+    c29c:	37c1 	ld	r3, 2(r7)
+    c29e:	39c0 	ld	r4, 0(r7)
+    c2a0:	3dc6 	ld	r6, 12(r7)
+    c2a2:	3bc7 	ld	r5, 14(r7)
+    c2a4:	2fd0 	addi	r7, r7, 16
+    c2a6:	a143 	jmp	r5
 
-0000c13e <sched_next_rr>:
-/*
-void update_sched_data_rr(void)
-{
-  remaining_quantum--;
-}*/
-/*
-int needs_sched_rr(void)
-{
-  if (remaining_quantum <= 0) return 1;
-  return 0;
-}*/
-
-void sched_next_rr(void)
-{
-    c13e:	2ffa 	addi	r7, r7, -6
-    c140:	4bc2 	st	4(r7), r5
-    c142:	4dc1 	st	2(r7), r6
-    c144:	2dc2 	addi	r6, r7, 2
-    c146:	45c0 	st	0(r7), r2
-  remaining_quantum=DEFAULT_QUANTUM;
-    c148:	5438 	movi	r2, 56
-    c14a:	5580 	movhi	r2, -128
-    c14c:	520a 	movi	r1, 10
-    c14e:	4280 	st	0(r2), r1
-
-  task_switch();
-    c150:	52e8 	movi	r1, -24
-    c152:	53c0 	movhi	r1, -64
-    c154:	aa44 	jal	r5, r1
-  running = !running;
-    c156:	5200 	movi	r1, 0
-    c158:	534a 	movhi	r1, 74
-    c15a:	3440 	ld	r2, 0(r1)
-    c15c:	5200 	movi	r1, 0
-    c15e:	1499 	cmpeq	r2, r2, r1
-    c160:	5200 	movi	r1, 0
-    c162:	534a 	movhi	r1, 74
-    c164:	4440 	st	0(r1), r2
-}
-    c166:	35c0 	ld	r2, 0(r7)
-    c168:	3dc1 	ld	r6, 2(r7)
-    c16a:	3bc2 	ld	r5, 4(r7)
-    c16c:	2fc6 	addi	r7, r7, 6
-    c16e:	a143 	jmp	r5
-
-0000c170 <schedule>:
+0000c2a8 <schedule>:
 
 void schedule()
 {
-    c170:	2ffa 	addi	r7, r7, -6
-    c172:	4bc2 	st	4(r7), r5
-    c174:	4dc1 	st	2(r7), r6
-    c176:	2dc2 	addi	r6, r7, 2
-    c178:	45c0 	st	0(r7), r2
-  //update_sched_data_rr();
-  remaining_quantum--;
-    c17a:	5238 	movi	r1, 56
-    c17c:	5380 	movhi	r1, -128
-    c17e:	3240 	ld	r1, 0(r1)
-    c180:	247f 	addi	r2, r1, -1
-    c182:	5238 	movi	r1, 56
-    c184:	5380 	movhi	r1, -128
-    c186:	4440 	st	0(r1), r2
+    c2a8:	2ffa 	addi	r7, r7, -6
+    c2aa:	4bc2 	st	4(r7), r5
+    c2ac:	4dc1 	st	2(r7), r6
+    c2ae:	2dc2 	addi	r6, r7, 2
+    c2b0:	45c0 	st	0(r7), r2
+    remaining_quantum--;
+    c2b2:	527c 	movi	r1, 124
+    c2b4:	5380 	movhi	r1, -128
+    c2b6:	3240 	ld	r1, 0(r1)
+    c2b8:	247f 	addi	r2, r1, -1
+    c2ba:	527c 	movi	r1, 124
+    c2bc:	5380 	movhi	r1, -128
+    c2be:	4440 	st	0(r1), r2
   
-  //if (needs_sched_rr())
-  if (remaining_quantum <= 0) 
-    c188:	5238 	movi	r1, 56
-    c18a:	5380 	movhi	r1, -128
-    c18c:	3440 	ld	r2, 0(r1)
-    c18e:	5200 	movi	r1, 0
-    c190:	1289 	cmple	r1, r2, r1
-    c192:	620f 	bz	r1, 32
-  {
-    //sched_next_rr();
-      remaining_quantum=DEFAULT_QUANTUM;
-    c194:	5438 	movi	r2, 56
-    c196:	5580 	movhi	r2, -128
-    c198:	520a 	movi	r1, 10
-    c19a:	4280 	st	0(r2), r1
-
-      task_switch();
-    c19c:	52e8 	movi	r1, -24
-    c19e:	53c0 	movhi	r1, -64
-    c1a0:	aa44 	jal	r5, r1
-      running = !running;
-    c1a2:	5200 	movi	r1, 0
-    c1a4:	534a 	movhi	r1, 74
-    c1a6:	3440 	ld	r2, 0(r1)
-    c1a8:	5200 	movi	r1, 0
-    c1aa:	1499 	cmpeq	r2, r2, r1
-    c1ac:	5200 	movi	r1, 0
-    c1ae:	534a 	movhi	r1, 74
-    c1b0:	4440 	st	0(r1), r2
-  }
-  
+    if (remaining_quantum <= 0) 
+    c2c0:	527c 	movi	r1, 124
+    c2c2:	5380 	movhi	r1, -128
+    c2c4:	3440 	ld	r2, 0(r1)
+    c2c6:	5200 	movi	r1, 0
+    c2c8:	1289 	cmple	r1, r2, r1
+    c2ca:	620f 	bz	r1, 32
+    {
+        remaining_quantum=DEFAULT_QUANTUM;
+    c2cc:	547c 	movi	r2, 124
+    c2ce:	5580 	movhi	r2, -128
+    c2d0:	5205 	movi	r1, 5
+    c2d2:	4280 	st	0(r2), r1
+        task_switch();
+    c2d4:	5222 	movi	r1, 34
+    c2d6:	53c1 	movhi	r1, -63
+    c2d8:	aa44 	jal	r5, r1
+        running = !running;
+    c2da:	527e 	movi	r1, 126
+    c2dc:	5380 	movhi	r1, -128
+    c2de:	3440 	ld	r2, 0(r1)
+    c2e0:	5200 	movi	r1, 0
+    c2e2:	1499 	cmpeq	r2, r2, r1
+    c2e4:	527e 	movi	r1, 126
+    c2e6:	5380 	movhi	r1, -128
+    c2e8:	4440 	st	0(r1), r2
+    }
    __asm__ (  
-    c1b2:	3dc0 	ld	r6, 0(r7)
-    c1b4:	3bc1 	ld	r5, 2(r7)
-    c1b6:	2fc6 	addi	r7, r7, 6
-    c1b8:	a0c3 	jmp	r3
-            "ld	r6, 0(r7)\n\t"
-            "ld	r5, 2(r7)\n\t"
-            "addi r7, r7, 6\n\t"
-            "jmp r3\n\t"
-            : 
-            : );
-  
+    c2ea:	3dc0 	ld	r6, 0(r7)
+    c2ec:	3bc1 	ld	r5, 2(r7)
+    c2ee:	2fc6 	addi	r7, r7, 6
+    c2f0:	a0c3 	jmp	r3
+        "ld	r6, 0(r7)\n\t"
+        "ld	r5, 2(r7)\n\t"
+        "addi r7, r7, 6\n\t"
+        "jmp r3\n\t"
+        : 
+        : );
 }
-    c1ba:	35c0 	ld	r2, 0(r7)
-    c1bc:	3dc1 	ld	r6, 2(r7)
-    c1be:	3bc2 	ld	r5, 4(r7)
-    c1c0:	2fc6 	addi	r7, r7, 6
-    c1c2:	a143 	jmp	r5
+    c2f2:	35c0 	ld	r2, 0(r7)
+    c2f4:	3dc1 	ld	r6, 2(r7)
+    c2f6:	3bc2 	ld	r5, 4(r7)
+    c2f8:	2fc6 	addi	r7, r7, 6
+    c2fa:	a143 	jmp	r5
 
-0000c1c4 <main>:
-/*
-void init_sched() {
-    running = 0;
-    //correletras.register_esp = ;
-   // fibonacci.register_esp = ;
-}
-
-void init_interrupts() {
-    __asm__ (  
-            "ei\n\t"
-            : 
-            : );
-}*/
+0000c2fc <main>:
 
 int main (void) {
-    c1c4:	2ffa 	addi	r7, r7, -6
-    c1c6:	4bc2 	st	4(r7), r5
-    c1c8:	4dc1 	st	2(r7), r6
-    c1ca:	2dc2 	addi	r6, r7, 2
-    c1cc:	45c0 	st	0(r7), r2
-
-    //init_sched();
-    running = 0;
-    c1ce:	5400 	movi	r2, 0
-    c1d0:	554a 	movhi	r2, 74
-    c1d2:	5200 	movi	r1, 0
-    c1d4:	4280 	st	0(r2), r1
-    
-    //init_interrupts();
+    c2fc:	2ffa 	addi	r7, r7, -6
+    c2fe:	4bc2 	st	4(r7), r5
+    c300:	4dc1 	st	2(r7), r6
+    c302:	2dc2 	addi	r6, r7, 2
+    c304:	45c0 	st	0(r7), r2
+    running = 1;
+    c306:	547e 	movi	r2, 126
+    c308:	5580 	movhi	r2, -128
+    c30a:	5201 	movi	r1, 1
+    c30c:	4280 	st	0(r2), r1
     __asm__ (  
-    c1d6:	f020 	ei	
+    c30e:	f020 	ei	
             "ei\n\t"
             : 
             : );
     
-    //run_first_program();
+    __asm__ (
+    c310:	5234 	movi	r1, 52
+    c312:	5380 	movhi	r1, -128
+    c314:	3240 	ld	r1, 0(r1)
+    c316:	a043 	jmp	r1
+        "jmp %0\n\t"
+        :
+        : "r" (correletras_esp));
     
     while(1);
-    c1d8:	5a00 	movi	r5, 0
-    c1da:	6afe 	bz	r5, -2
+    c318:	5a00 	movi	r5, 0
+    c31a:	6afe 	bz	r5, -2
 
 temp_so.o:     file format elf32-sisa
 temp_so.o
@@ -435,37 +688,72 @@ Encabezado del Programa:
     LOAD off    0x00000ad2 vaddr 0x00006000 paddr 0x00006000 align 2**0
          filesz 0x00000062 memsz 0x00000062 flags rw-
     LOAD off    0x00000b34 vaddr 0x00008000 paddr 0x00008000 align 2**0
-         filesz 0x0000003a memsz 0x0000003a flags rw-
-    LOAD off    0x00000b6e vaddr 0x0000c000 paddr 0x0000c000 align 2**0
-         filesz 0x000001dc memsz 0x000001dc flags r-x
+         filesz 0x00000080 memsz 0x00000080 flags rw-
+    LOAD off    0x00000bb4 vaddr 0x0000c000 paddr 0x0000c000 align 2**0
+         filesz 0x0000031c memsz 0x0000031c flags r-x
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn  Flags
-  0 .sistema      000001dc  0000c000  0000c000  00000b6e  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  0 .sistema      0000031c  0000c000  0000c000  00000bb4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .userCorreletras 0000087e  00002000  00002000  000000f4  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .userFibonacci 00000160  00004000  00004000  00000972  2**1  CONTENTS, ALLOC, LOAD, READONLY, CODE
-  3 .sysdata      0000003a  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
+  3 .sysdata      00000080  00008000  00008000  00000b34  2**1  CONTENTS, ALLOC, LOAD, DATA
   4 .userdataCorreletras 00000062  00006000  00006000  00000ad2  2**1  CONTENTS, ALLOC, LOAD, DATA
   5 .bss          00000040  00004a00  00004a00  00000ad2  2**4  ALLOC
-  6 .stab         00000f60  00004a40  00004a40  00000d4c  2**2  CONTENTS, READONLY, DEBUGGING
-  7 .stabstr      00000776  000059a0  000059a0  00001cac  2**0  CONTENTS, READONLY, DEBUGGING
+  6 .stab         00001110  00004a40  00004a40  00000ed0  2**2  CONTENTS, READONLY, DEBUGGING
+  7 .stabstr      00000a2e  00005b50  00005b50  00001fe0  2**0  CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 00008000 l    d  .sysdata	00000000 .sysdata
 00008000 l       .sysdata	00000000 interrupts_vector
 00008008 l       .sysdata	00000000 exceptions_vector
 00008024 l       .sysdata	00000000 call_sys_vector
+00008074 g     O .sysdata	00000002 fibonacci_s4
+0000804c g     O .sysdata	00000002 correletras_s0
+00008038 g     O .sysdata	00000002 correletras_pila
+0000804a g     O .sysdata	00000002 correletras_r7
 00008034 g     O .sysdata	00000002 correletras_esp
+00008056 g     O .sysdata	00000002 correletras_s5
+00008064 g     O .sysdata	00000002 fibonacci_r4
+0000807e g     O .sysdata	00000002 running
+00008040 g     O .sysdata	00000002 correletras_r2
+00008050 g     O .sysdata	00000002 correletras_s2
+0000805e g     O .sysdata	00000002 fibonacci_r1
+00008078 g     O .sysdata	00000002 fibonacci_s6
+00008070 g     O .sysdata	00000002 fibonacci_s2
+00008068 g     O .sysdata	00000002 fibonacci_r6
+0000807a g     O .sysdata	00000002 fibonacci_s7
+0000803c g     O .sysdata	00000002 correletras_r0
+00008046 g     O .sysdata	00000002 correletras_r5
+00008066 g     O .sysdata	00000002 fibonacci_r5
 00008036 g     O .sysdata	00000002 fibonacci_esp
-00008038 g     O .sysdata	00000002 remaining_quantum
+00008052 g     O .sysdata	00000002 correletras_s3
+0000805a g     O .sysdata	00000002 correletras_s7
+00008060 g     O .sysdata	00000002 fibonacci_r2
+0000804e g     O .sysdata	00000002 correletras_s1
+0000806c g     O .sysdata	00000002 fibonacci_s0
+0000806a g     O .sysdata	00000002 fibonacci_r7
+00008072 g     O .sysdata	00000002 fibonacci_s3
+00008058 g     O .sysdata	00000002 correletras_s6
+00008048 g     O .sysdata	00000002 correletras_r6
+0000803e g     O .sysdata	00000002 correletras_r1
+00008042 g     O .sysdata	00000002 correletras_r3
+00008054 g     O .sysdata	00000002 correletras_s4
+00008044 g     O .sysdata	00000002 correletras_r4
+0000803a g     O .sysdata	00000002 fibonacci_pila
+0000805c g     O .sysdata	00000002 fibonacci_r0
+00008062 g     O .sysdata	00000002 fibonacci_r3
+00008076 g     O .sysdata	00000002 fibonacci_s5
+0000806e g     O .sysdata	00000002 fibonacci_s1
+0000807c g     O .sysdata	00000002 remaining_quantum
 
 
 Disassembly of section .sysdata:
 
 00008000 <interrupts_vector>:
-    8000:	c0c4 	stf	8(r3), f0
+    8000:	c0f6 	stf	-20(r3), f0
     8002:	c016 	stf	44(r0), f0
     8004:	c016 	stf	44(r0), f0
-    8006:	c0e6 	stf	-52(r3), f0
+    8006:	c118 	stf	48(r4), f0
 
 00008008 <exceptions_vector>:
     8008:	c018 	stf	48(r0), f0
@@ -499,5 +787,110 @@ Disassembly of section .sysdata:
 00008036 <fibonacci_esp>:
     8036:	40be                                        .@
 
-00008038 <remaining_quantum>:
-    8038:	0001                                        ..
+00008038 <correletras_pila>:
+    8038:	4c00                                        .L
+
+0000803a <fibonacci_pila>:
+    803a:	4a00                                        .J
+
+0000803c <correletras_r0>:
+    803c:	0001                                        ..
+
+0000803e <correletras_r1>:
+    803e:	0001                                        ..
+
+00008040 <correletras_r2>:
+    8040:	0001                                        ..
+
+00008042 <correletras_r3>:
+    8042:	0001                                        ..
+
+00008044 <correletras_r4>:
+    8044:	0001                                        ..
+
+00008046 <correletras_r5>:
+    8046:	0001                                        ..
+
+00008048 <correletras_r6>:
+    8048:	0001                                        ..
+
+0000804a <correletras_r7>:
+    804a:	0001                                        ..
+
+0000804c <correletras_s0>:
+    804c:	0001                                        ..
+
+0000804e <correletras_s1>:
+    804e:	0001                                        ..
+
+00008050 <correletras_s2>:
+    8050:	0001                                        ..
+
+00008052 <correletras_s3>:
+    8052:	0001                                        ..
+
+00008054 <correletras_s4>:
+    8054:	0001                                        ..
+
+00008056 <correletras_s5>:
+    8056:	0001                                        ..
+
+00008058 <correletras_s6>:
+    8058:	0001                                        ..
+
+0000805a <correletras_s7>:
+    805a:	0001                                        ..
+
+0000805c <fibonacci_r0>:
+    805c:	0001                                        ..
+
+0000805e <fibonacci_r1>:
+    805e:	0001                                        ..
+
+00008060 <fibonacci_r2>:
+    8060:	0001                                        ..
+
+00008062 <fibonacci_r3>:
+    8062:	0001                                        ..
+
+00008064 <fibonacci_r4>:
+    8064:	0001                                        ..
+
+00008066 <fibonacci_r5>:
+    8066:	0001                                        ..
+
+00008068 <fibonacci_r6>:
+    8068:	0001                                        ..
+
+0000806a <fibonacci_r7>:
+    806a:	0001                                        ..
+
+0000806c <fibonacci_s0>:
+    806c:	0001                                        ..
+
+0000806e <fibonacci_s1>:
+    806e:	0001                                        ..
+
+00008070 <fibonacci_s2>:
+    8070:	0001                                        ..
+
+00008072 <fibonacci_s3>:
+    8072:	0001                                        ..
+
+00008074 <fibonacci_s4>:
+    8074:	0001                                        ..
+
+00008076 <fibonacci_s5>:
+    8076:	0001                                        ..
+
+00008078 <fibonacci_s6>:
+    8078:	0001                                        ..
+
+0000807a <fibonacci_s7>:
+    807a:	0001                                        ..
+
+0000807c <remaining_quantum>:
+    807c:	0001                                        ..
+
+0000807e <running>:
+    807e:	0001                                        ..

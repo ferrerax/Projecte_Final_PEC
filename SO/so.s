@@ -2,6 +2,7 @@
 .include "macros.s"
 
 .set PILA, 0x4000                ; una posicion de memoria de una zona no ocupada para usarse como PILA (ojo con la inicializacion del TLB)
+.set PILA_USUARI, 0x4C00
 
 ; seccion de datos
 .data
@@ -80,6 +81,12 @@
     ; *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
     .global RSG
     RSG: ; Salvar el estado
+         
+         wrs    S4, R7
+         $MOVEI R7, PILA_USUARI
+         $push  R0, R1, R2, R3, R4, R5, R6
+         rds    R7, S4
+         
          $push  R0, R1, R2, R3, R4, R5, R6
          rds    R1, S0
          rds    R2, S1
@@ -131,6 +138,12 @@
          $pop  R3, R2, R1
          $pop  R6, R5, R4, R3, R2, R1, R0
          
+         wrs    S4, R7
+         $MOVEI R7, PILA_USUARI
+         addi   R7, R7, -14
+         $pop   R6, R5, R4, R3, R2, R1, R0
+         rds    R7, S4
+         
          reti
 
     ; *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
@@ -160,8 +173,8 @@
     ; Rutina interrupcion teclado PS/2
     ; *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
     RSI__interrup_keyboard:
-        ;in     r3, 15              ;leemos el valor correspondiente al caracter ASCII de la tecla pulsada
-        ;$MOVEI r4, tecla_pulsada   ;carga la direccion de memoria donde dejaremos el resultado de la tecla pulsada
-        ;st     0(r4), r3           ;actualiza la variable con la nueva tecla pulsada
+        in     r3, 15              ;leemos el valor correspondiente al caracter ASCII de la tecla pulsada
+        $MOVEI r4, tecla_pulsada   ;carga la direccion de memoria donde dejaremos el resultado de la tecla pulsada
+        st     0(r4), r3           ;actualiza la variable con la nueva tecla pulsada
         jmp    r6         ; R6 contine (ya que no lo hemos modificado) la direccion de retorno para gacer el fin de la RSG (fin del servicio de interrupcion)
 
