@@ -13,6 +13,7 @@ add wave -noupdate -group ADDR -radix hexadecimal /test_sisa/SoC/io0/mem(22)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(23)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(24)
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(25)
+add wave -noupdate /test_sisa/SoC/io0/sd_ctr/sd_drv/state
 add wave -noupdate -divider {fi I/O PORTS SD}
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/io0/mem(25)
 add wave -noupdate -group test_sisa -radix hexadecimal /test_sisa/addr_mem
@@ -396,8 +397,8 @@ add wave -noupdate /test_sisa/SoC/mem0/we
 add wave -noupdate /test_sisa/SoC/mem0/sram_wr
 add wave -noupdate -radix hexadecimal /test_sisa/SoC/mem0/addr
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{final reset} {2064850000 ps} 1} {{Cursor 8} {2601490000 ps} 0} {{__OFF_E_SHOFF sd read valid} {2418510000 ps} 1} {{__OFF_E_SHNUM sd read valid} {2592730000 ps} 1}
-quietly wave cursor active 4
+WaveRestoreCursors {{final reset} {2064850000 ps} 1} {{Cursor 8} {2070090000 ps} 0} {{__OFF_E_SHOFF sd read valid} {2418510000 ps} 1} {{__OFF_E_SHNUM sd read valid} {2592730000 ps} 1}
+quietly wave cursor active 2
 configure wave -namecolwidth 357
 configure wave -valuecolwidth 132
 configure wave -justifyvalue left
@@ -412,4 +413,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {2590902452 ps} {2594557548 ps}
+WaveRestoreZoom {2067942452 ps} {2071597548 ps}

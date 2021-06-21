@@ -25,73 +25,70 @@ signal rd_out_tmp : std_logic;
 
 signal validat : boolean := false; 
 
+signal lec_fin : std_logic;
+type state_type is (INI, IDLE, LEC, FIN);
+
+-- Register to hold the current state
+signal state   : state_type;
+
 begin
 
 	offset <= addr(8 downto 1) & '0'; -- 2 byte align addr%512
 	dout_taken <= dout_avail;
 
-    rd_out_tmp <= rd when busy = '0' else
-              rd when rd   = '0';
-				  
-	 rd_out <= rd_out_tmp;
-				  
-	
-	
-process (clk, reset)
+--    rd_out_tmp <= rd when busy = '0' else
+--              rd when rd   = '0';
+
+rd_out <= '1' when state = LEC else '0';
+valid  <= '0' when state = LEC or
+                   state = INI else
+          '1' when state = FIN;
+
+process (rd, busy, lec_fin)
 	begin
 			case state is
-				when s0=>
-					if input = '1' then
-						state <= s1;
-					else
-						state <= s0;
+				when INI=>
+					if busy = '0' and rd = '0' then
+						state <= IDLE;
 					end if;
-				when s1=>
-					if input = '1' then
-						state <= s2;
-					else
-						state <= s1;
+					if busy = '0' and rd = '1' then
+						state <= LEC;
 					end if;
-				when s2=>
-					if input = '1' then
-						state <= s3;
-					else
-						state <= s2;
+				when IDLE=>
+					if rd = '1' then
+						state <= LEC;
 					end if;
-				when s3 =>
-					if input = '1' then
-						state <= s0;
-					else
-						state <= s3;
+				when LEC=>
+					if lec_fin = '1' then
+						state <= FIN;
+					end if;
+				when FIN =>
+					if busy = '0' then
+						state <= IDLE;
+                    elsif rd = '1' then
+                        state <= INI;
 					end if;
 			end case;
 	end process;
 	
-	process (dout_avail, busy, rd_out_tmp) begin		
---    if (rising_edge(rd)) then
---        valid <= '0';
---		 byte_counter <= (others => '0');
-    if (busy = '0') then
-		 --valid <= '0';
-		 --validat <= false;
-		 byte_counter <= (others => '0');
-    else -- during read operation
-        if ( rising_edge(dout_avail) ) then -- new byte readed
-            if ( offset = byte_counter(8 downto 1) & '0' ) then
-                if ( byte_counter(0) = '1' ) then
-                    data(15 downto 8) <= dout;
-                    --valid <= '1'; -- and abort read
-						  validat <= true;
-                else 
-                    data(7 downto 0) <= dout;
+	process (dout_avail, busy) begin		
+        if (busy = '0') then
+             lec_fin <= '0';
+             byte_counter <= (others => '0');
+        else -- during read operation
+            if ( rising_edge(dout_avail) ) then -- new byte readed
+                if ( offset = byte_counter(8 downto 1) & '0' ) then
+                    if ( byte_counter(0) = '1' ) then
+                        data(15 downto 8) <= dout;
+                        lec_fin <= '1'; -- and abort read
+                    else 
+                        data(7 downto 0) <= dout;
+                    end if;
                 end if;
+                -- dout_taken <= '1';
+                byte_counter <= byte_counter + 1;
             end if;
-            -- dout_taken <= '1';
-            byte_counter <= byte_counter + 1;
-
         end if;
-    end if;
-
 	end process;
 
 --  process (rd, byte_counter) begin
