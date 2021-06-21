@@ -21,6 +21,8 @@ signal byte_counter   : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 signal byte_counter_d : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 signal offset         : std_logic_vector(8  downto  0)  :=  (others  =>  '0');
 
+signal validat : boolean := false; 
+
 begin
 
 	offset <= addr(8 downto 1) & '0'; -- 2 byte align addr%512
@@ -35,8 +37,9 @@ begin
 --    if (rising_edge(rd)) then
 --        valid <= '0';
 --		 byte_counter <= (others => '0');
-    if (busy = '0' and rd = '1') then
+    if (rd = '1' and validat) then
 		 valid <= '0';
+		 validat <= false;
 		 byte_counter <= (others => '0');
     else -- during read operation
         if ( rising_edge(dout_avail) ) then -- new byte readed
@@ -44,6 +47,7 @@ begin
                 if ( byte_counter(0) = '1' ) then
                     data(15 downto 8) <= dout;
                     valid <= '1'; -- and abort read
+						  validat <= true;
                 else 
                     data(7 downto 0) <= dout;
                 end if;
